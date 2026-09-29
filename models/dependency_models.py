@@ -1,0 +1,315 @@
+from typing import List, Optional
+
+from pydantic import BaseModel, Field
+
+
+# =========================================================
+# Dependency Node
+# =========================================================
+#
+# A node represents an entity in our dependency graph.
+#
+# Examples:
+#
+#   File:
+#       BookingService.cs
+#
+#   Class:
+#       BookingService
+#
+#   Method:
+#       BookingService.GetBooking()
+#
+# The graph will contain relationships between these nodes.
+# =========================================================
+
+class DependencyNode(BaseModel):
+
+    # Unique identifier for the node.
+    #
+    # Example:
+    #   class::bookingservice.cs::BookingService
+    id: str
+
+    # Type of node.
+    #
+    # Possible values:
+    #   file
+    #   class
+    #   method
+    node_type: str
+
+    # Display name of the node.
+    name: str
+
+    # C# source file where the node exists.
+    file_path: Optional[str] = None
+
+    # Namespace of the class/file.
+    namespace: Optional[str] = None
+
+    # Project containing the file.
+    project: Optional[str] = None
+
+
+# =========================================================
+# Dependency Edge
+# =========================================================
+#
+# An edge represents a relationship between two nodes.
+#
+# Example:
+#
+# BookingService
+#       |
+#       | depends_on
+#       ↓
+# BookingRepository
+#
+# Another example:
+#
+# MethodA
+#    |
+#    | calls
+#    ↓
+# MethodB
+# =========================================================
+
+class DependencyEdge(BaseModel):
+
+    # ID of the source node.
+    source: str
+
+    # ID of the target node.
+    target: str
+
+    # Type of relationship.
+    #
+    # Examples:
+    #   depends_on
+    #   implements
+    #   inherits
+    #   calls
+    relationship: str
+
+    # Source file.
+    source_file: Optional[str] = None
+
+    # Target file.
+    target_file: Optional[str] = None
+
+    # Source class.
+    source_class: Optional[str] = None
+
+    # Target class.
+    target_class: Optional[str] = None
+
+    # Source method.
+    source_method: Optional[str] = None
+
+    # Target method.
+    target_method: Optional[str] = None
+
+    # Evidence explaining why this relationship exists.
+    evidence: List[str] = Field(
+        default_factory=list
+    )
+
+
+# =========================================================
+# File Dependency
+# =========================================================
+#
+# Represents dependency between two C# files.
+#
+# Example:
+#
+# BookingService.cs
+#       ↓
+# BookingRepository.cs
+# =========================================================
+
+class FileDependency(BaseModel):
+
+    # File containing the dependency.
+    source_file: str
+
+    # File being depended upon.
+    target_file: str
+
+    # Relationship between the files.
+    relationship: str
+
+    # Evidence from Code Understanding analysis.
+    evidence: List[str] = Field(
+        default_factory=list
+    )
+
+
+# =========================================================
+# Class Dependency
+# =========================================================
+#
+# Represents dependency between two classes/interfaces.
+#
+# Example:
+#
+# BookingService
+#       |
+#       | implements
+#       ↓
+# IBookingService
+#
+# or:
+#
+# BookingService
+#       |
+#       | depends_on
+#       ↓
+# BookingRepository
+# =========================================================
+
+class ClassDependency(BaseModel):
+
+    # Source class.
+    source_class: str
+
+    # Target class/interface.
+    target_class: str
+
+    # File containing the source class.
+    source_file: Optional[str] = None
+
+    # File containing the target class.
+    target_file: Optional[str] = None
+
+    # Relationship type.
+    relationship: str
+
+    # Evidence supporting the dependency.
+    evidence: List[str] = Field(
+        default_factory=list
+    )
+
+
+# =========================================================
+# Method Dependency
+# =========================================================
+#
+# Represents a method-level dependency.
+#
+# Example:
+#
+# BookingService.GetBooking()
+#          |
+#          | calls
+#          ↓
+# BookingRepository.GetBooking()
+# =========================================================
+
+class MethodDependency(BaseModel):
+
+    # Source class.
+    source_class: str
+
+    # Source method.
+    source_method: str
+
+    # Target class.
+    target_class: Optional[str] = None
+
+    # Target method.
+    target_method: str
+
+    # Source file.
+    source_file: Optional[str] = None
+
+    # Target file.
+    target_file: Optional[str] = None
+
+    # Relationship type.
+    #
+    # Usually:
+    #   calls
+    relationship: str
+
+    # Evidence supporting the relationship.
+    evidence: List[str] = Field(
+        default_factory=list
+    )
+
+
+# =========================================================
+# Dependency Mapping Report
+# =========================================================
+#
+# This is the final output generated by the
+# Dependency Mapping Agent.
+#
+# It contains:
+#
+#   1. Repository statistics
+#   2. Graph nodes
+#   3. Graph edges
+#   4. File dependencies
+#   5. Class dependencies
+#   6. Method dependencies
+#   7. External dependencies
+#   8. Unresolved dependencies
+# =========================================================
+
+class DependencyMappingReport(BaseModel):
+
+    # Name of the repository.
+    repository_name: Optional[str] = None
+
+    # Number of files discovered from the cache.
+    total_files: int = 0
+
+    # Number of classes discovered.
+    total_classes: int = 0
+
+    # Number of methods discovered.
+    total_methods: int = 0
+
+    # Total number of graph nodes.
+    total_nodes: int = 0
+
+    # Total number of graph relationships.
+    total_edges: int = 0
+
+    # All nodes in the dependency graph.
+    nodes: List[DependencyNode] = Field(
+        default_factory=list
+    )
+
+    # All relationships in the dependency graph.
+    edges: List[DependencyEdge] = Field(
+        default_factory=list
+    )
+
+    # File-to-file dependencies.
+    file_dependencies: List[FileDependency] = Field(
+        default_factory=list
+    )
+
+    # Class-to-class dependencies.
+    class_dependencies: List[ClassDependency] = Field(
+        default_factory=list
+    )
+
+    # Method-to-method dependencies.
+    method_dependencies: List[MethodDependency] = Field(
+        default_factory=list
+    )
+
+    # Dependencies belonging to external libraries/frameworks.
+    external_dependencies: List[str] = Field(
+        default_factory=list
+    )
+
+    # Dependencies which could not be resolved to a class,
+    # interface, or known external dependency.
+    unresolved_dependencies: List[str] = Field(
+        default_factory=list
+    )

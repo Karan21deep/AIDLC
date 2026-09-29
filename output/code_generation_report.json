@@ -1,0 +1,48 @@
+{
+  "repository_name": "sam",
+  "total_source_files": 2,
+  "affected_files": 14,
+  "generated_files": 2,
+  "copied_files": 0,
+  "cached_files": 0,
+  "failed_files": 0,
+  "files": [
+    {
+      "source_file": "BookingMgmt.Application/Exceptions/ConfigurationInitializationException.cs",
+      "target_file": "BookingMgmt.Application/Exceptions/ConfigurationInitializationException.cs",
+      "source_hash": "c62f0bedc191285b8a0b814de9d935da288ff2ca6d392383f86c3647d2f0dde4",
+      "plan_hash": "8ed22c2ba38b14da4f56e8430b201050ff314c2305288c4ff12d2a80cceb9de7",
+      "status": "generated",
+      "llm_generated": true,
+      "copied_unchanged": false,
+      "changes": [
+        "Converted the namespace declaration to modern file-scoped namespace syntax.",
+        "Retained the legacy serialization constructor and added a targeted SYSLIB0051 suppression so the file remains compatible with modern .NET builds while preserving legacy exception serialization behavior."
+      ],
+      "warnings": [
+        "Formatter-based exception serialization is obsolete in modern .NET. The serialization constructor was preserved because repository usage and service-boundary behavior are unknown.",
+        "Human review should confirm whether this exception is still thrown, caught explicitly, serialized, or exposed across any WCF/API boundary."
+      ]
+    },
+    {
+      "source_file": "BookingMgmt.Application/Implementation/BookingCreatorApplicationServices.cs",
+      "target_file": "BookingMgmt.Application/Implementation/BookingCreatorApplicationServices.cs",
+      "source_hash": "9a95bc7dea5524efb34fb8541b7029d8f28e014b710f090d70ff79bddb28318b",
+      "plan_hash": "8ed22c2ba38b14da4f56e8430b201050ff314c2305288c4ff12d2a80cceb9de7",
+      "status": "unchanged",
+      "llm_generated": true,
+      "copied_unchanged": false,
+      "changes": [
+        "No meaningful code-level modernization was safely applied because the supplied implementation contains no concrete WCF attributes, endpoint configuration, hosting code, or project metadata requiring replacement in this file.",
+        "Removed no functionality and did not introduce transport-specific ASP.NET Core, CoreWCF, or gRPC code because the correct service boundary is unresolved."
+      ],
+      "warnings": [
+        "The actual target service technology cannot be selected from this file alone; WCF contract attributes, host files, endpoint bindings, configuration, and consumers were not supplied.",
+        "Do not replace this class with ASP.NET Core Web API or CoreWCF implementation code until IBookingCreatorApplicationServices, DTO serialization requirements, hosting model, security, and clients are confirmed.",
+        "The paging implementation appears unusual and may be a legacy defect or intentional behavior; it was preserved and should be reviewed with characterization tests before changing.",
+        "Input validation and nullability annotations were not added because current validation and exception compatibility expectations are unknown.",
+        "Async methods were not introduced because the underlying domain/data access implementation is unavailable and synchronous contract compatibility must be preserved."
+      ]
+    }
+  ]
+}

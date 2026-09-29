@@ -1,0 +1,6 @@
+openai
+pydantic
+python-dotenv
+streamlit
+tree-sitter
+tree-sitter-c-sharp

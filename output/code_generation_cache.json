@@ -1,0 +1,58 @@
+{
+  "BookingMgmt.Application/Exceptions/ConfigurationInitializationException.cs": {
+    "source_hash": "c62f0bedc191285b8a0b814de9d935da288ff2ca6d392383f86c3647d2f0dde4",
+    "plan_hash": "8ed22c2ba38b14da4f56e8430b201050ff314c2305288c4ff12d2a80cceb9de7",
+    "prompt_version": "v1",
+    "status": "success",
+    "generated_file": {
+      "source_file": "BookingMgmt.Application/Exceptions/ConfigurationInitializationException.cs",
+      "target_file": "BookingMgmt.Application/Exceptions/ConfigurationInitializationException.cs",
+      "generated_code": "using System;\nusing System.Runtime.Serialization;\n\nnamespace BookingMgmt.Application.Exceptions;\n\n[Serializable]\npublic class ConfigurationInitializationException : Exception\n{\n    public ConfigurationInitializationException()\n    {\n    }\n\n    public ConfigurationInitializationException(string message)\n        : base(message)\n    {\n    }\n\n    public ConfigurationInitializationException(string message, Exception innerException)\n        : base(message, innerException)\n    {\n    }\n\n#pragma warning disable SYSLIB0051 // Preserve legacy exception serialization compatibility where required.\n    protected ConfigurationInitializationException(SerializationInfo info, StreamingContext context)\n        : base(info, context)\n    {\n    }\n#pragma warning restore SYSLIB0051\n}\n",
+      "changes": [
+        "Converted the namespace declaration to modern file-scoped namespace syntax.",
+        "Retained the legacy serialization constructor and added a targeted SYSLIB0051 suppression so the file remains compatible with modern .NET builds while preserving legacy exception serialization behavior."
+      ],
+      "preserved_behavior": [
+        "The custom exception type name, namespace, inheritance from System.Exception, and standard constructors are preserved.",
+        "The [Serializable] attribute is preserved.",
+        "The protected SerializationInfo/StreamingContext constructor is preserved for compatibility with any legacy serialization or remoting-style code paths that may still depend on it."
+      ],
+      "warnings": [
+        "Formatter-based exception serialization is obsolete in modern .NET. The serialization constructor was preserved because repository usage and service-boundary behavior are unknown.",
+        "Human review should confirm whether this exception is still thrown, caught explicitly, serialized, or exposed across any WCF/API boundary."
+      ],
+      "generation_status": "generated"
+    }
+  },
+  "BookingMgmt.Application/Implementation/BookingCreatorApplicationServices.cs": {
+    "source_hash": "9a95bc7dea5524efb34fb8541b7029d8f28e014b710f090d70ff79bddb28318b",
+    "plan_hash": "8ed22c2ba38b14da4f56e8430b201050ff314c2305288c4ff12d2a80cceb9de7",
+    "prompt_version": "v1",
+    "status": "success",
+    "generated_file": {
+      "source_file": "BookingMgmt.Application/Implementation/BookingCreatorApplicationServices.cs",
+      "target_file": "BookingMgmt.Application/Implementation/BookingCreatorApplicationServices.cs",
+      "generated_code": "using System.Collections.Generic;\nusing System.Linq;\nusing BookingMgmt.Application.MapFactories.MapDomainToDTO;\nusing BookingMgmt.Application.MapFactories.MapDTOToDomain;\nusing BookingMgmt.Contracts;\nusing BookingMgmt.Contracts.DTO;\nusing BookingMgmt.Domain.DomainServiceContracts;\nusing BookingMgmt.Domain.Entities;\n\nnamespace BookingMgmt.Application.Implementation\n{\n    public class BookingCreatorApplicationServices : IBookingCreatorApplicationServices\n    {\n        private readonly IBookingCreatorDomainServices _bookingCreatorDomainServices;\n\n        public BookingCreatorApplicationServices(\n            IBookingCreatorDomainServices bookingCreatorDomainServices)\n        {\n            _bookingCreatorDomainServices = bookingCreatorDomainServices;\n        }\n\n        public void CancelBooking(int bookingId)\n        {\n            _bookingCreatorDomainServices.CancelBooking(bookingId);\n        }\n\n        public int CreateBooking(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n            return _bookingCreatorDomainServices.CreateBooking(booking);\n        }\n\n        public List<BookingDTO> GetCanceledByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetCanceled()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n\n        public List<BookingDTO> GetActivesByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetActives()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n        public decimal GetTotalPrice(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetTotalPrice();\n        }\n\n        public string GetRoute(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetRoute();\n        }\n\n        private Booking GetBookingDtoToBooking(BookingDTO bookingDto)\n        {\n            var bookingMapper = MappingToDomainFactory.GetFor(EnumDomain.Booking);\n            return bookingMapper.Get<BookingDTO, Booking>(bookingDto);\n        }\n\n        private List<BookingDTO> GetBookingToBookingDto(List<Booking> entities)\n        {\n            var mapping = MappingFromDomainFactory.GetFor(DomainToDtoEnum.Booking);\n            return mapping.GetCollection<Booking, BookingDTO>(entities).ToList();\n        }\n    }\n}\n",
+      "changes": [
+        "No meaningful code-level modernization was safely applied because the supplied implementation contains no concrete WCF attributes, endpoint configuration, hosting code, or project metadata requiring replacement in this file.",
+        "Removed no functionality and did not introduce transport-specific ASP.NET Core, CoreWCF, or gRPC code because the correct service boundary is unresolved."
+      ],
+      "preserved_behavior": [
+        "Constructor-injected IBookingCreatorDomainServices dependency is retained.",
+        "CancelBooking delegates directly to IBookingCreatorDomainServices.CancelBooking.",
+        "CreateBooking maps BookingDTO to Booking through the existing MappingToDomainFactory and delegates creation to the domain service.",
+        "GetCanceledByPages and GetActivesByPages preserve the existing ordering and paging formula: OrderBy(Id), Skip(page - 1), and Take(page * pageSize).",
+        "GetTotalPrice and GetRoute preserve current DTO-to-domain mapping followed by domain entity calculation methods.",
+        "Existing public class, implemented interface, method names, signatures, return types, synchronous behavior, mapping factories, and exception behavior are preserved."
+      ],
+      "warnings": [
+        "The actual target service technology cannot be selected from this file alone; WCF contract attributes, host files, endpoint bindings, configuration, and consumers were not supplied.",
+        "Do not replace this class with ASP.NET Core Web API or CoreWCF implementation code until IBookingCreatorApplicationServices, DTO serialization requirements, hosting model, security, and clients are confirmed.",
+        "The paging implementation appears unusual and may be a legacy defect or intentional behavior; it was preserved and should be reviewed with characterization tests before changing.",
+        "Input validation and nullability annotations were not added because current validation and exception compatibility expectations are unknown.",
+        "Async methods were not introduced because the underlying domain/data access implementation is unavailable and synchronous contract compatibility must be preserved."
+      ],
+      "generation_status": "unchanged"
+    }
+  }
+}

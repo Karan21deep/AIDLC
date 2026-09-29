@@ -1,0 +1,229 @@
+{
+  "repository_name": "sam",
+  "total_files": 19,
+  "total_classes": 1,
+  "total_methods": 0,
+  "total_nodes": 21,
+  "total_edges": 0,
+  "nodes": [
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\exceptions\\configurationinitializationexception.cs",
+      "node_type": "file",
+      "name": "ConfigurationInitializationException.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs",
+      "namespace": "namespace BookingMgmt.Application.Exceptions\n{\n    [Serializable]\n    public class ConfigurationInitializationException : Exception\n    {\n\n        public ConfigurationInitializationException()\n        {\n        \n        }\n        public ConfigurationInitializationException(string message) : base(message)\n        {\n\n        }\n        public ConfigurationInitializationException(string message, Exception innerException) : base(message, innerException)\n        {\n\n        }\n        protected ConfigurationInitializationException(SerializationInfo info,\n         StreamingContext context)\n            : base(info, context)\n        {\n\n        }\n\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\implementation\\bookingcreatorapplicationservices.cs",
+      "node_type": "file",
+      "name": "BookingCreatorApplicationServices.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "namespace BookingMgmt.Application.Implementation\n{\n    public class BookingCreatorApplicationServices : IBookingCreatorApplicationServices\n    {\n        private readonly IBookingCreatorDomainServices _bookingCreatorDomainServices;\n\n        public BookingCreatorApplicationServices(\n            IBookingCreatorDomainServices bookingCreatorDomainServices)\n        {\n            _bookingCreatorDomainServices = bookingCreatorDomainServices;\n        }\n\n        public void CancelBooking(int bookingId)\n        {\n            _bookingCreatorDomainServices.CancelBooking(bookingId);\n        }\n\n        public int CreateBooking(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n            return _bookingCreatorDomainServices.CreateBooking(booking);\n        }\n\n        public List<BookingDTO> GetCanceledByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetCanceled()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n\n        public List<BookingDTO> GetActivesByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetActives()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n        public decimal GetTotalPrice(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetTotalPrice();\n        }\n\n        public string GetRoute(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetRoute();\n        }\n\n        private Booking GetBookingDtoToBooking(BookingDTO bookingDto)\n        {\n            var bookingMapper = MappingToDomainFactory.GetFor(EnumDomain.Booking);\n            return bookingMapper.Get<BookingDTO,Booking>(bookingDto);\n        }\n\n        private List<BookingDTO> GetBookingToBookingDto(List<Booking> entities)\n        {\n            var mapping = MappingFromDomainFactory.GetFor(DomainToDtoEnum.Booking);\n            return mapping.GetCollection<Booking, BookingDTO>(entities).ToList();\n        }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdomaintodto\\domaintodtoenum.cs",
+      "node_type": "file",
+      "name": "DomainToDtoEnum.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\DomainToDtoEnum.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal enum DomainToDtoEnum\n    {\n        Booking,\n        Journey,\n        Passenger\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdomaintodto\\frombookingentity.cs",
+      "node_type": "file",
+      "name": "FromBookingEntity.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromBookingEntity.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal class FromBookingEntity : MappingBase\n    {\n        private readonly MappingBase jouneyMapping = \n            MappingFromDomainFactory.GetFor(DomainToDtoEnum.Journey);\n\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null)\n            {\n                return default;\n            }\n\n            if (!(source is Booking entity))\n            {\n                throw new InvalidCastException(typeof(TInput).Name);\n            }\n\n            return new BookingDTO\n            {\n                Created = entity.Created,\n                Id = entity.Id,\n                Journeys = jouneyMapping\n                    .GetCollection<Journey, JourneyDTO>(entity.Journeys)\n                    .ToList(),\n                Modified = entity.Modified,\n                RecordLocator = entity.RecordLocator,\n                SalesAgent = entity.SalesAgent,\n                TotalPrice = entity.GetTotalPrice()\n            } as TOutput;\n        }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdomaintodto\\fromjourneyentity.cs",
+      "node_type": "file",
+      "name": "FromJourneyEntity.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromJourneyEntity.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal class FromJourneyEntity : MappingBase\n    {\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null) { return default; }\n\n            if (!(source is Journey entity)) { throw new InvalidCastException(typeof(TInput).Name); }\n\n            return new JourneyDTO\n            {\n                Arrival = entity.Arrival,\n                ArrivalDate = entity.ArrivalDate,\n                BookingId = entity.BookingId,\n                Departure = entity.Departure,\n                DepartureDate = entity.DepartureDate,\n                Id = entity.Id,\n                Price = entity.Price\n\n            } as TOutput;\n        }\n\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdomaintodto\\mappingfromdomainfactory.cs",
+      "node_type": "file",
+      "name": "MappingFromDomainFactory.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\MappingFromDomainFactory.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal static class MappingFromDomainFactory\n    {\n        internal static MappingBase GetFor(DomainToDtoEnum entityName)\n        {\n            switch (entityName)\n            {\n                case DomainToDtoEnum.Booking:\n                    return new FromBookingEntity();\n                case DomainToDtoEnum.Journey:\n                    return new FromJourneyEntity();\n                default:\n                    throw new NotImplementedException(\n                        $\"Missing mapping for {entityName.ToString()} in BookingMgmt.Application.MapFactories.MapDomainToDTO.\");\n            }\n        }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdtotodomain\\enumdomain.cs",
+      "node_type": "file",
+      "name": "EnumDomain.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\EnumDomain.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal enum EnumDomain\n    {\n        Aircraft = 0,\n        Seat = 1,\n        Booking,\n        Journey,\n        Passenger\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdtotodomain\\frombookingdto.cs",
+      "node_type": "file",
+      "name": "FromBookingDTO.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromBookingDTO.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal class FromBookingDTO : MappingBase\n    {\n        private readonly MappingBase jouneyMapping = \n            MappingToDomainFactory.GetFor(EnumDomain.Journey);\n\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null) { return default; }\n\n            if (!(source is BookingDTO dto)) { throw new InvalidCastException(typeof(TInput).Name); }\n\n            return new Booking\n            {\n                Created = dto.Created,\n                Id = dto.Id,\n                Journeys = jouneyMapping.GetCollection<JourneyDTO, Journey>(dto.Journeys).ToList(),\n                Modified = dto.Modified,\n                RecordLocator = dto.RecordLocator,\n                SalesAgent = dto.SalesAgent\n            } as TOutput;\n        }\n\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdtotodomain\\fromjourneydto.cs",
+      "node_type": "file",
+      "name": "FromJourneyDTO.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromJourneyDTO.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal class FromJourneyDTO : MappingBase\n    {\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null) { return default; }\n\n            if (!(source is JourneyDTO dto)) { throw new InvalidCastException(typeof(TInput).Name); }\n\n            return new Journey\n            {\n                Arrival = dto.Arrival,\n                ArrivalDate = dto.ArrivalDate,\n                BookingId = dto.BookingId,\n                Departure = dto.Departure,\n                DepartureDate = dto.DepartureDate,\n                Id = dto.Id,\n                Price = dto.Price\n            } as TOutput;\n        }\n\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mapdtotodomain\\mappingtodomainfactory.cs",
+      "node_type": "file",
+      "name": "MappingToDomainFactory.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\MappingToDomainFactory.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal static class MappingToDomainFactory\n    {\n        internal static MappingBase GetFor(EnumDomain model)\n        {\n            switch (model)\n            {\n                case EnumDomain.Booking:\n                    return new FromBookingDTO();\n                case EnumDomain.Journey:\n                    return new FromJourneyDTO();\n                default:\n                    throw new NotImplementedException($\"The mapping for type {model} is not implemented.\");\n            }\n        }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\mapfactories\\mappingbase.cs",
+      "node_type": "file",
+      "name": "MappingBase.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MappingBase.cs",
+      "namespace": "namespace BookingMgmt.Application.MapFactories\n{\n    internal abstract class MappingBase\n    {\n        internal IEnumerable<TOutput> GetCollection<TInput, TOutput>(IEnumerable<TInput> source)\n            where TInput : class\n            where TOutput : class\n        {\n            if (source == null) { yield break; }\n\n            foreach (var item in source)\n            {\n                yield return Get<TInput, TOutput>(item);\n            }\n        }\n\n        internal abstract TOutput Get<TInput, TOutput>(TInput source) \n            where TInput : class\n            where TOutput : class;\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\properties\\assemblyinfo.cs",
+      "node_type": "file",
+      "name": "AssemblyInfo.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\Properties\\AssemblyInfo.cs",
+      "namespace": null,
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application\\properties\\nugetpackagegenerationattribute.cs",
+      "node_type": "file",
+      "name": "NugetPackageGenerationAttribute.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application\\Properties\\NugetPackageGenerationAttribute.cs",
+      "namespace": "namespace BookingMgmt.Application.Properties\n{\n    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]\n    [ComVisible(true)]\n    public sealed class NugetPackageGenerationAttribute : Attribute\n    {\n        public NugetPackageGenerationAttribute(bool Description)\n        {\n            this.Description = Description;\n        }\n\n        public bool Description { get; }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "class::d:\\migration\\repo\\before\\bookingmgmt.application\\properties\\nugetpackagegenerationattribute.cs::Unknown",
+      "node_type": "class",
+      "name": "Unknown",
+      "file_path": "repo\\before\\BookingMgmt.Application\\Properties\\NugetPackageGenerationAttribute.cs",
+      "namespace": "namespace BookingMgmt.Application.Properties\n{\n    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]\n    [ComVisible(true)]\n    public sealed class NugetPackageGenerationAttribute : Attribute\n    {\n        public NugetPackageGenerationAttribute(bool Description)\n        {\n            this.Description = Description;\n        }\n\n        public bool Description { get; }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application.unittest\\givenbookingdto\\whencancelbooking.cs",
+      "node_type": "file",
+      "name": "WhenCancelBooking.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\GivenBookingDto\\WhenCancelBooking.cs",
+      "namespace": "namespace BookingMgmt.Application.UnitTest.GivenBookingDto\n{\n    [TestClass]\n    public class WhenCancelBooking\n    {\n        public static MockFactory _mockFactory;\n        private static Mock<IBookingCreatorDomainServices> _bookingCreatorDomainServices;\n        private static IBookingCreatorApplicationServices _sut;\n\n\n        [ClassInitialize]\n        public static void ClassInitialize(TestContext context)\n        {\n            _mockFactory = new MockFactory();\n            _bookingCreatorDomainServices = _mockFactory.CreateMock<IBookingCreatorDomainServices>();\n\n            _sut = new BookingCreatorApplicationServices(_bookingCreatorDomainServices.MockObject);\n        }\n\n        [TestMethod]\n        public void Then_GetTotalPriceIsCalled()\n        {\n            _mockFactory.ClearExpectations();\n            var expected = 225;\n            var booking = BookingDtoMockProvider.GetNewBooking();\n            var actual = _sut.GetTotalPrice(booking);\n\n            Assert.IsTrue(actual == expected);\n\n        }\n\n        [TestMethod]\n        public void Then_GetRouteIsCalled()\n        {\n            _mockFactory.ClearExpectations();\n            var expected = \"MADBIO\";\n            var booking = BookingDtoMockProvider.GetNewBooking();\n            var actual = _sut.GetRoute(booking);\n\n            Assert.IsTrue(actual == expected);\n\n        }\n\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application.unittest\\mocks\\bookingdtomockprovider.cs",
+      "node_type": "file",
+      "name": "BookingDtoMockProvider.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs",
+      "namespace": "namespace BookingMgmt.Application.UnitTest.Mocks\n{\n    internal static class BookingDtoMockProvider\n    {\n        internal static BookingDTO GetNewBooking()\n        {\n            return new BookingDTO\n            {\n                Journeys = new List<JourneyDTO>\n                {\n                    new JourneyDTO\n                    {\n                        Departure = \"MAD\",\n                        Arrival = \"BCN\",\n                        Price = 150\n                    },\n                    new JourneyDTO\n                    {\n                        Departure = \"BCN\",\n                        Arrival = \"BIO\",\n                        Price = 75\n                    }\n                }\n            };\n        }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "class::d:\\migration\\repo\\before\\bookingmgmt.application.unittest\\mocks\\bookingdtomockprovider.cs::Unknown",
+      "node_type": "class",
+      "name": "Unknown",
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs",
+      "namespace": "namespace BookingMgmt.Application.UnitTest.Mocks\n{\n    internal static class BookingDtoMockProvider\n    {\n        internal static BookingDTO GetNewBooking()\n        {\n            return new BookingDTO\n            {\n                Journeys = new List<JourneyDTO>\n                {\n                    new JourneyDTO\n                    {\n                        Departure = \"MAD\",\n                        Arrival = \"BCN\",\n                        Price = 150\n                    },\n                    new JourneyDTO\n                    {\n                        Departure = \"BCN\",\n                        Arrival = \"BIO\",\n                        Price = 75\n                    }\n                }\n            };\n        }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.application.unittest\\properties\\assemblyinfo.cs",
+      "node_type": "file",
+      "name": "AssemblyInfo.cs",
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\Properties\\AssemblyInfo.cs",
+      "namespace": null,
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\before\\bookingmgmt.contracts\\dto\\bookingdto.cs",
+      "node_type": "file",
+      "name": "BookingDTO.cs",
+      "file_path": "repo\\before\\BookingMgmt.Contracts\\DTO\\BookingDTO.cs",
+      "namespace": "namespace BookingMgmt.Contracts.DTO\n{\n    public class BookingDTO\n    {\n        public int Id { get; set; }\n        public string SalesAgent { get; set; }\n        public System.DateTime Created { get; set; }\n        public System.DateTime Modified { get; set; }\n        public string RecordLocator { get; set; }\n        public decimal TotalPrice { get; set; }\n        public IEnumerable<JourneyDTO> Journeys { get; set; }\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\sam\\bookingmgmt.application\\exceptions\\configurationinitializationexception.cs",
+      "node_type": "file",
+      "name": "ConfigurationInitializationException.cs",
+      "file_path": "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs",
+      "namespace": "namespace BookingMgmt.Application.Exceptions\n{\n    [Serializable]\n    public class ConfigurationInitializationException : Exception\n    {\n\n        public ConfigurationInitializationException()\n        {\n        \n        }\n        public ConfigurationInitializationException(string message) : base(message)\n        {\n\n        }\n        public ConfigurationInitializationException(string message, Exception innerException) : base(message, innerException)\n        {\n\n        }\n        protected ConfigurationInitializationException(SerializationInfo info,\n         StreamingContext context)\n            : base(info, context)\n        {\n\n        }\n\n    }\n}",
+      "project": null
+    },
+    {
+      "id": "file::d:\\migration\\repo\\sam\\bookingmgmt.application\\implementation\\bookingcreatorapplicationservices.cs",
+      "node_type": "file",
+      "name": "BookingCreatorApplicationServices.cs",
+      "file_path": "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "namespace BookingMgmt.Application.Implementation\n{\n    public class BookingCreatorApplicationServices : IBookingCreatorApplicationServices\n    {\n        private readonly IBookingCreatorDomainServices _bookingCreatorDomainServices;\n\n        public BookingCreatorApplicationServices(\n            IBookingCreatorDomainServices bookingCreatorDomainServices)\n        {\n            _bookingCreatorDomainServices = bookingCreatorDomainServices;\n        }\n\n        public void CancelBooking(int bookingId)\n        {\n            _bookingCreatorDomainServices.CancelBooking(bookingId);\n        }\n\n        public int CreateBooking(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n            return _bookingCreatorDomainServices.CreateBooking(booking);\n        }\n\n        public List<BookingDTO> GetCanceledByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetCanceled()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n\n        public List<BookingDTO> GetActivesByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetActives()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n        public decimal GetTotalPrice(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetTotalPrice();\n        }\n\n        public string GetRoute(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetRoute();\n        }\n\n        private Booking GetBookingDtoToBooking(BookingDTO bookingDto)\n        {\n            var bookingMapper = MappingToDomainFactory.GetFor(EnumDomain.Booking);\n            return bookingMapper.Get<BookingDTO,Booking>(bookingDto);\n        }\n\n        private List<BookingDTO> GetBookingToBookingDto(List<Booking> entities)\n        {\n            var mapping = MappingFromDomainFactory.GetFor(DomainToDtoEnum.Booking);\n            return mapping.GetCollection<Booking, BookingDTO>(entities).ToList();\n        }\n    }\n}",
+      "project": null
+    }
+  ],
+  "edges": [],
+  "file_dependencies": [],
+  "class_dependencies": [],
+  "method_dependencies": [],
+  "external_dependencies": [
+    "Microsoft.VisualStudio.TestTools.UnitTesting",
+    "NMock",
+    "NotImplementedException",
+    "System",
+    "System.Collections.Generic",
+    "System.DateTime",
+    "System.Decimal",
+    "System.Exception",
+    "System.Int32",
+    "System.InvalidCastException",
+    "System.Linq",
+    "System.Runtime.Serialization.SerializationInfo",
+    "System.Runtime.Serialization.StreamingContext",
+    "System.SerializableAttribute",
+    "System.String"
+  ],
+  "unresolved_dependencies": [
+    "Booking",
+    "BookingCreatorApplicationServices",
+    "BookingDTO",
+    "BookingDtoMockProvider",
+    "BookingMgmt.Contracts.DTO.BookingDTO",
+    "BookingMgmt.Contracts.DTO.JourneyDTO",
+    "BookingMgmt.Domain.Entities.Journey",
+    "Derived MappingBase implementations",
+    "DomainToDtoEnum",
+    "EnumDomain",
+    "FromBookingDTO",
+    "FromBookingEntity",
+    "FromJourneyDTO",
+    "FromJourneyEntity",
+    "IBookingCreatorApplicationServices",
+    "IBookingCreatorDomainServices",
+    "IEnumerable<JourneyDTO>",
+    "IEnumerable<TInput>",
+    "IEnumerable<TOutput>",
+    "Journey",
+    "JourneyDTO",
+    "MappingBase",
+    "MappingFromDomainFactory",
+    "MappingToDomainFactory",
+    "Mock<IBookingCreatorDomainServices>",
+    "MockFactory",
+    "NotImplementedException",
+    "System"
+  ]
+}

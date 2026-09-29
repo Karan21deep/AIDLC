@@ -1,0 +1,27 @@
+{
+  "repository_name": "sam",
+  "generated_repository": "D:\\migration\\output\\generated_code",
+  "validation_status": "FAILED",
+  "build_status": "NOT_RUN",
+  "test_status": "NOT_RUN",
+  "semantic_validation_status": "NOT_RUN",
+  "total_projects": 0,
+  "total_source_files": 0,
+  "changed_files": 0,
+  "build_errors": 0,
+  "tests_total": 0,
+  "tests_passed": 0,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "build_output": "",
+  "test_output": "",
+  "build_errors_detail": [],
+  "test_result": null,
+  "file_results": [],
+  "global_issues": [
+    "No .NET project files were found in the generated repository."
+  ],
+  "warnings": [],
+  "recommendations": [],
+  "human_review_items": []
+}

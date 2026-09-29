@@ -1,0 +1,2119 @@
+{
+  "repository_name": "sam",
+  "wcf_detected": true,
+  "wcf_files": [
+    "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application.UnitTest\\GivenBookingDto\\WhenCancelBooking.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application.UnitTest\\Properties\\AssemblyInfo.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\EnumDomain.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromBookingDTO.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromJourneyDTO.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\MappingToDomainFactory.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\DomainToDtoEnum.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromBookingEntity.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromJourneyEntity.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\MappingFromDomainFactory.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MappingBase.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\Properties\\AssemblyInfo.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Application\\Properties\\NugetPackageGenerationAttribute.cs",
+    "D:\\migration\\repo\\before\\BookingMgmt.Contracts\\DTO\\BookingDTO.cs",
+    "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs",
+    "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs"
+  ],
+  "contracts": [
+    {
+      "name": "IBookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown; unit test imports BookingMgmt.Contracts and references IBookingCreatorApplicationServices, but the actual contract source was not supplied.",
+      "operations": [
+        {
+          "name": "GetTotalPrice",
+          "return_type": "Unknown; unit test compares the result to numeric value 225.",
+          "parameters": [
+            "booking: Unknown concrete DTO type; supplied by BookingDtoMockProvider.GetNewBooking()"
+          ],
+          "purpose": "Returns or calculates the total price for a booking DTO. This is inferred from the unit test only.",
+          "business_logic": [
+            "Expected test result is 225 for the mocked/new booking DTO.",
+            "May delegate to or use booking/domain logic, but the implementation is not supplied."
+          ],
+          "dependencies": [
+            "Booking DTO from BookingMgmt.Contracts or related contract assembly, inferred from using statements.",
+            "IBookingCreatorDomainServices may be involved through BookingCreatorApplicationServices, but this operation's actual implementation is unavailable."
+          ],
+          "database_related": false,
+          "external_service_related": false
+        },
+        {
+          "name": "GetRoute",
+          "return_type": "Unknown; unit test compares the result to string value \"MADBIO\".",
+          "parameters": [
+            "booking: Unknown concrete DTO type; supplied by BookingDtoMockProvider.GetNewBooking()"
+          ],
+          "purpose": "Returns or calculates a route string for a booking DTO. This is inferred from the unit test only.",
+          "business_logic": [
+            "Expected test result is \"MADBIO\" for the mocked/new booking DTO.",
+            "May derive the route from origin/destination data in the booking DTO, but implementation is not supplied."
+          ],
+          "dependencies": [
+            "Booking DTO from BookingMgmt.Contracts or related contract assembly, inferred from using statements.",
+            "IBookingCreatorDomainServices may be involved through BookingCreatorApplicationServices, but this operation's actual implementation is unavailable."
+          ],
+          "database_related": false,
+          "external_service_related": false
+        }
+      ],
+      "implementations": [
+        "BookingCreatorApplicationServices"
+      ],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository WCF discovery reported a WCF-related contract indicator in BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+        "The actual source for the contract/interface and WCF attributes such as [ServiceContract] and [OperationContract] was not supplied.",
+        "GetTotalPrice and GetRoute are inferred from the supplied unit test, not from direct inspection of the contract declaration.",
+        "No operation contract attributes, fault contracts, data contracts, message contracts, callback contracts, or async patterns are visible in the supplied information."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata reports this file as a WCF-related contract indicator.",
+        "The actual source code for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, OperationContract attributes, method signatures, namespace, and implementation relationships cannot be verified.",
+        "No operations can be safely identified from the supplied evidence.",
+        "No implementation class can be confirmed from the supplied evidence."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository WCF metadata reports this file as a WCF-related contract indicator.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so the exact contract type, namespace, attributes, methods, and operation signatures are Unknown.",
+        "No [ServiceContract] or [OperationContract] details are available in the supplied code analysis.",
+        "The file path includes an Implementation folder, so it may contain an implementation class, a contract-like interface, or both; this cannot be confirmed from the provided metadata."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": false,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata lists this file under WCF-related contracts, but the actual source content for this file was not supplied.",
+        "No [ServiceContract] attribute, [OperationContract] attributes, interface declaration, or contract members are directly observable from the provided data.",
+        "The file name suggests booking creation application-service responsibility, but the WCF contract shape is Unknown."
+      ]
+    },
+    {
+      "name": "IBookingCreatorApplicationServices",
+      "file_path": "Unknown",
+      "namespace": "BookingMgmt.Contracts",
+      "operations": [
+        {
+          "name": "CancelBooking",
+          "return_type": "void",
+          "parameters": [
+            "int bookingId"
+          ],
+          "purpose": "Cancels an existing booking by identifier.",
+          "business_logic": [
+            "Delegates cancellation to IBookingCreatorDomainServices.CancelBooking(bookingId)."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "CreateBooking",
+          "return_type": "int",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Creates a booking and returns an integer identifier or result value.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity using MappingToDomainFactory.",
+            "Delegates creation to IBookingCreatorDomainServices.CreateBooking(booking)."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain",
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetCanceledByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Returns canceled bookings with ordering and paging applied.",
+          "business_logic": [
+            "Retrieves canceled bookings through IBookingCreatorDomainServices.GetCanceled().",
+            "Orders by Booking.Id.",
+            "Applies Skip(page - 1) and Take(page * pageSize).",
+            "Maps Booking domain entities to BookingDTO collection using MappingFromDomainFactory."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking",
+            "BookingDTO",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetActivesByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Returns active bookings with ordering and paging applied.",
+          "business_logic": [
+            "Retrieves active bookings through IBookingCreatorDomainServices.GetActives().",
+            "Orders by Booking.Id.",
+            "Applies Skip(page - 1) and Take(page * pageSize).",
+            "Maps Booking domain entities to BookingDTO collection using MappingFromDomainFactory."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking",
+            "BookingDTO",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetTotalPrice",
+          "return_type": "decimal",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Calculates the total price for a booking DTO.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity using MappingToDomainFactory.",
+            "Calls Booking.GetTotalPrice()."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        },
+        {
+          "name": "GetRoute",
+          "return_type": "string",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Returns the route for a booking DTO.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity using MappingToDomainFactory.",
+            "Calls Booking.GetRoute()."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        }
+      ],
+      "implementations": [
+        "BookingCreatorApplicationServices"
+      ],
+      "service_contract_detected": false,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata reports a WCF-related contract indicator for BookingCreatorApplicationServices.cs.",
+        "The supplied code does not include the IBookingCreatorApplicationServices interface definition.",
+        "No [ServiceContract] attribute was observed in the supplied code.",
+        "No [OperationContract] attributes were observed in the supplied code.",
+        "The contract namespace is inferred from the using BookingMgmt.Contracts statement; the actual interface namespace is not directly supplied."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata reports this file as a WCF-related contract indicator.",
+        "The source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, OperationContract members, method signatures, callback contracts, fault contracts, and data contracts cannot be verified.",
+        "The name suggests booking-creation application service responsibilities, but the exact contract shape is Unknown.",
+        "No implementation class relationship can be confirmed from the supplied metadata."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata identifies this file as a WCF-related contract indicator.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, OperationContract methods, namespace, interface/class shape, and operation signatures cannot be verified.",
+        "No implementation relationship can be confirmed from the supplied metadata.",
+        "No WCF operations can be enumerated because the contract source was unavailable."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository WCF metadata lists this file under contracts.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, interface/class shape, namespace, and operation signatures cannot be verified.",
+        "No OperationContract methods are available in the supplied information.",
+        "No service implementation relationship was provided for this contract."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository WCF metadata identifies this file as a WCF-related contract candidate.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attribute details, interface/class shape, namespace, method signatures, callback contracts, sessions, and known types are Unknown.",
+        "No OperationContract methods were available in the supplied data.",
+        "No implementation class relationship was confirmed."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata reports this file as a WCF-related contract indicator.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, interface/class shape, namespace, methods, and operation signatures cannot be verified.",
+        "No OperationContract methods were available in the supplied analysis.",
+        "No implementation class relationship was identified from the supplied metadata."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Observed: Repository WCF discovery lists BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs under contracts.",
+        "Unknown: The actual source for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, interface/class shape, namespace, and operations cannot be verified.",
+        "Unknown: No OperationContract methods were provided in the supplied metadata.",
+        "Inferred: The name suggests an application service related to booking creation, but the exact WCF contract role is unavailable."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository WCF metadata identifies this file as a contract candidate or WCF-related contract indicator.",
+        "The actual source code for BookingCreatorApplicationServices.cs was not supplied, so the presence of [ServiceContract], [OperationContract], contract interface/class shape, namespace, methods, callback contracts, fault contracts, and data contracts cannot be verified.",
+        "No operations can be confirmed from the supplied evidence.",
+        "The file path includes an Implementation folder, which may indicate an application service implementation rather than a pure contract, but this cannot be confirmed from available information."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata identifies this file as a WCF-related contract indicator.",
+        "The source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, OperationContract methods, namespace, method signatures, and implemented interfaces cannot be verified.",
+        "No implementation class relationship can be confirmed from the available metadata."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository WCF discovery lists this file under contracts, so a WCF-related contract indicator was detected.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so ServiceContract attributes, OperationContract methods, namespaces, data contracts, fault contracts, and callback contracts cannot be verified.",
+        "No service implementation relationship is available from the supplied metadata.",
+        "No operation signatures are available."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Observed: repository WCF metadata lists this file under contracts.",
+        "Observed: the physical path includes an Implementation folder, but the repository metadata categorizes it as a WCF contract indicator.",
+        "Unknown: source code for this file was not supplied, so the exact interface/class shape, namespace, [ServiceContract] attribute, [OperationContract] methods, data contracts, fault contracts, async patterns, and implemented interfaces cannot be verified.",
+        "Unknown: no operations were available for analysis."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": null,
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": false,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata reports this file under the WCF contracts list, but the source content for this file was not supplied.",
+        "No [ServiceContract] attribute, [OperationContract] attribute, interface declaration, method signatures, or namespace information is available in the provided evidence.",
+        "Treat this as a possible WCF contract indicator, not a confirmed WCF service contract."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": true,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata identifies this file as a WCF-related contract indicator.",
+        "The actual source content for BookingCreatorApplicationServices.cs was not supplied, so the exact type shape, namespace, ServiceContract attribute usage, interface/class distinction, and method list are Unknown.",
+        "No OperationContract methods were provided in the supplied analysis; WCF operations cannot be confirmed.",
+        "The file path contains an Implementation folder, which suggests it may be an application service implementation or mixed implementation/contract class, but this is not confirmed from available evidence."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown",
+      "operations": [],
+      "implementations": [],
+      "service_contract_detected": false,
+      "operation_contract_detected": false,
+      "observations": [
+        "Repository metadata lists this file under WCF contracts, but the source content of this file was not supplied.",
+        "No [ServiceContract], [OperationContract], interface declaration, class declaration, method signatures, namespace, or implementation details are available in the supplied evidence.",
+        "The name suggests booking-creation application-service responsibility, but this is inferred from the file name only.",
+        "Actual WCF contract shape, data contracts, fault contracts, async pattern, and operation semantics are Unknown."
+      ]
+    },
+    {
+      "name": "IBookingCreatorApplicationServices",
+      "file_path": "Unknown",
+      "namespace": "BookingMgmt.Contracts",
+      "operations": [
+        {
+          "name": "CancelBooking",
+          "return_type": "void",
+          "parameters": [
+            "int bookingId"
+          ],
+          "purpose": "Cancels an existing booking by delegating to IBookingCreatorDomainServices.CancelBooking.",
+          "business_logic": [
+            "Delegates cancellation to the domain service."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "CreateBooking",
+          "return_type": "int",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Creates a booking from a BookingDTO and returns the created booking identifier.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity.",
+            "Delegates creation to IBookingCreatorDomainServices.CreateBooking."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain",
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetCanceledByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Retrieves canceled bookings using paging-like logic and returns BookingDTO objects.",
+          "business_logic": [
+            "Retrieves canceled bookings from the domain service.",
+            "Orders bookings by Id.",
+            "Applies Skip(page - 1) and Take(page * pageSize).",
+            "Maps Booking domain entities to BookingDTO objects."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "IBookingCreatorDomainServices",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetActivesByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Retrieves active bookings using paging-like logic and returns BookingDTO objects.",
+          "business_logic": [
+            "Retrieves active bookings from the domain service.",
+            "Orders bookings by Id.",
+            "Applies Skip(page - 1) and Take(page * pageSize).",
+            "Maps Booking domain entities to BookingDTO objects."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "IBookingCreatorDomainServices",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetTotalPrice",
+          "return_type": "decimal",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Calculates the total price for a booking DTO.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity.",
+            "Calls Booking.GetTotalPrice."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        },
+        {
+          "name": "GetRoute",
+          "return_type": "string",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Gets the route description for a booking DTO.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity.",
+            "Calls Booking.GetRoute."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        }
+      ],
+      "implementations": [
+        "BookingCreatorApplicationServices"
+      ],
+      "service_contract_detected": false,
+      "operation_contract_detected": false,
+      "observations": [
+        "The implementation class implements IBookingCreatorApplicationServices imported from BookingMgmt.Contracts.",
+        "The actual interface source was not supplied, so [ServiceContract] and [OperationContract] attributes cannot be confirmed.",
+        "The repository metadata reported a WCF-related contract indicator in BookingCreatorApplicationServices.cs, but the provided class itself does not contain visible WCF attributes.",
+        "Listed operations are inferred from public methods on the implementation class and may correspond to contract operations if the interface exposes them."
+      ]
+    }
+  ],
+  "services": [
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "Unknown; unit test imports BookingMgmt.Application.Implementation.",
+      "contracts": [
+        "IBookingCreatorApplicationServices"
+      ],
+      "operations": [
+        {
+          "name": "GetTotalPrice",
+          "return_type": "Unknown; unit test compares the result to numeric value 225.",
+          "parameters": [
+            "booking: Unknown concrete DTO type; supplied by BookingDtoMockProvider.GetNewBooking()"
+          ],
+          "purpose": "Returns or calculates total price for a booking DTO, inferred from tests.",
+          "business_logic": [
+            "Expected value for the test booking is 225."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking DTO / BookingMgmt.Contracts"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        },
+        {
+          "name": "GetRoute",
+          "return_type": "Unknown; unit test compares the result to string value \"MADBIO\".",
+          "parameters": [
+            "booking: Unknown concrete DTO type; supplied by BookingDtoMockProvider.GetNewBooking()"
+          ],
+          "purpose": "Returns or calculates route information for a booking DTO, inferred from tests.",
+          "business_logic": [
+            "Expected value for the test booking is \"MADBIO\"."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking DTO / BookingMgmt.Contracts"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        }
+      ],
+      "dependencies": [
+        "IBookingCreatorApplicationServices",
+        "IBookingCreatorDomainServices",
+        "BookingMgmt.Contracts",
+        "Booking DTO type, exact name unknown",
+        "ConfigurationInitializationException may exist in the application layer but its relationship to this service is unknown"
+      ],
+      "wcf_detected": true,
+      "observations": [
+        "The implementation is instantiated directly in the unit test with a mocked IBookingCreatorDomainServices dependency.",
+        "No [ServiceBehavior], InstanceContextMode, ConcurrencyMode, transaction behavior, error behavior, authorization behavior, or throttling behavior was supplied.",
+        "No service host or .svc file was supplied.",
+        "The service appears to be application-layer logic around booking creation/booking DTO processing, but the full behavior is unknown."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "repo\\before\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "BookingMgmt.Application.Implementation",
+      "contracts": [
+        "IBookingCreatorApplicationServices"
+      ],
+      "operations": [
+        {
+          "name": "CancelBooking",
+          "return_type": "void",
+          "parameters": [
+            "int bookingId"
+          ],
+          "purpose": "Cancels an existing booking by identifier.",
+          "business_logic": [
+            "Delegates cancellation to IBookingCreatorDomainServices.CancelBooking(bookingId)."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "CreateBooking",
+          "return_type": "int",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Creates a booking and returns an integer identifier or result value.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity using MappingToDomainFactory.",
+            "Delegates creation to IBookingCreatorDomainServices.CreateBooking(booking)."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain",
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetCanceledByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Returns canceled bookings with ordering and paging applied.",
+          "business_logic": [
+            "Retrieves canceled bookings through IBookingCreatorDomainServices.GetCanceled().",
+            "Orders by Booking.Id.",
+            "Applies Skip(page - 1) and Take(page * pageSize).",
+            "Maps Booking domain entities to BookingDTO collection using MappingFromDomainFactory."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking",
+            "BookingDTO",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetActivesByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Returns active bookings with ordering and paging applied.",
+          "business_logic": [
+            "Retrieves active bookings through IBookingCreatorDomainServices.GetActives().",
+            "Orders by Booking.Id.",
+            "Applies Skip(page - 1) and Take(page * pageSize).",
+            "Maps Booking domain entities to BookingDTO collection using MappingFromDomainFactory."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking",
+            "BookingDTO",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetTotalPrice",
+          "return_type": "decimal",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Calculates the total price for a booking DTO.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity using MappingToDomainFactory.",
+            "Calls Booking.GetTotalPrice()."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        },
+        {
+          "name": "GetRoute",
+          "return_type": "string",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Returns the route for a booking DTO.",
+          "business_logic": [
+            "Maps BookingDTO to Booking domain entity using MappingToDomainFactory.",
+            "Calls Booking.GetRoute()."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        }
+      ],
+      "dependencies": [
+        "IBookingCreatorApplicationServices",
+        "IBookingCreatorDomainServices",
+        "BookingDTO",
+        "Booking",
+        "MappingToDomainFactory",
+        "MappingFromDomainFactory",
+        "EnumDomain",
+        "DomainToDtoEnum",
+        "System.Collections.Generic",
+        "System.Linq"
+      ],
+      "wcf_detected": true,
+      "observations": [
+        "This class is an implementation of IBookingCreatorApplicationServices and appears to contain application service operations related to booking creation, cancellation, active-booking queries, canceled-booking queries, total-price calculation, and route calculation.",
+        "The supplied implementation contains no WCF attributes such as [ServiceBehavior], [OperationBehavior], InstanceContextMode, or ConcurrencyMode.",
+        "Constructor injection is used for IBookingCreatorDomainServices, implying dependency injection or a composition root exists, but no host or DI configuration was supplied.",
+        "The implementation is synchronous.",
+        "Domain entities are kept internal to the application layer and DTOs are exposed at the application-service boundary.",
+        "Database involvement is inferred through the domain-service operations CreateBooking, CancelBooking, GetCanceled, and GetActives; the actual persistence implementation is not supplied."
+      ]
+    },
+    {
+      "name": "BookingCreatorApplicationServices",
+      "file_path": "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "namespace": "BookingMgmt.Application.Implementation",
+      "contracts": [
+        "IBookingCreatorApplicationServices"
+      ],
+      "operations": [
+        {
+          "name": "CancelBooking",
+          "return_type": "void",
+          "parameters": [
+            "int bookingId"
+          ],
+          "purpose": "Cancels a booking through the domain service.",
+          "business_logic": [
+            "Calls _bookingCreatorDomainServices.CancelBooking(bookingId)."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "CreateBooking",
+          "return_type": "int",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Creates a booking through DTO-to-domain mapping and domain service delegation.",
+          "business_logic": [
+            "Converts BookingDTO to Booking using MappingToDomainFactory.",
+            "Calls _bookingCreatorDomainServices.CreateBooking(booking)."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain",
+            "IBookingCreatorDomainServices"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetCanceledByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Returns canceled bookings as DTOs using ordering and paging-like logic.",
+          "business_logic": [
+            "Calls _bookingCreatorDomainServices.GetCanceled().",
+            "Orders results by Id.",
+            "Applies Skip(page - 1).",
+            "Applies Take(page * pageSize).",
+            "Maps Booking entities to BookingDTO collection."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking",
+            "BookingDTO",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetActivesByPages",
+          "return_type": "List<BookingDTO>",
+          "parameters": [
+            "int page",
+            "int pageSize"
+          ],
+          "purpose": "Returns active bookings as DTOs using ordering and paging-like logic.",
+          "business_logic": [
+            "Calls _bookingCreatorDomainServices.GetActives().",
+            "Orders results by Id.",
+            "Applies Skip(page - 1).",
+            "Applies Take(page * pageSize).",
+            "Maps Booking entities to BookingDTO collection."
+          ],
+          "dependencies": [
+            "IBookingCreatorDomainServices",
+            "Booking",
+            "BookingDTO",
+            "MappingFromDomainFactory",
+            "DomainToDtoEnum",
+            "System.Linq"
+          ],
+          "database_related": true,
+          "external_service_related": false
+        },
+        {
+          "name": "GetTotalPrice",
+          "return_type": "decimal",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Calculates total price using domain entity behavior.",
+          "business_logic": [
+            "Converts BookingDTO to Booking.",
+            "Calls Booking.GetTotalPrice()."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        },
+        {
+          "name": "GetRoute",
+          "return_type": "string",
+          "parameters": [
+            "BookingDTO bookingDto"
+          ],
+          "purpose": "Returns route information using domain entity behavior.",
+          "business_logic": [
+            "Converts BookingDTO to Booking.",
+            "Calls Booking.GetRoute()."
+          ],
+          "dependencies": [
+            "BookingDTO",
+            "Booking",
+            "MappingToDomainFactory",
+            "EnumDomain"
+          ],
+          "database_related": false,
+          "external_service_related": false
+        }
+      ],
+      "dependencies": [
+        "IBookingCreatorApplicationServices",
+        "IBookingCreatorDomainServices",
+        "BookingDTO",
+        "Booking",
+        "MappingToDomainFactory",
+        "MappingFromDomainFactory",
+        "EnumDomain",
+        "DomainToDtoEnum",
+        "System.Collections.Generic",
+        "System.Linq"
+      ],
+      "wcf_detected": true,
+      "observations": [
+        "This class is an application service implementation and implements IBookingCreatorApplicationServices.",
+        "No [ServiceBehavior], [ServiceContract], [OperationContract], InstanceContextMode, or ConcurrencyMode attributes are visible on the supplied class.",
+        "The class depends on constructor injection for IBookingCreatorDomainServices.",
+        "The class uses static mapping factories for DTO/domain conversion.",
+        "No direct database access code is shown, but operations that delegate to the domain service are likely persistence-related.",
+        "No explicit exception handling, WCF fault translation, authorization checks, or validation are visible."
+      ]
+    }
+  ],
+  "endpoints": [
+    {
+      "name": "Unknown",
+      "contract": "BookingCreatorApplicationServices",
+      "binding": "Unknown",
+      "address": "Unknown",
+      "configuration_file": null,
+      "observations": [
+        "No WCF endpoint configuration files were supplied.",
+        "No service host, .svc file, app.config, web.config, or programmatic host setup was provided.",
+        "Endpoint address, binding, behavior configuration, and exposed contract cannot be confirmed."
+      ]
+    },
+    {
+      "name": "Unknown",
+      "contract": "Unknown",
+      "binding": "Unknown",
+      "address": "Unknown",
+      "configuration_file": "Unknown",
+      "observations": [
+        "No WCF endpoint configuration or service host file was supplied.",
+        "Endpoint address, endpoint contract mapping, and endpoint binding are unknown."
+      ]
+    }
+  ],
+  "bindings": [
+    {
+      "name": "Unknown",
+      "binding_type": null,
+      "configuration_file": null,
+      "configuration": [],
+      "security": [
+        "Unknown. No binding configuration was supplied."
+      ],
+      "migration_considerations": [
+        "Binding type is unavailable, so transport protocol, encoding, message size limits, timeout behavior, reliable sessions, and security mode cannot be assessed.",
+        "Before migration, locate app.config/web.config or programmatic ServiceHost/client configuration to identify whether the service uses basicHttpBinding, wsHttpBinding, netTcpBinding, customBinding, or another binding."
+      ]
+    },
+    {
+      "name": "Unknown",
+      "binding_type": "Unknown",
+      "configuration_file": "Unknown",
+      "configuration": [
+        "No binding configuration was supplied."
+      ],
+      "security": [
+        "Unknown"
+      ],
+      "migration_considerations": [
+        "Binding-dependent migration decisions cannot be finalized without knowing whether the service used basicHttpBinding, wsHttpBinding, netTcpBinding, named pipes, customBinding, or another binding.",
+        "Transport protocol, message encoding, timeouts, quotas, reliable sessions, transactions, and security mode are unknown."
+      ]
+    }
+  ],
+  "migration_recommendations": [
+    {
+      "component": "IBookingCreatorApplicationServices / BookingCreatorApplicationServices",
+      "current_technology": "WCF-related .NET Framework application service; exact WCF exposure is unconfirmed from supplied metadata.",
+      "target_technology": "ASP.NET Core Web API if this service is externally exposed as request/response operations; otherwise a .NET class library/application service if used only in-process.",
+      "rationale": "The observed operations, GetTotalPrice and GetRoute, appear to be simple request/response application operations over booking DTOs. No duplex, streaming, sessionful, MSMQ, named pipe, transaction, or advanced SOAP behavior was observed. Without endpoint/binding configuration, the safest recommendation is conditional on whether clients actually call it remotely.",
+      "considerations": [
+        "Inventory actual WCF attributes and configuration before choosing a final target.",
+        "If existing consumers require SOAP compatibility, consider CoreWCF or a SOAP-compatible facade rather than directly replacing with REST.",
+        "If consumers are internal HTTP clients and contract compatibility is not required, ASP.NET Core Web API is likely simpler and more idiomatic.",
+        "If the service is only used inside the process, avoid preserving WCF remoting and move the logic to a normal application service in a modern .NET class library.",
+        "Preserve DTO serialization semantics if existing clients depend on XML/SOAP shapes, namespaces, or data member names."
+      ],
+      "complexity": "Unknown; likely Low to Medium for the visible operations, but cannot be confirmed without contracts, DTOs, host configuration, and consumers."
+    },
+    {
+      "component": "WCF hosting/configuration",
+      "current_technology": "Unknown; no host, .svc, app.config, web.config, endpoints, or bindings were supplied.",
+      "target_technology": "ASP.NET Core hosting model, CoreWCF hosting, or no service host depending on confirmed exposure requirements.",
+      "rationale": "No hosting artifacts are available, so the migration target cannot be selected solely from the supplied component metadata.",
+      "considerations": [
+        "Locate the original service host project, IIS/WAS configuration, Windows Service host, or self-host bootstrap code.",
+        "Confirm service addresses, base addresses, metadata publishing, diagnostics, and authentication settings.",
+        "Confirm whether there are generated WCF clients or external SOAP consumers."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF contract indicator; exact WCF usage unknown",
+      "target_technology": "ASP.NET Core Web API or Minimal API, if the service is a simple HTTP request/response application service",
+      "rationale": "The component name suggests an application service for booking creation, which often maps naturally to HTTP API endpoints in modern .NET. However, this is an inferred recommendation only because the actual contract, operations, binding, and clients are unavailable.",
+      "considerations": [
+        "Confirm whether the existing service is consumed as SOAP, REST-like HTTP, internal .NET-to-.NET WCF, or another transport.",
+        "Confirm request/response DTOs, validation behavior, exception contracts, and serialization requirements before selecting the final target.",
+        "Do not assume HTTP API migration is safe if existing clients require SOAP/WSDL compatibility."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Possible WCF ServiceContract",
+      "target_technology": "CoreWCF, if SOAP/WSDL compatibility or WCF-style contracts must be preserved",
+      "rationale": "If the detected contract is used by existing SOAP clients or depends on WCF-specific features, CoreWCF may reduce migration risk compared with rewriting the service contract as a REST API.",
+      "considerations": [
+        "Validate whether existing clients consume generated WCF proxies or WSDL metadata.",
+        "Check for WCF-specific behaviors such as InstanceContextMode, ConcurrencyMode, fault contracts, message contracts, custom bindings, inspectors, credentials, or reliable sessions.",
+        "CoreWCF does not support every legacy WCF feature; compatibility must be assessed after locating full configuration and source code."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs",
+      "current_technology": "Unit test DTO fixture/helper; not confirmed as WCF service code",
+      "target_technology": "Modern .NET test project support, if the test suite is migrated",
+      "rationale": "The supplied code analysis is for a unit-test data provider that creates BookingDTO and JourneyDTO instances. It is not itself a WCF service contract, endpoint, or binding.",
+      "considerations": [
+        "This file should not drive WCF migration design decisions.",
+        "DTO serialization compatibility should be reviewed if BookingDTO and JourneyDTO are part of the service contract.",
+        "Hard-coded test data may need updates if DTO contracts change during modernization."
+      ],
+      "complexity": "Low"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF-related application service / possible WCF service contract",
+      "target_technology": "ASP.NET Core Web API or gRPC; CoreWCF only if WCF/SOAP compatibility is required",
+      "rationale": "The available metadata suggests a booking creation application service, but no endpoint, binding, hosting model, or operation signatures are available. If the service is request/response business functionality, ASP.NET Core Web API is usually suitable for HTTP/JSON modernization. If strongly typed service-to-service communication is required, gRPC may be suitable. If existing SOAP clients, WCF bindings, or WS-* features must be preserved, CoreWCF should be evaluated.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains a WCF [ServiceContract], [OperationContract], service implementation, or only application-layer logic.",
+        "Identify current consumers before selecting REST, gRPC, or CoreWCF.",
+        "Recover or inspect missing configuration files to determine bindings, addresses, authentication, authorization, message size settings, timeouts, and behaviors.",
+        "Determine whether SOAP interoperability is required.",
+        "Determine whether the service uses WCF-specific features such as sessions, duplex callbacks, transactions, reliable messaging, impersonation, message security, or custom behaviors.",
+        "Preserve operation-level business semantics and error contracts if FaultContract or custom exception behavior exists."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Unknown; repository metadata indicates a possible WCF contract/application service",
+      "target_technology": "ASP.NET Core Web API, gRPC, or CoreWCF depending on the missing contract and client requirements",
+      "rationale": "The supplied metadata does not expose operations, bindings, endpoints, hosting model, or client compatibility requirements. If the service is request/response business functionality, ASP.NET Core Web API is a likely modern target. If strongly typed internal service-to-service communication is required, gRPC may be suitable. If existing SOAP/WCF clients or contract compatibility must be preserved, CoreWCF should be evaluated.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices contains [ServiceContract] and [OperationContract] declarations.",
+        "Identify all consumers before choosing a target technology.",
+        "If SOAP clients exist, avoid assuming Web API is sufficient without a compatibility plan.",
+        "If the class is only an internal application service and not externally hosted via WCF, it may not require a service-boundary migration.",
+        "No endpoint, binding, or behavior configuration was supplied, so transport, serialization, and security requirements are Unknown."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "ConfigurationInitializationException",
+      "current_technology": ".NET custom exception with [Serializable] pattern",
+      "target_technology": "Modern .NET exception type; preserve only required serialization behavior",
+      "rationale": "The exception class is not itself a WCF service, contract, endpoint, or binding. It may participate in service error handling, but no WCF fault mapping is shown.",
+      "considerations": [
+        "Review whether this exception crosses service boundaries.",
+        "If exposed through WCF, determine whether it is converted to FaultException or FaultContract types.",
+        "Binary exception serialization patterns may be unnecessary in modern .NET unless legacy compatibility requires them."
+      ],
+      "complexity": "Low"
+    },
+    {
+      "component": "BookingCreatorApplicationServices application boundary",
+      "current_technology": "Possible WCF service implementation or WCF-adjacent application service; exact WCF exposure is Unknown",
+      "target_technology": "ASP.NET Core Web API on modern .NET, if consumers can move to HTTP/JSON request-response APIs",
+      "rationale": "The observed operations are request-response application-service methods using DTOs and synchronous business operations. No duplex callbacks, streaming, sessions, transactions, or WCF-specific binding behavior were observed, making a REST-style or RPC-over-HTTP API a reasonable modernization target if client compatibility does not require WCF.",
+      "considerations": [
+        "Confirm whether IBookingCreatorApplicationServices is actually decorated with [ServiceContract] and whether each public method is exposed with [OperationContract].",
+        "Define HTTP resource/operation boundaries explicitly before migration; do not assume all public methods should map one-to-one without API design review.",
+        "Preserve DTO compatibility only if existing clients depend on current data shapes.",
+        "Review error handling and decide how domain/application exceptions should be translated at the API boundary.",
+        "Review paging semantics before migration because the current Skip(page - 1) and Take(page * pageSize) behavior may be intentional legacy behavior or a defect."
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "component": "Existing WCF-compatible service surface",
+      "current_technology": "Unknown WCF binding/configuration; repository metadata indicates WCF-related detection but no endpoint or binding files were supplied",
+      "target_technology": "CoreWCF on modern .NET, if existing WCF clients, SOAP contracts, or binding compatibility must be preserved",
+      "rationale": "Because no endpoint, binding, or client information is available, compatibility requirements are unresolved. If external consumers depend on SOAP/WCF contracts, CoreWCF may reduce contract-breaking changes compared with redesigning the service as Web API.",
+      "considerations": [
+        "CoreWCF does not support every legacy WCF feature; confirm actual binding, security mode, behaviors, serialization requirements, and hosting model first.",
+        "ServiceContract, OperationContract, DataContract, KnownType, FaultContract, and serializer settings must be inspected in the missing contracts and DTO files.",
+        "If configuration-based WCF behavior exists outside the supplied files, it must be inventoried before target selection."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices implementation class",
+      "current_technology": "C# application service with injected domain service dependency",
+      "target_technology": ".NET class library used behind the selected service boundary",
+      "rationale": "The implementation contains business/application orchestration and mapping logic that can remain separated from transport-specific concerns. Keeping this as an application service behind Web API, CoreWCF, or another host preserves layered boundaries.",
+      "considerations": [
+        "Make dependency injection, lifetime, and thread-safety explicit in the modern host.",
+        "Evaluate whether static mapper factories should remain or become injectable dependencies for testability and configurability.",
+        "Consider async only after confirming underlying persistence or remote calls are I/O-bound; do not change synchronous behavior without compatibility review."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF-related contract indicator / Unknown concrete WCF configuration",
+      "target_technology": "ASP.NET Core Web API on modern .NET, if the service exposes request/response booking application operations over HTTP",
+      "rationale": "The only available evidence suggests an application service related to booking creation. No duplex, streaming, sessionful, named-pipe, MSMQ, TCP, or advanced SOAP-specific behavior is observed. For typical request/response application service operations, ASP.NET Core Web API is usually the most appropriate modern .NET target.",
+      "considerations": [
+        "Validate the actual ServiceContract and OperationContract methods before choosing the final target.",
+        "If existing consumers require SOAP compatibility, CoreWCF may be a lower-disruption interim target.",
+        "If the service is internal RPC-style and strong contracts/performance are important, gRPC may be considered after reviewing the actual operations and clients.",
+        "Authentication, authorization, transport security, message security, serialization behavior, exception/fault behavior, and hosting model are Unknown from the supplied data.",
+        "No migration code should be generated until the missing source, project, host, and configuration files are available."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "WCF hosting/configuration",
+      "current_technology": "Unknown",
+      "target_technology": "Unknown until host and endpoint configuration are located",
+      "rationale": "No .config files, service host files, .svc files, project files, endpoints, bindings, or behaviors were supplied. Hosting and configuration cannot be inferred safely.",
+      "considerations": [
+        "Locate App.config/Web.config, .svc files, Windows Service host, IIS hosting metadata, self-host startup code, or dependency injection/bootstrap code.",
+        "Determine whether the service is IIS-hosted, WAS-hosted, Windows Service-hosted, console-hosted, or hosted by another process.",
+        "Determine whether endpoint addresses are externally consumed before changing URL structure or protocol."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF contract indicator / legacy .NET application service; exact WCF usage Unknown",
+      "target_technology": "ASP.NET Core Web API if this is request/response application service; CoreWCF if WCF contract/client compatibility must be preserved",
+      "rationale": "The only confirmed WCF-related artifact is a contract indicator. No endpoints, bindings, duplex/session behavior, streaming, transactions, or WCF-specific hosting features were supplied. A booking-creation application service commonly maps well to HTTP API style, but existing WCF client compatibility cannot be ruled out.",
+      "considerations": [
+        "Inspect BookingCreatorApplicationServices.cs to confirm whether it contains [ServiceContract] and [OperationContract].",
+        "Identify consumers before choosing REST/HTTP API versus CoreWCF compatibility.",
+        "Preserve DTO compatibility if external clients depend on existing service contracts.",
+        "Confirm serialization requirements, fault contracts, validation, authentication, and authorization behavior.",
+        "Do not remove WCF compatibility until endpoint bindings and client usage are known."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "FromBookingDTO mapping component",
+      "current_technology": "Custom .NET Framework-style mapping infrastructure inferred from MappingBase and MappingToDomainFactory",
+      "target_technology": "Modern .NET class library component reused by service/application layer",
+      "rationale": "The supplied code is not a WCF service implementation but appears to support application/domain mapping from BookingDTO to Booking. It can likely remain an internal application-layer concern during migration.",
+      "considerations": [
+        "Review custom MappingBase and MappingToDomainFactory behavior before migration.",
+        "Confirm null-handling for BookingDTO.Journeys.",
+        "Confirm whether DTOs are shared as WCF DataContract types or plain DTOs.",
+        "Improve type-safety only as a refactoring decision; no code change is implied by this analysis."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Possible WCF service contract or WCF-related application service",
+      "target_technology": "ASP.NET Core Web API or ASP.NET Core application service layer; exact target depends on whether this contract is externally exposed",
+      "rationale": "The component appears related to booking creation application services, but no endpoint, binding, hosting, message pattern, or operation metadata is available. If this is an external request/response service, ASP.NET Core Web API is the most likely modern replacement. If it is only an internal application service, it may be better migrated as a normal .NET application service class/library rather than exposed as a network service.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains [ServiceContract] and [OperationContract] attributes.",
+        "Confirm whether consumers call it through WCF or directly as an in-process application service.",
+        "Identify operation signatures, DTOs, exception contracts, validation behavior, and transaction expectations before choosing a final target.",
+        "No evidence was provided for duplex callbacks, streaming, sessions, reliable messaging, or distributed transactions; do not select gRPC/CoreWCF solely based on the available metadata.",
+        "If backward WCF compatibility is required, evaluate CoreWCF after confirming bindings and clients."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "FromJourneyDTO mapping component",
+      "current_technology": "C# application-layer mapper using BookingMgmt.Contracts.DTO.JourneyDTO and BookingMgmt.Domain.Entities.Journey",
+      "target_technology": ".NET application-layer mapping component",
+      "rationale": "The supplied code is not itself a WCF service, endpoint, binding, or host. It maps a DTO to a domain entity and should likely remain an internal application-layer concern during modernization.",
+      "considerations": [
+        "Preserve current null-source behavior, which returns default(TOutput).",
+        "Preserve or intentionally change current casting behavior, where incompatible output types can result in null due to 'as TOutput'.",
+        "The mapper depends on both contract DTOs and domain entities, so layer boundaries should be reviewed during modernization.",
+        "The analysis metadata marked this file as WCF-related, likely because it consumes a contract DTO, but no direct WCF attributes or operations are shown in the supplied code."
+      ],
+      "complexity": "Low"
+    },
+    {
+      "component": "WCF hosting/configuration",
+      "current_technology": "Unknown",
+      "target_technology": "Unknown until host and configuration are identified",
+      "rationale": "No .config files, service host files, .svc files, application startup files, project files, endpoints, bindings, or behavior configuration were supplied.",
+      "considerations": [
+        "Locate App.config, Web.config, .svc files, ServiceHost usage, IIS/WAS hosting metadata, Windows Service host code, or self-hosting startup code.",
+        "Identify bindings before selecting a replacement technology.",
+        "Identify authentication, authorization, transport security, message security, certificates, and impersonation settings before migration.",
+        "Identify clients and compatibility requirements before replacing WCF endpoints."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF contract candidate / application service contract",
+      "target_technology": "ASP.NET Core Web API if this is a stateless request/response booking API; CoreWCF only if WCF wire compatibility or WCF-specific behavior must be preserved",
+      "rationale": "The available metadata indicates a WCF-related contract but provides no endpoints, bindings, behaviors, sessions, duplex callbacks, transactions, or SOAP-specific requirements. For a booking creation application service, a modern HTTP API is likely appropriate if consumers can migrate. CoreWCF should be considered only when existing SOAP/WCF clients or WCF-specific behaviors must remain compatible.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains ServiceContract and OperationContract attributes.",
+        "Inventory all operations and request/response DTOs before selecting the target technology.",
+        "Identify existing consumers and whether they require SOAP, generated WCF proxies, WS-* security, or binary/net.tcp transport.",
+        "If the service is internally consumed and high-performance contract-first RPC is needed, evaluate gRPC; no evidence currently confirms this requirement.",
+        "If no remote boundary is actually required, consider keeping the functionality as an in-process application service in modern .NET."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "MappingToDomainFactory",
+      "current_technology": "Internal static C# mapping factory in application layer",
+      "target_technology": "Retain as application-layer mapping logic, potentially refactor for dependency injection during broader modernization",
+      "rationale": "This component is not a WCF endpoint or service implementation based on the supplied source. It supports DTO-to-domain conversion and may be used by service operations, but no direct WCF behavior is shown.",
+      "considerations": [
+        "Factory directly instantiates concrete mappers FromBookingDTO and FromJourneyDTO.",
+        "Unsupported enum values throw NotImplementedException.",
+        "If service operations depend on this mapping, validate mapper behavior and exception translation when exposing through a modern API.",
+        "If mappers require dependencies in the future, dependency injection may be preferable."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF-related contract indicator; exact WCF usage unknown",
+      "target_technology": "ASP.NET Core Web API, or CoreWCF if WCF/SOAP compatibility must be preserved",
+      "rationale": "Only a possible application service contract related to booking creation was identified. No endpoint, binding, host, message contract, duplex/session behavior, or transport/security configuration was supplied. If this is a request/response application service consumed over HTTP, ASP.NET Core Web API is a likely modern target. If existing SOAP/WCF clients must continue to consume compatible contracts, CoreWCF may be more appropriate.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains [ServiceContract] and [OperationContract] attributes.",
+        "Identify all consumers before selecting REST, gRPC, CoreWCF, or another target.",
+        "Confirm whether operations use SOAP-specific features such as message contracts, fault contracts, sessions, transactions, callbacks, or custom behaviors.",
+        "No migration code should be generated until source contracts, hosting model, and configuration are known."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF-related application service contract indicator; exact WCF implementation unknown",
+      "target_technology": "ASP.NET Core Web API on modern .NET, or CoreWCF only if existing WCF client/protocol compatibility must be preserved",
+      "rationale": "The available evidence suggests an application-layer service related to booking creation, but no WCF endpoint, binding, hosting model, or transport-specific behavior is available. If this is a request/response business service exposing booking creation functionality, ASP.NET Core Web API is typically a better modernization target than preserving WCF. CoreWCF should be considered only if the missing source/configuration shows a strong requirement to retain WCF contracts, SOAP clients, or WCF-specific binding behavior.",
+      "considerations": [
+        "Validate the actual BookingCreatorApplicationServices.cs source before selecting the final target technology.",
+        "Identify whether consumers are SOAP/WCF clients, HTTP clients, internal .NET callers, or message-based integrations.",
+        "Preserve DTO compatibility if BookingMgmt.Contracts.DTO types are externally consumed.",
+        "Review any ServiceContract, OperationContract, FaultContract, ServiceKnownType, ServiceBehavior, InstanceContextMode, and ConcurrencyMode attributes if present in the missing file.",
+        "No endpoint or binding configuration was supplied, so transport, serialization, security, and hosting requirements are unknown."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "Mapping layer: FromBookingEntity",
+      "current_technology": "Application-layer manual DTO mapper",
+      "target_technology": "Modern .NET class library component used behind the selected service API",
+      "rationale": "The supplied code maps Booking domain entities to BookingDTO objects and is not itself a WCF endpoint or host. It should remain an internal application concern during migration and can be reused or refactored independently of the service transport.",
+      "considerations": [
+        "Observed dependency on BookingMgmt.Domain.Entities and BookingMgmt.Contracts.DTO.",
+        "Mapping calls Booking.GetTotalPrice(), so migrated behavior must preserve domain pricing semantics.",
+        "Null and invalid cast behavior should be reviewed before changing mapper design.",
+        "The mapper appears to expose DTOs likely used by service contracts, so DTO shape compatibility may affect clients."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF-related contract candidate / application service; exact WCF usage Unknown",
+      "target_technology": "ASP.NET Core Minimal API or ASP.NET Core Web API, subject to confirmation of operation style",
+      "rationale": "The component appears related to booking creation application services. If the confirmed WCF contract exposes request/response business operations, an HTTP API is usually the most appropriate modern .NET target. However, the actual contract operations, payloads, hosting model, and bindings are unavailable, so the target cannot be finalized.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains [ServiceContract] and [OperationContract] members.",
+        "Inventory operation signatures, DTOs, faults, validation behavior, transaction requirements, and authorization behavior before selecting the final migration target.",
+        "If consumers require SOAP compatibility, consider CoreWCF rather than replacing the interface with REST/HTTP APIs immediately.",
+        "If operations are asynchronous workflow or event-oriented, evaluate messaging technologies such as Azure Service Bus, RabbitMQ, or MassTransit rather than a direct HTTP API replacement."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "FromJourneyEntity mapper",
+      "current_technology": "Internal application-layer mapper used to map BookingMgmt.Domain.Entities.Journey to BookingMgmt.Contracts.DTO.JourneyDTO",
+      "target_technology": "Retain as application-layer mapping logic in modern .NET, with optional refactoring after compatibility analysis",
+      "rationale": "The supplied code is not itself a WCF service, endpoint, or binding, but it maps domain data to a DTO that may be exposed by a service boundary. This mapping logic should be preserved independently of the transport migration.",
+      "considerations": [
+        "Preserve existing null behavior: null input returns default.",
+        "Preserve or intentionally change current invalid cast behavior only after compatibility review.",
+        "Review DTO serialization compatibility if JourneyDTO is exposed through WCF or a future API.",
+        "The code depends on BookingMgmt.Contracts.DTO.JourneyDTO, BookingMgmt.Domain.Entities.Journey, and MappingBase, none of which were supplied."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "WCF hosting/configuration",
+      "current_technology": "Unknown",
+      "target_technology": "Unknown until host, endpoint, binding, and configuration files are located",
+      "rationale": "No .config files, service host files, endpoints, bindings, behaviors, or project metadata were supplied. Hosting and transport characteristics are therefore unknown.",
+      "considerations": [
+        "Locate App.config, Web.config, service host project, .svc files, Windows Service host, IIS/WAS configuration, or self-host startup code.",
+        "Confirm bindings, addresses, security mode, credentials, service behaviors, throttling, instance context mode, concurrency mode, and metadata publishing settings.",
+        "Do not assume HTTP/SOAP, net.tcp, message security, transport security, or anonymous access without configuration evidence."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF contract or WCF-related application service indicator; exact WCF usage is Unknown",
+      "target_technology": "ASP.NET Core Minimal API or ASP.NET Core Web API, if the service exposes request/response booking operations over HTTP; otherwise Unknown until contract operations and hosting model are reviewed",
+      "rationale": "The available naming suggests application-level booking creation functionality. No endpoint, binding, duplex, streaming, session, transaction, or net.tcp-specific behavior was provided. For simple request/response business operations, ASP.NET Core HTTP APIs are typically the modern .NET replacement.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains [ServiceContract] and [OperationContract] before selecting a final migration target.",
+        "Identify operation signatures, DTOs, exception contracts, validation behavior, and serialization requirements.",
+        "If existing consumers depend on SOAP/WSDL compatibility, consider CoreWCF instead of REST-style ASP.NET Core APIs.",
+        "If the service uses WCF-specific features not visible in the supplied metadata, such as callbacks, sessions, transactions, message inspectors, custom bindings, or Windows transport security, reassess the target technology.",
+        "No migration code should be generated until source, project, host, and configuration files are available."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "Domain-to-DTO mapping factory used by application layer",
+      "current_technology": "Internal static C# factory",
+      "target_technology": "Retain as application-layer component initially; optionally modernize later using dependency injection or mapper registry",
+      "rationale": "MappingFromDomainFactory is not itself a WCF endpoint or contract, but it may support application service operations by converting domain objects to DTOs. It can likely remain behind a modern API boundary during initial migration.",
+      "considerations": [
+        "The factory directly creates concrete mapper classes, which may complicate unit testing and dependency substitution.",
+        "Unsupported enum values throw NotImplementedException; migration should review whether this maps appropriately to service/API error responses.",
+        "The metadata marked the file as database_related and wcf_related, but the supplied code only shows mapping selection and no direct database or WCF API usage."
+      ],
+      "complexity": "Low"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Possible WCF service contract / application service contract",
+      "target_technology": "ASP.NET Core Web API if this is a request/response booking-creation application service; gRPC if strongly typed RPC semantics are required; CoreWCF only if WCF protocol/configuration compatibility must be preserved",
+      "rationale": "The component name suggests application-level booking creation behavior, but no binding, endpoint, operation, or hosting details are available. A REST-style ASP.NET Core API is commonly appropriate for application commands, but the final target cannot be confirmed without contract methods, message shapes, client expectations, and binding/security requirements.",
+      "considerations": [
+        "Recover and inspect BookingCreatorApplicationServices.cs before selecting the migration target.",
+        "Identify whether existing clients use SOAP/WSDL, generated WCF proxies, duplex callbacks, sessions, transactions, or message-level security.",
+        "If existing consumers depend on SOAP contracts or WCF-specific behaviors, CoreWCF may reduce compatibility risk.",
+        "If consumers can be changed and operations are simple request/response commands, ASP.NET Core Web API is likely a better long-term modernization target.",
+        "If low-latency internal service-to-service RPC with strongly typed contracts is required, evaluate gRPC."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "MappingBase",
+      "current_technology": "Internal .NET mapping helper in BookingMgmt.Application.MapFactories",
+      "target_technology": "Modern .NET class library code retained as internal application infrastructure",
+      "rationale": "MappingBase is not itself a WCF service contract, endpoint, or binding. It appears to be internal application-layer mapping infrastructure that may be used by service/application logic.",
+      "considerations": [
+        "Preserve lazy deferred execution behavior from yield return if this mapper participates in service responses.",
+        "Review null-handling behavior when enabling nullable reference types in modern C#.",
+        "Do not expose this internal infrastructure as a service API unless a separate design decision requires it."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "WCF-related contract indicator; exact WCF usage unknown",
+      "target_technology": "Undetermined; likely ASP.NET Core Web API for simple HTTP request/response application-service operations, or gRPC if strongly typed RPC semantics are required",
+      "rationale": "The available metadata indicates a WCF-related contract but provides no endpoint, binding, operation, hosting, or security details. Because no SOAP-specific behavior, duplex messaging, transactions, sessions, or custom bindings are observable, the modern target cannot be selected confidently from the supplied data alone.",
+      "considerations": [
+        "Inspect BookingCreatorApplicationServices.cs to confirm whether it is an interface or implementation class and whether it uses [ServiceContract], [OperationContract], [FaultContract], [DataContract], or WCF-specific behaviors.",
+        "Locate project, host, and configuration files to determine bindings, addresses, behaviors, authentication, authorization, serialization settings, throttling, and lifecycle behavior.",
+        "If the service is consumed as SOAP by external clients, consider CoreWCF or preserving a SOAP-compatible facade during migration.",
+        "If consumers can move to REST and operations are resource/application-command oriented, ASP.NET Core Web API is likely appropriate.",
+        "If internal clients require contract-first, high-performance RPC and are not dependent on SOAP interoperability, gRPC may be appropriate."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Possible WCF application service / possible WCF contract indicator",
+      "target_technology": "Unknown; likely ASP.NET Core Web API or gRPC only if confirmed service semantics require it",
+      "rationale": "The available metadata suggests booking creation application-service behavior, but no actual WCF contract, endpoint, binding, hosting model, or operation shape is available. A target technology cannot be selected confidently without contract and configuration details. If this exposes request/response business operations to HTTP clients, ASP.NET Core Web API may be appropriate. If it requires strongly typed RPC-style contracts, streaming, or high-performance internal service-to-service calls, gRPC may be considered.",
+      "considerations": [
+        "Confirm whether BookingCreatorApplicationServices.cs contains [ServiceContract] and [OperationContract] attributes or whether it is only an application service class.",
+        "Inspect missing project files, host files, App.config/Web.config, and client configuration before selecting a migration target.",
+        "Determine consumers, transport protocol, serialization expectations, authentication requirements, and operation signatures.",
+        "Do not assume all WCF components should map to one modern technology; select target per actual service behavior once source and configuration are available."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "WCF hosting/configuration",
+      "current_technology": "Unknown",
+      "target_technology": "Unknown",
+      "rationale": "No WCF host, service activation file, Windows service host, IIS/WAS host, console host, Web.config, App.config, endpoint, or binding configuration was supplied.",
+      "considerations": [
+        "Hosting model must be discovered before estimating migration complexity.",
+        "If hosted in IIS/WAS, ASP.NET Core hosting may be a natural target; if hosted as a Windows Service, .NET Worker Service plus HTTP/gRPC endpoint hosting may be relevant.",
+        "Configuration migration cannot be assessed because no configuration files were supplied."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Legacy WCF-related application service or possible WCF ServiceContract",
+      "target_technology": "ASP.NET Core Web API or Minimal API; consider CoreWCF only if WCF protocol/wire compatibility is required",
+      "rationale": "Only a WCF contract indicator is available; no endpoints, bindings, behaviors, or host configuration were supplied. If the service exposes simple request/response booking operations over HTTP, ASP.NET Core Web API or Minimal API is usually the preferred modern .NET target. If existing WCF clients, SOAP contracts, or non-HTTP bindings must remain compatible, CoreWCF may be a safer transitional target.",
+      "considerations": [
+        "Confirm the actual ServiceContract and OperationContract declarations before selecting the final target technology.",
+        "Inventory existing consumers and determine whether they depend on SOAP/WSDL or WCF-specific client proxies.",
+        "Confirm whether the service currently uses WCF features such as sessions, transactions, reliable messaging, callbacks, custom behaviors, or message inspectors.",
+        "Preserve DTO contract compatibility if external clients depend on the existing serialized shape.",
+        "No binding or endpoint data is available, so transport, encoding, and authentication requirements are Unknown."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "BookingMgmt.Contracts.DTO.BookingDTO",
+      "current_technology": "Shared DTO used by application/service boundaries; WCF serialization involvement is possible but not confirmed",
+      "target_technology": "Shared .NET contract model usable by ASP.NET Core APIs, gRPC, or CoreWCF depending on selected service target",
+      "rationale": "BookingDTO is a contract-style data transfer object with public properties and no visible DataContract/DataMember attributes. It may be serialized using default public property serialization, but the actual WCF serializer behavior is Unknown.",
+      "considerations": [
+        "Verify whether BookingDTO is part of any published WSDL/SOAP contract before changing names, nullability, collection types, or date/time semantics.",
+        "The Journeys property depends on JourneyDTO, whose definition was not supplied.",
+        "DateTime semantics for Created and Modified are not documented; migration should clarify UTC/local expectations without breaking clients.",
+        "Reference type nullability is not expressed in the legacy DTO."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices",
+      "current_technology": "Possible WCF contract or application service; exact WCF usage Unknown",
+      "target_technology": "Unknown pending source/configuration review; likely ASP.NET Core Web API if it is simple request/response application functionality, or CoreWCF if SOAP/WCF protocol compatibility is required",
+      "rationale": "Only a WCF-related contract indicator is available. There are no endpoint, binding, host, or operation details to prove whether this is a SOAP service contract, an application-layer class, or both.",
+      "considerations": [
+        "Inspect BookingCreatorApplicationServices.cs for [ServiceContract], [OperationContract], [FaultContract], [DataContract], service interface/class declarations, and implementation references.",
+        "If existing consumers depend on SOAP envelopes, WSDL, WS-* features, or WCF-specific bindings, CoreWCF may be the safer compatibility target.",
+        "If the service exposes standard request/response business operations without WCF-specific protocol requirements, ASP.NET Core Web API is likely more appropriate.",
+        "Do not select a final migration target until operations, consumers, bindings, hosting model, and authentication requirements are known."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "ConfigurationInitializationException",
+      "current_technology": ".NET Framework-style custom serializable exception",
+      "target_technology": "Modern .NET custom exception, retaining compatibility only if callers depend on this exception type",
+      "rationale": "The supplied source shows a custom exception with [Serializable] and a SerializationInfo/StreamingContext constructor. There is no direct evidence that it is part of a WCF fault contract.",
+      "considerations": [
+        "Preserve the exception type if application code or service consumers catch it specifically.",
+        "Review whether formatter-based exception serialization is still required in the target runtime.",
+        "If this exception is currently allowed to cross WCF service boundaries, replace implicit exception propagation with explicit error/fault handling in the target service design."
+      ],
+      "complexity": "Low"
+    },
+    {
+      "component": "BookingCreatorApplicationServices remote service boundary",
+      "current_technology": "Possible WCF service contract implemented by a .NET Framework application service; exact WCF configuration is unknown",
+      "target_technology": "ASP.NET Core Web API on modern .NET, if consumers can move to HTTP/REST or HTTP-based JSON APIs",
+      "rationale": "The visible operations are request/response application-service methods using DTOs and collections. No WCF-specific features such as duplex callbacks, sessions, streaming, reliable messaging, distributed transactions, or custom bindings are visible in the supplied code.",
+      "considerations": [
+        "Confirm the actual IBookingCreatorApplicationServices interface and whether it has [ServiceContract] and [OperationContract] attributes.",
+        "Confirm existing consumers and whether they require SOAP/WSDL compatibility.",
+        "Define HTTP resource/action mapping carefully because several methods are RPC-style operations rather than pure CRUD resources.",
+        "Preserve DTO serialization behavior where clients depend on existing contract shapes.",
+        "Add boundary validation and standardized error responses only after confirming compatibility expectations."
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "component": "BookingCreatorApplicationServices compatibility path",
+      "current_technology": "Possible WCF SOAP service",
+      "target_technology": "CoreWCF on modern .NET, if SOAP/WSDL compatibility or WCF-style bindings must be retained",
+      "rationale": "Because endpoint, binding, and client compatibility requirements are unknown, CoreWCF may be more appropriate than ASP.NET Core Web API if existing consumers require SOAP contracts or WCF-compatible metadata.",
+      "considerations": [
+        "CoreWCF suitability depends on the actual binding and WCF features used by the missing configuration.",
+        "Verify whether the original service used WCF behaviors, security modes, service metadata publishing, throttling, instancing, or custom behaviors.",
+        "Not all legacy WCF bindings and behaviors have equivalent support in modern .NET/CoreWCF."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "Application/domain service internals",
+      "current_technology": "Synchronous application service with constructor-injected domain service and static mapping factories",
+      "target_technology": ".NET class library application service behind the selected transport boundary",
+      "rationale": "The visible class mainly coordinates DTO mapping and domain service calls. It can remain an application-layer service independent of whether the external boundary becomes ASP.NET Core Web API, CoreWCF, or another host.",
+      "considerations": [
+        "Evaluate async APIs only if the underlying domain/data access layer performs I/O and can support asynchronous execution.",
+        "Static mapping factory usage may limit testability and dependency injection flexibility.",
+        "Review paging behavior before changing it, because current Skip/Take logic may be intentional or may be a defect."
+      ],
+      "complexity": "Low to Medium"
+    }
+  ],
+  "observations": [
+    "WCF was reported as detected by repository metadata, and one contract indicator was reported in BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "No service files, bindings, endpoints, or configuration files were supplied.",
+    "The only supplied code snippet is a unit test: BookingMgmt.Application.UnitTest\\GivenBookingDto\\WhenCancelBooking.cs.",
+    "The unit test references IBookingCreatorApplicationServices and BookingCreatorApplicationServices and exercises GetTotalPrice and GetRoute.",
+    "The test class name mentions CancelBooking, but no cancellation operation is called in the supplied code.",
+    "IBookingCreatorDomainServices is injected into BookingCreatorApplicationServices, indicating an application-service to domain-service dependency.",
+    "The dependency graph supplied contains no edges, so dependency relationships are inferred only from the unit test code.",
+    "Database involvement was flagged by code analysis metadata, but the supplied source does not show data access code, repositories, database connections, or persistence APIs.",
+    "No security configuration, endpoint authentication mode, transport security, message security, certificates, authorization policies, or identity settings were supplied.",
+    "No WCF behavior configuration such as ServiceBehavior, InstanceContextMode, ConcurrencyMode, throttling, transactions, metadata behavior, or exception shielding was supplied.",
+    "WCF was reported as detected by repository metadata, but the supplied source excerpt is a unit-test helper rather than a WCF contract or service implementation.",
+    "No service implementation files were listed in the WCF repository metadata.",
+    "No bindings, endpoints, configuration files, host files, project files, or solution files were supplied.",
+    "The only reported WCF contract candidate is BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "The actual contents of BookingCreatorApplicationServices.cs were not provided, so WCF attributes and operations cannot be independently verified.",
+    "The supplied BookingDtoMockProvider.cs depends on BookingMgmt.Contracts.DTO.BookingDTO and BookingMgmt.Contracts.DTO.JourneyDTO. These DTOs may be relevant to service contracts, but that relationship is not confirmed.",
+    "No database access, repositories, ORMs, connection strings, or transaction boundaries are visible in the supplied WCF evidence. The automated code analysis marked database_related=true, but the shown code only constructs DTOs and does not access a database.",
+    "No external service integrations were identified from the supplied evidence.",
+    "Hosting characteristics are Unknown because no IIS .svc file, Windows Service host, console host, ServiceHost configuration, or ASP.NET hosting metadata was supplied.",
+    "Security characteristics are Unknown because no binding/security configuration, credentials, certificates, authorization behavior, or transport details were supplied.",
+    "Important WCF behavior such as ServiceBehavior, InstanceContextMode, ConcurrencyMode, throttling, fault contracts, data contracts, known types, and serialization settings is Unknown from the available data.",
+    "WCF detection is reported as true.",
+    "No WCF service implementation files were reported in the supplied WCF metadata.",
+    "One WCF-related contract indicator was reported: BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "No WCF bindings were reported.",
+    "No WCF endpoints were reported.",
+    "No WCF configuration files were reported.",
+    "No solution file, project file, package metadata, host file, application configuration file, or web configuration file was supplied.",
+    "The only supplied code analysis is for BookingMgmt.Application.UnitTest\\Properties\\AssemblyInfo.cs, which is not WCF-related.",
+    "The repository appears to include an Application layer, but the complete architecture is Unknown.",
+    "A custom exception file named ConfigurationInitializationException.cs is mentioned by architecture metadata, but no direct relationship to WCF configuration or service initialization is proven.",
+    "WCF detection is reported as true by repository metadata.",
+    "No WCF service implementation files were identified in the supplied repository WCF information.",
+    "No WCF configuration files were supplied.",
+    "No endpoints were supplied.",
+    "No bindings were supplied.",
+    "No hosting files, .svc files, service host code, project files, or application configuration files were supplied.",
+    "Only one WCF-related contract indicator is listed: BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "The only source code shown is ConfigurationInitializationException, which contains no directly observable WCF attributes or service operations.",
+    "The architecture appears to include an Application layer, but the full solution/project structure is Unknown.",
+    "Observed WCF evidence is limited. Repository metadata reports WCF detection and lists BookingCreatorApplicationServices.cs under contracts, but the supplied code is a concrete class and contains no visible WCF attributes.",
+    "The likely service contract is IBookingCreatorApplicationServices, but its source code was not supplied.",
+    "The only observed service implementation is BookingCreatorApplicationServices.",
+    "No WCF endpoints were supplied.",
+    "No WCF bindings were supplied.",
+    "No WCF configuration files were supplied.",
+    "No hosting files, .svc files, Windows Service host, IIS configuration, console host, or application startup files were supplied.",
+    "Security configuration is Unknown because no binding, endpoint, behavior, or config metadata is available.",
+    "Important WCF behavior such as InstanceContextMode, ConcurrencyMode, IncludeExceptionDetailInFaults, throttling, transactions, reliable sessions, message size quotas, and serializer settings is Unknown.",
+    "All observed operations are synchronous.",
+    "No external service integrations were identified from the supplied code.",
+    "The class uses DTO-to-domain and domain-to-DTO mapping factories and delegates persistence-related actions to a domain service interface.",
+    "WCF was detected at repository metadata level, but the available code sample is EnumDomain.cs and is not WCF-related.",
+    "No service implementation files were reported in the WCF repository information.",
+    "No bindings, endpoints, configuration files, or host files were provided.",
+    "No dependency edges were detected.",
+    "The folder structure suggests an Application layer, but the broader solution architecture is Unknown.",
+    "EnumDomain.cs defines an internal enum with values Aircraft, Seat, Booking, Journey, and Passenger; it has no observed WCF attributes, service behavior, endpoint, binding, database, or external integration logic.",
+    "WCF detection is present in repository metadata, but no service files were reported.",
+    "One WCF-related contract indicator was reported: BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "No WCF configuration files were supplied.",
+    "No endpoints were supplied.",
+    "No bindings were supplied.",
+    "No .sln, .csproj, host, app.config, web.config, package, or dependency metadata was supplied.",
+    "No ServiceBehavior, InstanceContextMode, ConcurrencyMode, FaultContract, DataContract, KnownType, or security attributes were visible in the provided source.",
+    "The provided code analysis is for FromBookingDTO, a mapper from BookingDTO to Booking domain entity, not a confirmed WCF service contract or service implementation.",
+    "FromBookingDTO depends on MappingBase, MappingToDomainFactory, EnumDomain, BookingDTO, JourneyDTO, Booking, Journey, System, and System.Linq.",
+    "The supplied code analysis marks FromBookingDTO as database_related and wcf_related, but the visible code performs DTO-to-domain mapping only and does not show direct database access or WCF attributes.",
+    "Hosting characteristics are Unknown because no host project, IIS/WAS configuration, Windows Service host, console host, or service activation file was supplied.",
+    "Security characteristics are Unknown because no binding security mode, transport security, message credentials, authorization behavior, certificate configuration, or authentication configuration was supplied.",
+    "WCF detection is reported as true by repository metadata.",
+    "No WCF service implementation files were listed.",
+    "No WCF endpoint configuration was supplied.",
+    "No WCF binding configuration was supplied.",
+    "No WCF configuration files were supplied.",
+    "No solution, project, host, package, target framework, or runtime entry point metadata is available.",
+    "The only supplied source code is FromJourneyDTO.cs, which is a mapper from JourneyDTO to Journey and does not show WCF attributes, endpoints, bindings, or service hosting behavior.",
+    "Application-layer naming suggests a layered structure, but the overall architecture is unknown from the available metadata.",
+    "Observed dependency in the supplied mapper: BookingMgmt.Contracts.DTO.JourneyDTO.",
+    "Observed dependency in the supplied mapper: BookingMgmt.Domain.Entities.Journey.",
+    "Observed dependency in the supplied mapper: MappingBase.",
+    "Observed framework dependency in the supplied mapper: System.InvalidCastException.",
+    "WCF detection is reported as true at repository level.",
+    "No WCF service implementation files were reported.",
+    "No WCF configuration files were supplied.",
+    "No endpoint definitions were supplied.",
+    "No binding definitions were supplied.",
+    "No hosting files or host configuration were supplied.",
+    "No .sln, .csproj, package metadata, target framework, runtime host, or dependency graph information was supplied.",
+    "The only named WCF contract candidate is BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "The supplied code snippet for MappingToDomainFactory is application mapping infrastructure, not a WCF contract or service implementation by itself.",
+    "Dependency graph edges are empty, so relationships between BookingCreatorApplicationServices, mapping components, persistence, and external systems are Unknown.",
+    "WCF detection is reported as true by repository metadata.",
+    "No WCF service implementation files were listed.",
+    "No WCF configuration files were supplied.",
+    "No endpoints were detected.",
+    "No bindings were detected.",
+    "No service host, .svc file, executable host, IIS/WAS configuration, app.config, or web.config was supplied.",
+    "The only supplied code analysis is for DomainToDtoEnum.cs, which is not WCF-related and defines an internal enum with values Booking, Journey, and Passenger.",
+    "Architecture metadata suggests a possible Application layer, but no solution, project, package, target framework, or host metadata is available.",
+    "ConfigurationInitializationException is mentioned in architecture metadata as a possible custom exception, but no source content was supplied.",
+    "Observed: Repository-level WCF detection is true.",
+    "Observed: No WCF service implementation files were listed in service_files.",
+    "Observed: No WCF bindings were listed.",
+    "Observed: No WCF endpoints were listed.",
+    "Observed: No WCF configuration files were supplied.",
+    "Observed: No .sln, .csproj, host, package, or runtime configuration metadata was supplied.",
+    "Observed: The only supplied source code is FromBookingEntity.cs, a mapper from Booking domain entity to BookingDTO.",
+    "Observed: FromBookingEntity depends on BookingMgmt.Contracts.DTO and BookingMgmt.Domain.Entities.",
+    "Inferred: The repository likely contains at least part of an Application layer.",
+    "Unknown: Target .NET Framework version.",
+    "Unknown: Hosting model, such as IIS/WAS, Windows Service, console host, or self-host.",
+    "Unknown: Whether BookingCreatorApplicationServices is an interface, class, WCF contract, service implementation, or both.",
+    "Unknown: Whether the service uses SOAP, REST-style WebHttpBinding, NetTcpBinding, message queues, duplex callbacks, sessions, transactions, or streaming.",
+    "WCF detection is reported as true by repository metadata.",
+    "No WCF service implementation files were reported in service_files.",
+    "No WCF binding metadata was supplied.",
+    "No WCF endpoint metadata was supplied.",
+    "No WCF configuration files were supplied.",
+    "No solution, project, package, host, or runtime entry-point metadata is available.",
+    "The only supplied source analysis is for BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromJourneyEntity.cs, which is a mapper from Journey domain entity to JourneyDTO and is not itself a confirmed WCF service contract or service implementation.",
+    "FromJourneyEntity has dependencies on System, BookingMgmt.Contracts.DTO.JourneyDTO, BookingMgmt.Domain.Entities.Journey, and MappingBase.",
+    "The mapper is application-layer/internal logic and may support DTOs exposed by a WCF boundary, but that relationship is inferred and not confirmed.",
+    "Hosting characteristics are Unknown.",
+    "Security characteristics are Unknown.",
+    "Important WCF behaviors such as ServiceBehavior, InstanceContextMode, ConcurrencyMode, transaction flow, fault contracts, throttling, reliable sessions, metadata publishing, and serializer behavior are Unknown from the supplied information.",
+    "WCF detection is reported as true by repository metadata.",
+    "No WCF service implementation files were identified in service_files.",
+    "One WCF-related contract indicator was reported: BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "No WCF configuration files were provided.",
+    "No endpoints were detected.",
+    "No bindings were detected.",
+    "No .sln, .csproj, host, application configuration, or dependency metadata is available.",
+    "The only supplied source analysis is for MappingFromDomainFactory.cs, which appears to be an internal application-layer domain-to-DTO mapper factory rather than a WCF service or contract.",
+    "Hosting characteristics are Unknown because there is no IIS/SVC file, Windows Service host, console host, ASP.NET compatibility setting, ServiceHost usage, or configuration file provided.",
+    "Security characteristics are Unknown because no binding configuration, behavior configuration, authorization attributes, transport security settings, message security settings, or authentication metadata was supplied.",
+    "Important WCF behavior such as InstanceContextMode, ConcurrencyMode, ServiceBehavior, FaultContract, KnownType, DataContract, session mode, transaction flow, throttling, and serializer settings is Unknown from the supplied evidence.",
+    "WCF was reported as detected in repository metadata.",
+    "No service implementation files were identified in the supplied WCF repository information.",
+    "No WCF endpoint configuration was supplied.",
+    "No WCF binding configuration was supplied.",
+    "No .config files, .sln files, .csproj files, host files, package metadata, or runtime entry points were supplied.",
+    "Hosting characteristics are Unknown. There is no evidence of IIS/WAS hosting, Windows Service hosting, console self-hosting, or ASP.NET compatibility mode.",
+    "Security characteristics are Unknown. There is no supplied binding security mode, transport security setting, message credential configuration, certificate configuration, authorization behavior, or identity configuration.",
+    "Important WCF behavior such as ServiceBehavior, InstanceContextMode, ConcurrencyMode, transaction behavior, throttling, fault behavior, session mode, reliable messaging, and duplex callback usage is Unknown.",
+    "The supplied MappingBase.cs file is application infrastructure, not a confirmed WCF component. It uses System.Collections.Generic and provides internal generic object/collection mapping with deferred execution.",
+    "Dependency graph contains no edges, so project-to-project, service-to-service, database, and external integration relationships cannot be confirmed.",
+    "Observed: WCF detection is true in the supplied repository metadata.",
+    "Observed: no WCF service implementation files were listed in service_files.",
+    "Observed: no bindings, endpoints, or configuration files were supplied or detected.",
+    "Observed: only AssemblyInfo.cs source analysis was provided; it is not WCF-related.",
+    "Observed: dependency graph contains no edges.",
+    "Inferred: folder naming suggests an Application layer, but the overall architecture, host model, project boundaries, target framework, and runtime entry points are unknown.",
+    "Unknown: whether BookingCreatorApplicationServices is a service contract interface, a concrete WCF service class, or an application service referenced by a WCF facade.",
+    "Repository WCF detection is true, but supplied evidence is very limited.",
+    "No confirmed WCF service implementation files were listed in service_files.",
+    "The repository metadata lists BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs as a contract, but the contents of that file were not included.",
+    "No WCF endpoint metadata was supplied.",
+    "No WCF binding metadata was supplied.",
+    "No WCF configuration files were supplied.",
+    "No dependency graph edges were supplied.",
+    "The only source file content shown is NugetPackageGenerationAttribute.cs, which is an assembly-level custom attribute helper and does not show WCF service behavior.",
+    "The code-analysis block marks database_related and wcf_related as true for NugetPackageGenerationAttribute.cs, but the shown code does not contain database or WCF APIs; this appears inconsistent with the source snippet and should be treated as unresolved or false-positive metadata.",
+    "No [ServiceContract], [OperationContract], [ServiceBehavior], [DataContract], [DataMember], endpoint, binding, or behavior configuration is observable from the supplied code.",
+    "WCF was detected by repository metadata, but only one WCF-related contract indicator was reported.",
+    "No confirmed WCF service implementation files were supplied in service_files.",
+    "No WCF configuration files were supplied, so system.serviceModel configuration, bindings, endpoints, behaviors, diagnostics, and hosting configuration are Unknown.",
+    "No endpoints were supplied; service address, contract-to-endpoint mapping, transport protocol, and listen URI are Unknown.",
+    "No bindings were supplied; binding type, message encoding, transfer mode, quotas, timeouts, reliability, transactions, and security mode are Unknown.",
+    "No hosting files were supplied; IIS/WAS, Windows Service, console/self-hosting, or custom host characteristics are Unknown.",
+    "BookingDTO is present under BookingMgmt.Contracts.DTO and contains booking-related data such as Id, SalesAgent, Created, Modified, RecordLocator, TotalPrice, and Journeys.",
+    "BookingDTO has no visible WCF DataContract/DataMember attributes in the supplied code analysis.",
+    "Dependency graph contains no edges, so project-to-project and runtime dependencies are Unknown.",
+    "The architecture metadata suggests a partial Application layer, but no solution, project, host, or dependency metadata is available to confirm the full architecture.",
+    "WCF detection is reported as true by repository metadata.",
+    "No service implementation files were detected in the supplied repository WCF information.",
+    "No WCF endpoints were supplied or detected.",
+    "No WCF bindings were supplied or detected.",
+    "No WCF configuration files were supplied or detected.",
+    "No .sln, .csproj, host executable, IIS/SVC file, app.config, web.config, package metadata, or dependency graph edges were provided.",
+    "The only supplied source file content is ConfigurationInitializationException.cs, which is not itself a WCF service contract or service implementation based on the visible code.",
+    "The architecture metadata suggests an Application layer, but the overall architecture style, hosting model, runtime, target framework, and dependency structure are Unknown.",
+    "WCF-related metadata was detected, but the supplied source file does not show direct WCF attributes.",
+    "The actual service contract interface source file is not provided.",
+    "No .sln, .csproj, app.config, web.config, service host, endpoint, binding, behavior, or package metadata was supplied.",
+    "The only visible implementation is BookingCreatorApplicationServices under BookingMgmt.Application.Implementation.",
+    "The class exposes booking creation, cancellation, active/canceled listing, route calculation, and total price calculation operations.",
+    "The implementation delegates persistence-like operations to IBookingCreatorDomainServices and performs DTO/domain mapping through factory classes.",
+    "Hosting characteristics are Unknown.",
+    "Security characteristics are Unknown.",
+    "Instance management and concurrency characteristics are Unknown."
+  ],
+  "risks": [
+    "Actual WCF contract attributes and operation definitions are not visible, so operation exposure cannot be fully verified.",
+    "No endpoint or binding information is available; protocol, transport, address, SOAP version, encoding, and security mode are unknown.",
+    "No host information is available; deployment model and runtime lifecycle are unknown.",
+    "Existing external consumers may depend on SOAP contracts, XML namespaces, serialized DTO shapes, or generated WSDL that are not available in the supplied metadata.",
+    "Security behavior is unknown, creating risk when selecting a modern hosting technology or authentication model.",
+    "The service implementation depends on IBookingCreatorDomainServices, but that domain service implementation and its data/external dependencies are unavailable.",
+    "Unit tests show returned values but do not verify domain service interaction; behavior may be incompletely characterized.",
+    "The repository metadata appears incomplete: no solution, project files, package references, configuration files, or host files were provided.",
+    "The WCF detector classified the implementation file as a contract indicator, but the evidence for ServiceContract/OperationContract is not directly shown.",
+    "The repository metadata may be incomplete; critical WCF artifacts such as service implementations, config files, host projects, and client proxies may be missing from the supplied input.",
+    "A WCF contract indicator alone is insufficient to determine runtime behavior, binding selection, security requirements, or compatibility constraints.",
+    "Existing clients may depend on SOAP/WSDL, specific namespaces, message shapes, fault contracts, or serialization behavior that are not visible here.",
+    "If BookingDTO and JourneyDTO are part of a service contract, changing them during migration could break clients.",
+    "Without endpoint and binding configuration, it is not possible to estimate migration complexity accurately.",
+    "Security migration risk is Unknown because authentication, authorization, transport security, message security, and credential handling are not available.",
+    "Hosting migration risk is Unknown because the current hosting model is not available.",
+    "The automated analysis labels the unit-test helper as WCF-related and database-related, but the visible code does not support those conclusions; relying solely on this classification could lead to incorrect migration assumptions.",
+    "The actual WCF contract shape is Unknown because the source content of BookingCreatorApplicationServices.cs was not supplied.",
+    "Operation names, parameters, return types, fault contracts, one-way operations, async patterns, and serialization requirements are Unknown.",
+    "No endpoint information is available, so client access paths, service addresses, and contract-to-endpoint relationships are Unknown.",
+    "No binding information is available, so transport protocol, encoding, message limits, timeouts, reliability, transaction flow, and security mode are Unknown.",
+    "No hosting metadata is available, so it is Unknown whether the service is hosted in IIS, WAS, Windows Service, console host, or another host.",
+    "Security characteristics are Unknown because no configuration or attributes were supplied.",
+    "Migration target selection is uncertain without knowing consumers, protocol requirements, WCF behaviors, and binding/security configuration.",
+    "If existing clients depend on SOAP or WS-* behavior, replacing the service with a plain REST API could be breaking.",
+    "If the service relies on WCF-specific behaviors such as InstanceContextMode, ConcurrencyMode, sessions, reliable messaging, distributed transactions, or custom behaviors, migration complexity may be higher than indicated by the limited metadata.",
+    "Possible false positive WCF detection: the actual BookingCreatorApplicationServices source was not provided, so WCF attributes cannot be verified.",
+    "Operations, message contracts, data contracts, fault contracts, and service behaviors are Unknown.",
+    "Endpoint addresses, binding types, transport protocols, quotas, timeouts, and message sizes are Unknown.",
+    "Security mode, authentication, authorization, certificates, Windows authentication, and transport security settings are Unknown.",
+    "Hosting model is Unknown, including whether the service is IIS-hosted, WAS-hosted, self-hosted, or library-only.",
+    "Client dependencies are Unknown, making target technology selection uncertain.",
+    "If existing external SOAP clients depend on the contract, an incompatible migration to REST or gRPC could break consumers.",
+    "If custom exception types are serialized or exposed as faults, migration to modern .NET may require explicit error-contract review.",
+    "Actual WCF contract metadata is missing; the interface may contain ServiceContract, OperationContract, FaultContract, DataContract, or serializer attributes that materially affect migration.",
+    "Endpoint, binding, security, and hosting characteristics are Unknown, preventing accurate compatibility assessment.",
+    "Existing clients are Unknown; changing from WCF/SOAP to HTTP/JSON could be a breaking change if clients depend on SOAP contracts or WCF-specific behaviors.",
+    "Paging behavior in GetCanceledByPages and GetActivesByPages appears unusual and may produce unexpected results; migration could accidentally preserve or alter a legacy defect.",
+    "No input validation is visible for bookingDto, page, pageSize, or bookingId, which may lead to runtime errors or inconsistent API behavior.",
+    "Exception handling and fault translation are not visible; legacy WCF clients may depend on specific fault behavior that is not captured here.",
+    "Thread-safety and service lifetime are Unknown; static mapping factories and injected domain services should be reviewed under the target host's concurrency model.",
+    "Database query execution behavior is Unknown; paging may occur in memory depending on the return type of the domain service methods.",
+    "The actual WCF contract cannot be fully analyzed because the source content of BookingCreatorApplicationServices.cs is missing.",
+    "No OperationContract methods are visible, so operation count, parameters, return types, faults, async patterns, one-way operations, and serialization requirements are Unknown.",
+    "No endpoint or binding configuration is available, so protocol, address, transport, quotas, timeouts, reliability, sessions, and message size constraints are Unknown.",
+    "Security configuration is Unknown; authentication mode, authorization model, transport security, message security, certificates, Windows authentication, and claims behavior cannot be assessed.",
+    "Hosting model is Unknown, creating migration risk around lifecycle, instance management, concurrency, dependency injection, configuration loading, and deployment topology.",
+    "No project file or target framework information is available, so package dependencies and .NET Framework compatibility issues cannot be assessed.",
+    "Existing consumers are Unknown, which creates risk when selecting between ASP.NET Core Web API, gRPC, CoreWCF, or another integration style.",
+    "If the existing service uses SOAP-specific contracts, WS-* features, sessions, duplex callbacks, or custom bindings, a simple Web API migration may not preserve behavior.",
+    "Actual WCF contract and operation details are unknown because the source for BookingCreatorApplicationServices.cs was not supplied.",
+    "Endpoint addresses, bindings, binding configuration, quotas, timeouts, message sizes, and encodings are unknown.",
+    "Security behavior is unknown, creating migration risk around authentication, authorization, transport security, message security, and certificate handling.",
+    "Hosting model is unknown, so deployment and lifetime behavior cannot be assessed.",
+    "Existing clients and compatibility requirements are unknown.",
+    "Serialization requirements are unknown, including DataContract, XML serializer usage, known types, enum handling, and versioning.",
+    "Fault handling is unknown; WCF FaultContract usage may exist but was not provided.",
+    "Instance management and concurrency behavior are unknown; migration may alter lifetime or thread-safety assumptions if not reviewed.",
+    "Transaction, session, streaming, duplex callback, and reliable messaging usage are unknown.",
+    "The mapping layer uses runtime generic casts and may fail at runtime if incorrect source/target types are passed.",
+    "Actual WCF contract details cannot be validated because BookingCreatorApplicationServices.cs content was not supplied.",
+    "Operation list is unknown; migration scope cannot be estimated accurately.",
+    "Endpoint addresses are unknown; consumer impact cannot be assessed.",
+    "Binding types are unknown; protocol, transport, encoding, session, streaming, transaction, and compatibility requirements cannot be assessed.",
+    "Security configuration is unknown; authentication, authorization, transport security, message security, certificates, and impersonation requirements may be hidden in missing configuration or host code.",
+    "Hosting model is unknown; migration approach differs significantly for IIS-hosted, WAS-hosted, Windows Service-hosted, or self-hosted WCF services.",
+    "No client information is available, so backward compatibility requirements are unknown.",
+    "Repository metadata may be incomplete because only a small subset of files is represented.",
+    "The mapper returns default for null input and may return null for incompatible output types; changing this behavior during modernization could alter runtime behavior.",
+    "The WCF contract may be incomplete or incorrectly classified because the actual BookingCreatorApplicationServices.cs source was not supplied.",
+    "Operation inventory is unavailable, preventing accurate assessment of API surface, DTO compatibility, exception contracts, and consumer impact.",
+    "Endpoint and binding information is missing, so transport protocol, address scheme, SOAP version, message encoding, quotas, timeouts, and reliability settings are Unknown.",
+    "Security configuration is unavailable; authentication, authorization, transport security, message security, certificates, Windows authentication, and client credential requirements are Unknown.",
+    "Hosting model is unavailable; IIS/WAS, Windows Service, console host, or custom ServiceHost usage cannot be determined.",
+    "WCF behavior settings such as InstanceContextMode, ConcurrencyMode, throttling, transactions, sessions, known types, fault contracts, and serializer behavior are Unknown.",
+    "Existing client compatibility requirements are Unknown, which creates risk when choosing between ASP.NET Core Web API, gRPC, and CoreWCF.",
+    "The mapping factory throws NotImplementedException for unsupported domain mappings, which could surface as generic service failures if not translated by service-layer error handling. No FaultContract/error policy was supplied.",
+    "The reported WCF contract cannot be validated without the source content of BookingCreatorApplicationServices.cs.",
+    "Operation names, parameters, return types, and fault behavior are unknown.",
+    "Runtime hosting characteristics are unknown, including IIS/WAS, Windows Service, console host, or self-hosting.",
+    "Endpoint addresses, binding types, quotas, timeouts, encodings, and message size limits are unknown.",
+    "Security configuration is unknown, including transport security, message security, credentials, certificates, authorization, and impersonation.",
+    "Client compatibility requirements are unknown, which makes target technology selection uncertain.",
+    "No dependency information is available; database access, external service calls, messaging, and domain dependencies may be hidden.",
+    "No project file or package metadata is available, so .NET Framework version and WCF package/reference usage are unknown.",
+    "Missing BookingCreatorApplicationServices.cs source prevents verification of ServiceContract and OperationContract details.",
+    "Missing configuration prevents assessment of endpoints, bindings, security mode, credentials, quotas, timeouts, throttling, diagnostics, and behaviors.",
+    "Unknown client population creates migration risk; SOAP/WCF clients may require compatibility measures or staged migration.",
+    "Unknown hosting model may hide dependencies on IIS/WAS activation, Windows services, app.config/web.config behaviors, or deployment-specific settings.",
+    "Unknown serialization attributes may affect DTO compatibility, especially if DataContract, KnownType, XmlSerializerFormat, or custom serialization is used.",
+    "The mapper performs runtime casting and may return default/null for incompatible output types; behavioral changes during modernization could introduce regressions.",
+    "Booking.GetTotalPrice() is invoked during DTO mapping; pricing calculation side effects or dependencies are unknown.",
+    "The WCF contract detection cannot be validated because the actual BookingCreatorApplicationServices.cs source code was not supplied.",
+    "No endpoint or binding information is available, so transport protocol, address structure, encoding, quotas, timeout behavior, and interoperability requirements are unknown.",
+    "No security configuration is available, so authentication, authorization, credential type, transport security, message security, certificate usage, and impersonation requirements are unknown.",
+    "No hosting information is available, so migration planning cannot determine whether the service is IIS-hosted, WAS-hosted, Windows Service-hosted, console/self-hosted, or hosted another way.",
+    "No operation signatures are available, so consumer impact, API shape, DTO serialization requirements, and backward compatibility risks cannot be assessed.",
+    "No dependency graph edges were supplied; runtime dependencies, database access, external service integrations, and transaction boundaries may be missing from the analysis.",
+    "The mapper code is marked database_related in the supplied analysis because it maps a domain entity, but no actual database access code was supplied.",
+    "The file BookingCreatorApplicationServices.cs is listed under contracts while its path includes Implementation; this creates ambiguity about whether it is a contract, implementation, or both.",
+    "The WCF contract detection cannot be validated because the source for BookingCreatorApplicationServices.cs was not supplied.",
+    "Operation inventory is incomplete; no OperationContract methods can be identified from the available metadata.",
+    "Endpoint and binding information is absent, so protocol, address, transport, security mode, and client compatibility requirements are Unknown.",
+    "Hosting model is Unknown, which creates migration risk around lifecycle, activation, configuration, dependency injection, and deployment model.",
+    "Security behavior is Unknown; authentication, authorization, transport protection, message protection, and credential requirements may be missed without configuration and host files.",
+    "Consumers are Unknown; changing from WCF/SOAP to HTTP/REST could break clients if they depend on WSDL/SOAP contracts.",
+    "Serialization contracts are Unknown; DTO compatibility, XML namespaces, data member naming, known types, and fault contracts require source inspection.",
+    "The architecture cannot be confirmed because project files, package references, and runtime entry points are unavailable.",
+    "The supplied code analysis marks MappingFromDomainFactory.cs as database_related and wcf_related, but the visible code does not show direct database or WCF dependencies; relying on that classification may overstate coupling.",
+    "The detected contract file was not included in the code analysis payload, so the actual WCF contract shape is unknown.",
+    "No OperationContract information is available, preventing accurate operation inventory and migration sizing.",
+    "No endpoint or binding data is available, so transport protocol, address scheme, security mode, quotas, timeouts, message size limits, and serializer behavior are unknown.",
+    "No hosting information is available, creating risk around lifecycle, dependency injection, configuration initialization, identity, deployment, and environment-specific behavior.",
+    "Existing client dependencies are unknown. Migration may break clients if they rely on SOAP/WSDL-generated proxies or WCF-specific behaviors.",
+    "Security migration risk is high because authentication, authorization, transport/message security, certificates, and credentials are not documented in the supplied data.",
+    "Behavioral compatibility risk exists because InstanceContextMode, ConcurrencyMode, session requirements, transaction requirements, and fault contract behavior are unknown.",
+    "MappingBase uses deferred execution. If service operations depend on this mapper, changing enumeration timing during modernization could alter exception timing or resource lifetime behavior.",
+    "High uncertainty because the actual WCF-related source file was not included in the code analysis payload.",
+    "Endpoint addresses, binding types, transport protocols, message encodings, quotas, timeouts, and security modes are unknown.",
+    "Authentication and authorization behavior are unknown because no configuration, attributes, host code, or service behaviors were supplied.",
+    "Hosting model is unknown; the service could be IIS-hosted, Windows Service-hosted, self-hosted, or only a library contract.",
+    "Operation signatures, data contracts, exception/fault behavior, transaction usage, session requirements, and concurrency/instancing behavior are unknown.",
+    "The file path suggests Implementation while repository metadata labels it as a contract, creating ambiguity around service contract versus implementation role.",
+    "Migration target selection may be incorrect without consumer analysis and binding/endpoint details.",
+    "High risk of incomplete analysis because the actual suspected WCF contract file content was not supplied.",
+    "WCF detection may be a false positive or may refer to code not included in the analysis payload.",
+    "Unknown operation signatures prevent assessment of REST/RPC mapping, serialization compatibility, async behavior, exception contracts, and client impact.",
+    "Unknown bindings prevent assessment of transport, message encoding, quotas, timeouts, transactions, reliable sessions, streaming, and security mode.",
+    "Unknown security configuration prevents assessment of authentication, authorization, transport security, message security, certificates, Windows authentication, or identity propagation.",
+    "Unknown hosting model prevents assessment of lifecycle, instance management, concurrency behavior, deployment model, and configuration migration.",
+    "No project or package metadata is available, so target framework, WCF package usage, build system, and runtime dependencies are unknown.",
+    "No consumer/client information is available, so backward compatibility requirements are unknown.",
+    "The actual WCF contract and operation list are Unknown, preventing accurate operation-level migration planning.",
+    "No endpoint or binding data is available, so migration could miss required SOAP, transport, encoding, authentication, authorization, or compatibility behavior.",
+    "If existing clients depend on generated WCF proxies or WSDL shape, changing DTOs or moving directly to REST/JSON may be breaking.",
+    "If the original service uses WCF-specific features such as sessions, callbacks, transactions, reliable messaging, inspectors, throttling, or custom behaviors, those features may require special handling or a CoreWCF transitional approach.",
+    "Security characteristics are Unknown; authentication scheme, authorization model, certificate usage, message security, and transport security must be discovered before modernization.",
+    "Hosting characteristics are Unknown; deployment assumptions may be incorrect without IIS/WAS/self-host evidence.",
+    "BookingDTO uses mutable public properties and unspecified nullability/date-time semantics; modernizing the model without compatibility analysis could alter client behavior.",
+    "The actual WCF contract may be incomplete or misidentified because BookingCreatorApplicationServices.cs source was not supplied.",
+    "No operations are known, so migration effort, API surface, transaction behavior, validation behavior, and business dependencies cannot be estimated reliably.",
+    "No endpoint or binding configuration is available, so transport protocol, address, message encoding, quotas, timeouts, reliable sessions, transactions, and message size limits are Unknown.",
+    "No security configuration is available, so authentication, authorization, transport security, message security, certificates, Windows authentication, and impersonation requirements are Unknown.",
+    "No hosting information is available, so IIS/WAS, Windows Service, console host, self-hosting, or custom ServiceHost usage cannot be determined.",
+    "No consumer/client information is available, so compatibility requirements for existing callers are Unknown.",
+    "If the service currently relies on WCF-specific features such as SOAP faults, sessions, duplex callbacks, WS-Security, distributed transactions, or custom behaviors, a direct ASP.NET Core Web API migration could lose behavior unless explicitly redesigned.",
+    "The code analysis metadata marks ConfigurationInitializationException.cs as database_related and wcf_related, but the visible source does not contain database or WCF-specific constructs; this should be verified against actual usages.",
+    "Actual WCF service contract attributes and operation attributes are unavailable, so the exposed service surface cannot be confirmed.",
+    "Endpoint and binding information is missing, preventing assessment of protocol, transport, security mode, quotas, timeouts, sessions, and compatibility requirements.",
+    "Existing client expectations are unknown, including whether clients depend on SOAP, WSDL metadata, XML serialization details, or specific fault contracts.",
+    "No explicit validation is visible for bookingId, bookingDto, page, or pageSize.",
+    "No explicit exception handling or fault translation is visible; migrating to a new transport may change error behavior.",
+    "Paging logic uses Skip(page - 1) and Take(page * pageSize), which may produce unexpected results if conventional paging was intended.",
+    "Static mapping factories create coupling that may complicate dependency injection, testing, and modernization.",
+    "Synchronous operations may become scalability bottlenecks if underlying domain services perform database or network I/O.",
+    "The absence of project and host metadata makes target framework, dependency versions, hosting model, and runtime behavior unknown."
+  ],
+  "unresolved_items": [
+    "No code analysis found for: BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+    "Actual source code for BookingCreatorApplicationServices.cs.",
+    "Actual declaration of IBookingCreatorApplicationServices.",
+    "Whether IBookingCreatorApplicationServices has [ServiceContract].",
+    "Which methods have [OperationContract].",
+    "Exact DTO type passed to GetTotalPrice and GetRoute.",
+    "Return types for GetTotalPrice and GetRoute.",
+    "ServiceBehavior settings, if any.",
+    "Endpoint addresses and contracts.",
+    "Binding types and binding settings.",
+    "Security mode and authentication/authorization configuration.",
+    "Hosting model: IIS/WAS, Windows Service, console/self-host, or other.",
+    "Target .NET Framework version and package dependencies.",
+    "Client applications and compatibility requirements.",
+    "Whether the service uses database access through IBookingCreatorDomainServices.",
+    "Whether cancellation-related operations exist elsewhere despite the unit test fixture name.",
+    "Actual source code for BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "Whether BookingCreatorApplicationServices has [ServiceContract] and which methods have [OperationContract].",
+    "Service implementation class or classes for the reported contract.",
+    "WCF endpoint addresses and contracts.",
+    "WCF binding types and binding configuration.",
+    "Security mode, authentication mechanism, authorization model, and certificate/credential usage.",
+    "Hosting model: IIS/WAS, Windows Service, console self-host, ASP.NET application, or other.",
+    "ServiceBehavior settings including InstanceContextMode, ConcurrencyMode, IncludeExceptionDetailInFaults, throttling, and transaction behavior.",
+    "DataContract/MessageContract/FaultContract definitions for BookingDTO, JourneyDTO, and related types.",
+    "Client applications or generated proxies consuming the service.",
+    "Target framework, project references, NuGet packages, and build structure.",
+    "Any database, repository, transaction, or external integration dependencies used by the actual service operations.",
+    "Exact service contract name and namespace are Unknown.",
+    "Whether BookingCreatorApplicationServices is an interface, class, or both is Unknown.",
+    "All WCF operations are Unknown.",
+    "Service implementation class or classes are Unknown.",
+    "Dependency relationships are Unknown; no dependency edges were supplied.",
+    "Endpoint addresses are Unknown.",
+    "Binding types and binding configurations are Unknown.",
+    "Security mode, authentication mechanism, authorization behavior, certificates, impersonation, and transport requirements are Unknown.",
+    "Hosting model is Unknown.",
+    "ServiceBehavior, InstanceContextMode, ConcurrencyMode, transaction behavior, throttling, metadata publishing, and error handling behavior are Unknown.",
+    "Target .NET version and current .NET Framework version are Unknown.",
+    "Source code for BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs is required to confirm ServiceContract and OperationContract details.",
+    "Need .csproj or package references to determine target .NET Framework version and WCF dependencies.",
+    "Need app.config, web.config, or programmatic host configuration to identify endpoints and bindings.",
+    "Need hosting artifacts such as .svc files, ServiceHost usage, IIS configuration, or Windows service host code.",
+    "Need client usage information to identify consumers and compatibility requirements.",
+    "Need security configuration to determine authentication, authorization, transport security, and certificate usage.",
+    "Need behavior configuration to determine InstanceContextMode, ConcurrencyMode, throttling, metadata publishing, fault behavior, and serializer settings.",
+    "Source code for IBookingCreatorApplicationServices.",
+    "Whether IBookingCreatorApplicationServices has [ServiceContract].",
+    "Whether methods have [OperationContract].",
+    "DTO definitions, especially BookingDTO serialization attributes and compatibility requirements.",
+    "Any WCF configuration files, including system.serviceModel endpoint, binding, behavior, and security settings.",
+    "Hosting model: IIS, WAS, Windows Service, console host, self-host, or other.",
+    "Client usage and compatibility requirements.",
+    "Binding type and transport protocol.",
+    "Authentication, authorization, transport security, message security, and credential settings.",
+    "Service lifetime, InstanceContextMode, ConcurrencyMode, throttling, transaction, and fault behavior.",
+    "Domain service implementation and persistence technology.",
+    "Actual contents of BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "Whether BookingCreatorApplicationServices is an interface marked with ServiceContract, a class implementation, or both.",
+    "List of OperationContract methods and their signatures.",
+    "Any ServiceBehavior, OperationBehavior, FaultContract, DataContract, KnownType, XmlSerializerFormat, or custom serialization attributes.",
+    "Service implementation classes and dependency relationships.",
+    "WCF endpoint addresses and contract-to-endpoint mappings.",
+    "Binding types and binding settings.",
+    "Security settings for bindings and service behaviors.",
+    "Hosting model and runtime entry point.",
+    "Target framework, project references, NuGet/package dependencies, and build configuration.",
+    "Existing WCF clients or external consumers.",
+    "Provide BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs source for contract and operation analysis.",
+    "Provide service implementation files, if separate from the contract.",
+    "Provide app.config, web.config, service host configuration, or code-based hosting setup.",
+    "Provide project files to determine target framework and WCF package/assembly references.",
+    "Identify WCF clients or consumers of BookingCreatorApplicationServices.",
+    "Confirm whether BookingDTO and related DTOs are decorated with DataContract/DataMember or used as plain POCO serialization types.",
+    "Confirm authentication, authorization, and transport requirements.",
+    "Confirm whether any non-basic WCF features are used, such as sessions, duplex callbacks, transactions, streaming, reliable sessions, or custom behaviors.",
+    "Contents of BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "Whether BookingCreatorApplicationServices is an interface, implementation class, or both.",
+    "Presence and details of [ServiceContract], [OperationContract], [ServiceBehavior], [FaultContract], [DataContract], and [DataMember] attributes.",
+    "Actual WCF operations and method signatures.",
+    "Service implementation classes.",
+    "Endpoint addresses and contract-to-endpoint relationships.",
+    "Binding types and binding configuration.",
+    "Security mode and authentication/authorization configuration.",
+    "Hosting model.",
+    "Service behaviors such as InstanceContextMode, ConcurrencyMode, throttling, metadata publishing, transactions, and exception behavior.",
+    "Consumer/client applications.",
+    "Target framework and package dependencies.",
+    "Database access details; the supplied mapper handles a domain entity but no persistence implementation is shown.",
+    "Source code for BookingCreatorApplicationServices.cs is required to identify ServiceContract, OperationContract methods, DTOs, fault contracts, service behavior, and dependencies.",
+    "Source code for any implementation classes is required to determine business logic, persistence access, external integrations, and transaction behavior.",
+    "WCF configuration files or programmatic host setup are required to identify endpoints, bindings, behaviors, security, and hosting.",
+    "Consumer/client information is required to determine compatibility requirements and target technology.",
+    "Project files are required to determine .NET Framework version, package dependencies, assembly references, and build structure.",
+    "Database access code and repository/domain services are required to validate the reported database-related classification.",
+    "Source code for BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+    "Whether BookingCreatorApplicationServices is an interface, class, or implementation",
+    "Presence of [ServiceContract], [OperationContract], [FaultContract], [ServiceBehavior], or related WCF attributes",
+    "Operation list and signatures",
+    "Service implementation classes",
+    "Hosting model",
+    "Endpoint addresses and contracts",
+    "Binding types and binding configuration",
+    "Security mode and credentials",
+    "Behavior configuration such as instance context mode, concurrency mode, throttling, metadata publishing, transactions, and error handling",
+    "Client applications and compatibility requirements",
+    "Target framework and project/package dependencies",
+    "Actual source for BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "Whether BookingCreatorApplicationServices contains [ServiceContract].",
+    "List of [OperationContract] methods and signatures.",
+    "Service implementation class or classes.",
+    "WCF host type and startup path.",
+    "Endpoint addresses and contracts.",
+    "Binding types and binding configuration.",
+    "Security mode, authentication, authorization, transport certificates, message credentials, and impersonation settings.",
+    "Service behaviors including InstanceContextMode, ConcurrencyMode, throttling, metadata publishing, debug behavior, transactions, sessions, and fault handling.",
+    "Client applications and compatibility requirements.",
+    "Project files, package references, target framework, and dependency graph.",
+    "Actual contents of BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs.",
+    "Confirmed [ServiceContract] declarations.",
+    "Confirmed [OperationContract] methods and signatures.",
+    "Service implementation class or classes.",
+    "Namespace of the WCF contract and/or implementation.",
+    "Endpoint addresses and contract-to-endpoint mappings.",
+    "Binding types and binding configuration details.",
+    "Security mode, credential type, authorization behavior, and certificate/identity configuration.",
+    "Hosting model and startup mechanism.",
+    "ServiceBehavior settings including InstanceContextMode and ConcurrencyMode.",
+    "Known consumers/clients and compatibility requirements.",
+    "DTO definitions, data contracts, fault contracts, and serializer attributes.",
+    "Project target framework and package/framework dependencies.",
+    "Actual contents of BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs are unavailable.",
+    "Whether BookingCreatorApplicationServices contains [ServiceContract] is unverified.",
+    "Whether any methods contain [OperationContract] is Unknown.",
+    "Service implementation classes are Unknown.",
+    "Implemented contracts and interface/class relationships are Unknown.",
+    "Endpoint addresses are Unknown.",
+    "Binding types and binding configurations are Unknown.",
+    "Security configuration is Unknown.",
+    "Hosting model is Unknown.",
+    "Target .NET Framework version and project structure are Unknown.",
+    "Package dependencies and WCF assembly references are Unknown.",
+    "Client applications and backward compatibility requirements are Unknown.",
+    "Data contracts, DTOs, fault contracts, and serialization requirements are Unknown.",
+    "Whether database access or external integrations exist behind the booking service is Unknown.",
+    "Inspect BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs to confirm ServiceContract, OperationContract, namespace, operation signatures, message contracts, fault contracts, and implemented interfaces.",
+    "Locate any service implementation class that implements the detected contract.",
+    "Locate WCF configuration files such as App.config, Web.config, or external config includes.",
+    "Identify service endpoints, addresses, bindings, binding configurations, and behaviors.",
+    "Identify the hosting model: IIS/WAS, Windows Service, console self-host, or other.",
+    "Identify existing clients and whether they consume SOAP metadata/WSDL or use ChannelFactory/client proxy code.",
+    "Determine authentication, authorization, transport security, message security, certificate, and identity requirements.",
+    "Determine whether sessions, transactions, reliable messaging, duplex callbacks, streaming, large messages, custom behaviors, inspectors, or throttling are used.",
+    "Confirm target framework and package dependencies from project files, which are currently unavailable.",
+    "Source code for BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs is required to identify contracts, operations, dependencies, and behaviors.",
+    "Project files are required to determine target framework, package references, assembly references, and WCF dependency usage.",
+    "Configuration files or host startup code are required to identify endpoints, bindings, behaviors, security, hosting, throttling, and diagnostics.",
+    "Consumer/client code is required to determine compatibility requirements and whether SOAP compatibility must be preserved.",
+    "Data contracts, request/response DTOs, fault contracts, and serialization requirements are unknown.",
+    "Database access and external service dependencies are unknown.",
+    "Actual contents of BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+    "Whether BookingCreatorApplicationServices is an interface, concrete service implementation, or non-WCF application service",
+    "Presence or absence of [ServiceContract] and [OperationContract] attributes",
+    "Operation names, parameters, return types, fault contracts, and data contracts",
+    "Service implementation classes and implemented contracts",
+    "WCF hosting model: IIS/WAS, Windows Service, console/self-host, or other",
+    "Endpoint addresses and contract-to-endpoint mappings",
+    "Bindings and binding configurations",
+    "Security mode, credentials, authentication/authorization model, certificates, and transport requirements",
+    "ServiceBehavior settings such as InstanceContextMode, ConcurrencyMode, transaction behavior, throttling, and error handling",
+    "Target framework and project/package references",
+    "Runtime dependencies, database dependencies, and external integrations",
+    "WCF clients or downstream consumers",
+    "Actual contents of BookingCreatorApplicationServices.cs are needed to identify ServiceContract, OperationContract methods, parameters, return types, behaviors, and dependencies.",
+    "Confirm whether BookingCreatorApplicationServices is an interface, class, service implementation, or mixed contract/implementation type.",
+    "Locate WCF host and configuration files, including app.config, web.config, service host files, or programmatic service hosting code.",
+    "Identify endpoint addresses, binding types, binding configurations, and security settings.",
+    "Identify service behaviors such as InstanceContextMode, ConcurrencyMode, IncludeExceptionDetailInFaults, throttling, metadata publishing, and debug behavior.",
+    "Identify consumers of the service and determine whether SOAP/WSDL compatibility is required.",
+    "Locate JourneyDTO and any other DTOs used by the service contract.",
+    "Determine target .NET version and deployment model after confirming current runtime, hosting model, and client compatibility requirements.",
+    "Source content for BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs is required to identify contracts, operations, attributes, dependencies, and implementation relationships.",
+    "Project files are required to determine target framework, referenced assemblies, WCF package usage, and build structure.",
+    "Configuration files such as app.config or web.config are required to identify endpoints, bindings, behaviors, diagnostics, throttling, and security settings.",
+    "Hosting artifacts are required to determine whether the WCF service is hosted in IIS/WAS, Windows Service, console/self-host, or another process.",
+    "Client/consumer references are required to determine whether SOAP/WSDL compatibility must be preserved.",
+    "Runtime behavior such as instance context mode, concurrency mode, throttling, transaction flow, fault handling, and authorization is Unknown.",
+    "Database dependencies, repositories, external services, and infrastructure dependencies used by booking creation logic are Unknown.",
+    "Source for IBookingCreatorApplicationServices.",
+    "Whether IBookingCreatorApplicationServices has [ServiceContract].",
+    "Which methods have [OperationContract].",
+    "Source for DTO contracts, especially BookingDTO serialization attributes.",
+    "WCF configuration files such as app.config or web.config.",
+    "Service host type: IIS/WAS, Windows Service, console self-host, or other.",
+    "Endpoint addresses and contracts.",
+    "Binding types and binding settings.",
+    "Security mode, authentication, authorization, certificates, credentials, or transport security requirements.",
+    "ServiceBehavior settings such as InstanceContextMode, ConcurrencyMode, IncludeExceptionDetailInFaults, throttling, metadata publishing, and transaction behavior.",
+    "Existing client applications and compatibility requirements.",
+    "Target framework and project/package dependencies.",
+    "Domain service implementation and actual database/data-access behavior."
+  ]
+}

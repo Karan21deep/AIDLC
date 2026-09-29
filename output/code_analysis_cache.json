@@ -1,0 +1,1309 @@
+{
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs": {
+    "file_hash": "c62f0bedc191285b8a0b814de9d935da288ff2ca6d392383f86c3647d2f0dde4",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.Exceptions\n{\n    [Serializable]\n    public class ConfigurationInitializationException : Exception\n    {\n\n        public ConfigurationInitializationException()\n        {\n        \n        }\n        public ConfigurationInitializationException(string message) : base(message)\n        {\n\n        }\n        public ConfigurationInitializationException(string message, Exception innerException) : base(message, innerException)\n        {\n\n        }\n        protected ConfigurationInitializationException(SerializationInfo info,\n         StreamingContext context)\n            : base(info, context)\n        {\n\n        }\n\n    }\n}",
+      "file_purpose": "Defines a custom application-layer exception used to represent configuration initialization failures. The exact configuration component or initialization flow that throws this exception is not shown in the supplied code unit.",
+      "usings": [
+        "using System;",
+        "using System.Runtime.Serialization;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System.Exception",
+          "dependency_type": "framework class",
+          "description": "Base class for all .NET exceptions. ConfigurationInitializationException derives from Exception and delegates constructor behavior to the base class."
+        },
+        {
+          "name": "System.SerializableAttribute",
+          "dependency_type": "framework attribute",
+          "description": "Marks the exception type as serializable, which is the traditional .NET pattern for custom exception types, especially in .NET Framework and remoting/WCF-era code."
+        },
+        {
+          "name": "System.Runtime.Serialization.SerializationInfo",
+          "dependency_type": "framework class",
+          "description": "Used by the protected serialization constructor to deserialize exception state."
+        },
+        {
+          "name": "System.Runtime.Serialization.StreamingContext",
+          "dependency_type": "framework struct",
+          "description": "Provides contextual information for the protected serialization constructor."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Custom exception serialization",
+          "observation": "The class uses [Serializable] and a protected serialization constructor, which is common for .NET Framework custom exceptions.",
+          "recommendation": "If modernizing to newer .NET versions, review whether binary serialization support is still required. In many modern .NET applications, exception serialization constructors are less commonly needed unless crossing legacy remoting or serialization boundaries."
+        },
+        {
+          "area": "Exception specificity",
+          "observation": "The exception name indicates configuration initialization failure, but the class contains no additional context such as configuration key, section name, or component name.",
+          "recommendation": "Consider whether additional diagnostic context would improve troubleshooting, while preserving existing behavior if compatibility is required."
+        },
+        {
+          "area": "Application-layer duplication",
+          "observation": "Repository metadata also indicates similarly named ConfigurationInitializationException classes may exist in other projects such as Domain or Infrastructure.",
+          "recommendation": "During modernization, review whether duplicated exception types across layers are intentional or whether a shared/common exception abstraction would reduce ambiguity. Do not change without confirming usage."
+        },
+        {
+          "area": "Base exception type",
+          "observation": "The class derives directly from System.Exception.",
+          "recommendation": "This is acceptable for a custom exception. If modernization includes API or service fault design, evaluate how this exception is translated at boundaries such as WCF faults or application responses."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs": {
+    "file_hash": "9a95bc7dea5524efb34fb8541b7029d8f28e014b710f090d70ff79bddb28318b",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.Implementation\n{\n    public class BookingCreatorApplicationServices : IBookingCreatorApplicationServices\n    {\n        private readonly IBookingCreatorDomainServices _bookingCreatorDomainServices;\n\n        public BookingCreatorApplicationServices(\n            IBookingCreatorDomainServices bookingCreatorDomainServices)\n        {\n            _bookingCreatorDomainServices = bookingCreatorDomainServices;\n        }\n\n        public void CancelBooking(int bookingId)\n        {\n            _bookingCreatorDomainServices.CancelBooking(bookingId);\n        }\n\n        public int CreateBooking(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n            return _bookingCreatorDomainServices.CreateBooking(booking);\n        }\n\n        public List<BookingDTO> GetCanceledByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetCanceled()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n\n        public List<BookingDTO> GetActivesByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetActives()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n        public decimal GetTotalPrice(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetTotalPrice();\n        }\n\n        public string GetRoute(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetRoute();\n        }\n\n        private Booking GetBookingDtoToBooking(BookingDTO bookingDto)\n        {\n            var bookingMapper = MappingToDomainFactory.GetFor(EnumDomain.Booking);\n            return bookingMapper.Get<BookingDTO,Booking>(bookingDto);\n        }\n\n        private List<BookingDTO> GetBookingToBookingDto(List<Booking> entities)\n        {\n            var mapping = MappingFromDomainFactory.GetFor(DomainToDtoEnum.Booking);\n            return mapping.GetCollection<Booking, BookingDTO>(entities).ToList();\n        }\n    }\n}",
+      "file_purpose": "Unknown",
+      "usings": [
+        "using System.Collections.Generic;",
+        "using System.Linq;",
+        "using BookingMgmt.Application.MapFactories.MapDomainToDTO;",
+        "using BookingMgmt.Application.MapFactories.MapDTOToDomain;",
+        "using BookingMgmt.Contracts;",
+        "using BookingMgmt.Contracts.DTO;",
+        "using BookingMgmt.Domain.DomainServiceContracts;",
+        "using BookingMgmt.Domain.Entities;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "IBookingCreatorApplicationServices",
+          "dependency_type": "interface",
+          "description": "Application service contract implemented by BookingCreatorApplicationServices."
+        },
+        {
+          "name": "IBookingCreatorDomainServices",
+          "dependency_type": "interface",
+          "description": "Injected domain service dependency used to cancel bookings, create bookings, and retrieve active or canceled bookings."
+        },
+        {
+          "name": "BookingDTO",
+          "dependency_type": "class",
+          "description": "Application/contract DTO used as input and output for application service operations."
+        },
+        {
+          "name": "Booking",
+          "dependency_type": "class",
+          "description": "Domain entity used internally after mapping from BookingDTO and before mapping back to BookingDTO."
+        },
+        {
+          "name": "MappingToDomainFactory",
+          "dependency_type": "class",
+          "description": "Factory used to obtain a mapper for converting DTO objects into domain entities."
+        },
+        {
+          "name": "MappingFromDomainFactory",
+          "dependency_type": "class",
+          "description": "Factory used to obtain a mapper for converting domain entities into DTO objects."
+        },
+        {
+          "name": "EnumDomain",
+          "dependency_type": "enum",
+          "description": "Used to select the domain mapper for Booking in MappingToDomainFactory."
+        },
+        {
+          "name": "DomainToDtoEnum",
+          "dependency_type": "enum",
+          "description": "Used to select the DTO mapper for Booking in MappingFromDomainFactory."
+        },
+        {
+          "name": "System.Collections.Generic",
+          "dependency_type": "framework",
+          "description": "Provides List<T>, used by methods returning collections of BookingDTO."
+        },
+        {
+          "name": "System.Linq",
+          "dependency_type": "framework",
+          "description": "Provides LINQ methods such as OrderBy, Skip, Take, ToList, and ToList after mapping collections."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Pagination",
+          "observation": "GetCanceledByPages and GetActivesByPages use Skip(page - 1) and Take(page * pageSize). This is an unusual paging formula because conventional page-based pagination typically skips based on both page and pageSize.",
+          "recommendation": "Review the intended paging behavior and add tests that document expected page/pageSize semantics before changing behavior."
+        },
+        {
+          "area": "Input validation",
+          "observation": "The class does not validate bookingDto, page, pageSize, bookingId, or the injected domain service dependency.",
+          "recommendation": "Consider defining validation responsibilities explicitly. If validation belongs at the application boundary, add documented guard behavior in a future refactor."
+        },
+        {
+          "area": "Exception handling",
+          "observation": "No exceptions are caught or translated at the application service layer.",
+          "recommendation": "Consider whether application-level exception translation is needed, especially if this service is consumed by a WCF boundary."
+        },
+        {
+          "area": "Mapping",
+          "observation": "Mapping is performed through static factory calls inside private methods.",
+          "recommendation": "For improved testability and configurability, consider whether mapper dependencies should be injectable in future modernization work."
+        },
+        {
+          "area": "Query execution",
+          "observation": "The application service applies ordering and paging after calling GetCanceled() or GetActives(). The return type of those domain service methods is not visible here, so it is unknown whether paging occurs in memory or is translated to a database query.",
+          "recommendation": "Review domain service return types and query execution behavior to ensure paging is performed efficiently for large data sets."
+        },
+        {
+          "area": "Synchronous API",
+          "observation": "All operations are synchronous.",
+          "recommendation": "If underlying persistence or service calls are I/O-bound, future modernization could evaluate async application service methods, while preserving existing behavior and contracts as needed."
+        },
+        {
+          "area": "Layer boundaries",
+          "observation": "The class keeps domain entities internal to the application layer and exposes DTOs through the application contract.",
+          "recommendation": "This separation is consistent with layered architecture and should be preserved during modernization unless the overall service contract strategy changes."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\DomainToDtoEnum.cs": {
+    "file_hash": "f9fa9d1c71fac2b4fece3760a61b01fe09bf060ea6f744c1cf68b864b9990b45",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\DomainToDtoEnum.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal enum DomainToDtoEnum\n    {\n        Booking,\n        Journey,\n        Passenger\n    }\n}",
+      "file_purpose": "Unknown",
+      "usings": [],
+      "classes": [],
+      "dependencies": [],
+      "database_related": false,
+      "wcf_related": false,
+      "external_integrations": [],
+      "modernization_observations": []
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromBookingEntity.cs": {
+    "file_hash": "1385661ce7f4909a552923b43ff3a3b19549759df7f502062a7610aadc549abc",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromBookingEntity.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal class FromBookingEntity : MappingBase\n    {\n        private readonly MappingBase jouneyMapping = \n            MappingFromDomainFactory.GetFor(DomainToDtoEnum.Journey);\n\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null)\n            {\n                return default;\n            }\n\n            if (!(source is Booking entity))\n            {\n                throw new InvalidCastException(typeof(TInput).Name);\n            }\n\n            return new BookingDTO\n            {\n                Created = entity.Created,\n                Id = entity.Id,\n                Journeys = jouneyMapping\n                    .GetCollection<Journey, JourneyDTO>(entity.Journeys)\n                    .ToList(),\n                Modified = entity.Modified,\n                RecordLocator = entity.RecordLocator,\n                SalesAgent = entity.SalesAgent,\n                TotalPrice = entity.GetTotalPrice()\n            } as TOutput;\n        }\n    }\n}",
+      "file_purpose": "Maps a domain Booking entity from BookingMgmt.Domain.Entities into a BookingDTO from BookingMgmt.Contracts.DTO. It is part of the application-layer mapping infrastructure used to convert domain objects into contract/application DTOs.",
+      "usings": [
+        "using System;",
+        "using System.Linq;",
+        "using BookingMgmt.Contracts.DTO;",
+        "using BookingMgmt.Domain.Entities;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "MappingBase",
+          "dependency_type": "class",
+          "description": "Base mapping abstraction that FromBookingEntity inherits from. It defines the overridden Get<TInput, TOutput> method and likely provides GetCollection<TInput, TOutput>, although its implementation is not supplied."
+        },
+        {
+          "name": "MappingFromDomainFactory",
+          "dependency_type": "class",
+          "description": "Factory used to obtain a mapper for converting Journey domain entities to JourneyDTO objects."
+        },
+        {
+          "name": "DomainToDtoEnum",
+          "dependency_type": "enum",
+          "description": "Used to request the Journey mapper from MappingFromDomainFactory via DomainToDtoEnum.Journey."
+        },
+        {
+          "name": "Booking",
+          "dependency_type": "class",
+          "description": "Domain entity being mapped. Its properties Created, Id, Journeys, Modified, RecordLocator, SalesAgent, and method GetTotalPrice() are read."
+        },
+        {
+          "name": "Journey",
+          "dependency_type": "class",
+          "description": "Domain entity type used when mapping the Booking.Journeys collection to JourneyDTO objects."
+        },
+        {
+          "name": "BookingDTO",
+          "dependency_type": "class",
+          "description": "Target DTO created and populated by this mapper."
+        },
+        {
+          "name": "JourneyDTO",
+          "dependency_type": "class",
+          "description": "Target DTO type for mapped journey items inside BookingDTO.Journeys."
+        },
+        {
+          "name": "System.InvalidCastException",
+          "dependency_type": "framework",
+          "description": "Thrown when the supplied source object is not a Booking entity."
+        },
+        {
+          "name": "System.Linq",
+          "dependency_type": "framework",
+          "description": "Provides ToList(), used to materialize the mapped JourneyDTO collection."
+        },
+        {
+          "name": "System",
+          "dependency_type": "framework",
+          "description": "Provides core framework types, including InvalidCastException."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Type safety",
+          "observation": "The mapper uses a generic method but performs runtime type checking with `source is Booking` and returns `new BookingDTO ... as TOutput`.",
+          "recommendation": "Consider stronger typed mapper abstractions in future modernization to reduce runtime casting and possible null results from incompatible TOutput types."
+        },
+        {
+          "area": "Exception clarity",
+          "observation": "InvalidCastException is thrown with only `typeof(TInput).Name` as the message when the source is not a Booking.",
+          "recommendation": "Consider clearer diagnostic messages in future modernization, including expected and actual types."
+        },
+        {
+          "area": "Naming",
+          "observation": "The private field is named `jouneyMapping`, which appears to be a misspelling of `journeyMapping`.",
+          "recommendation": "Consider correcting naming during cleanup to improve readability, while ensuring no external behavior is affected."
+        },
+        {
+          "area": "Null behavior",
+          "observation": "A null source returns `default` for TOutput. For reference types this is null.",
+          "recommendation": "Document expected null-mapping behavior or standardize it across mapping components during modernization."
+        },
+        {
+          "area": "Collection mapping",
+          "observation": "The code assumes `entity.Journeys` can be passed to GetCollection and then materialized with ToList(). Behavior when `entity.Journeys` is null depends on MappingBase.GetCollection, which is not supplied.",
+          "recommendation": "Review collection null-handling behavior across mappers if modernizing the mapping layer."
+        },
+        {
+          "area": "Manual mapping",
+          "observation": "The class manually assigns individual properties from Booking to BookingDTO.",
+          "recommendation": "Manual mapping is explicit and easy to audit, but in larger modernization efforts a standardized mapping approach may reduce duplication if many similar mappers exist."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromJourneyEntity.cs": {
+    "file_hash": "5924a7c552ba7fee99e5e7d9d9353b7da9cf64d96285687ab8287557fd858801",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromJourneyEntity.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal class FromJourneyEntity : MappingBase\n    {\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null) { return default; }\n\n            if (!(source is Journey entity)) { throw new InvalidCastException(typeof(TInput).Name); }\n\n            return new JourneyDTO\n            {\n                Arrival = entity.Arrival,\n                ArrivalDate = entity.ArrivalDate,\n                BookingId = entity.BookingId,\n                Departure = entity.Departure,\n                DepartureDate = entity.DepartureDate,\n                Id = entity.Id,\n                Price = entity.Price\n\n            } as TOutput;\n        }\n\n    }\n}",
+      "file_purpose": "Maps a domain Journey entity into a JourneyDTO used by the contracts/application-facing DTO layer.",
+      "usings": [
+        "using System;",
+        "using BookingMgmt.Contracts.DTO;",
+        "using BookingMgmt.Domain.Entities;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System",
+          "dependency_type": "framework/library",
+          "description": "Provides InvalidCastException and core language/runtime types."
+        },
+        {
+          "name": "BookingMgmt.Contracts.DTO.JourneyDTO",
+          "dependency_type": "class",
+          "description": "Target data transfer object populated from the Journey domain entity."
+        },
+        {
+          "name": "BookingMgmt.Domain.Entities.Journey",
+          "dependency_type": "class",
+          "description": "Source domain entity whose properties are mapped into JourneyDTO."
+        },
+        {
+          "name": "MappingBase",
+          "dependency_type": "class",
+          "description": "Base mapping abstraction that defines the overridden generic Get<TInput, TOutput> method. Its implementation is not supplied."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Type safety",
+          "observation": "The method uses generic TInput/TOutput parameters but only supports Journey as input and returns JourneyDTO via 'as TOutput'. Incorrect TOutput may result in null rather than a clear exception.",
+          "recommendation": "Consider stronger typed mapper contracts in a future modernization effort, while preserving existing behavior if compatibility is required."
+        },
+        {
+          "area": "Exception clarity",
+          "observation": "InvalidCastException is thrown with typeof(TInput).Name when the runtime source object is not Journey. This may not fully identify the actual runtime type when generic type information is broad.",
+          "recommendation": "Consider more explicit diagnostic messages in future maintenance or modernization, if changing exception text is acceptable."
+        },
+        {
+          "area": "Mapping implementation",
+          "observation": "Property mapping is manually implemented field by field.",
+          "recommendation": "For larger modernization efforts, evaluate centralized mapping approaches or source-generated mapping, but only after assessing performance, traceability, and compatibility requirements."
+        },
+        {
+          "area": "Null handling",
+          "observation": "Null input returns default without recording or distinguishing whether the mapping was intentionally skipped.",
+          "recommendation": "Document expected null semantics or consider explicit null handling conventions across mappers during modernization."
+        },
+        {
+          "area": "Accessibility and layering",
+          "observation": "The class is internal and belongs to the application mapping layer, which helps prevent direct use outside the assembly.",
+          "recommendation": "Maintain clear layer boundaries during modernization; expose only necessary mapping abstractions."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\MappingFromDomainFactory.cs": {
+    "file_hash": "9e4de7c888d713c6f9e1d69c0fcd4698bd4afe178207d5bba14fe8432b47c71a",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\MappingFromDomainFactory.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDomainToDTO\n{\n    internal static class MappingFromDomainFactory\n    {\n        internal static MappingBase GetFor(DomainToDtoEnum entityName)\n        {\n            switch (entityName)\n            {\n                case DomainToDtoEnum.Booking:\n                    return new FromBookingEntity();\n                case DomainToDtoEnum.Journey:\n                    return new FromJourneyEntity();\n                default:\n                    throw new NotImplementedException(\n                        $\"Missing mapping for {entityName.ToString()} in BookingMgmt.Application.MapFactories.MapDomainToDTO.\");\n            }\n        }\n    }\n}",
+      "file_purpose": "Provides a centralized application-layer factory for selecting a domain-to-DTO mapper based on a DomainToDtoEnum value.",
+      "usings": [
+        "using System;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System",
+          "dependency_type": "framework",
+          "description": "Provides NotImplementedException used when a mapping is missing."
+        },
+        {
+          "name": "DomainToDtoEnum",
+          "dependency_type": "enum",
+          "description": "Controls which domain-to-DTO mapper implementation is selected by the factory."
+        },
+        {
+          "name": "MappingBase",
+          "dependency_type": "class",
+          "description": "The common return type for mapper implementations returned by GetFor."
+        },
+        {
+          "name": "FromBookingEntity",
+          "dependency_type": "class",
+          "description": "Concrete mapper returned when the requested mapping is DomainToDtoEnum.Booking."
+        },
+        {
+          "name": "FromJourneyEntity",
+          "dependency_type": "class",
+          "description": "Concrete mapper returned when the requested mapping is DomainToDtoEnum.Journey."
+        },
+        {
+          "name": "NotImplementedException",
+          "dependency_type": "class",
+          "description": "Thrown when the factory receives an enum value for which no mapper is implemented."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Factory extensibility",
+          "observation": "Supported mappings are hard-coded in a switch statement.",
+          "recommendation": "If the number of mappings grows, consider a registration-based or dependency-injected mapper lookup to reduce repeated factory edits."
+        },
+        {
+          "area": "Object creation",
+          "observation": "The factory directly constructs concrete mapper classes using new.",
+          "recommendation": "For improved testability and configurability, consider whether mapper creation should be delegated to an IoC container or mapper registry in a future modernization."
+        },
+        {
+          "area": "Exception semantics",
+          "observation": "Unsupported enum values result in NotImplementedException.",
+          "recommendation": "Consider whether a more specific exception type or validation error would better describe an unsupported mapping request."
+        },
+        {
+          "area": "Accessibility and coupling",
+          "observation": "The class and method are internal static, making them simple to use inside the assembly but tightly coupling callers to this static factory.",
+          "recommendation": "If future requirements need substitution, testing isolation, or runtime configuration, consider introducing an abstraction around mapper resolution."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\EnumDomain.cs": {
+    "file_hash": "fd33b543897015861c405f017ab56650835131ff696430ad82cbefef7d7ade27",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\EnumDomain.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal enum EnumDomain\n    {\n        Aircraft = 0,\n        Seat = 1,\n        Booking,\n        Journey,\n        Passenger\n    }\n}",
+      "file_purpose": "Unknown",
+      "usings": [],
+      "classes": [],
+      "dependencies": [],
+      "database_related": false,
+      "wcf_related": false,
+      "external_integrations": [],
+      "modernization_observations": []
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromBookingDTO.cs": {
+    "file_hash": "4e2b872a6cb160fd132781292d5d07414247f37fb8b83caa8f36b6165f8ef9b7",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromBookingDTO.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal class FromBookingDTO : MappingBase\n    {\n        private readonly MappingBase jouneyMapping = \n            MappingToDomainFactory.GetFor(EnumDomain.Journey);\n\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null) { return default; }\n\n            if (!(source is BookingDTO dto)) { throw new InvalidCastException(typeof(TInput).Name); }\n\n            return new Booking\n            {\n                Created = dto.Created,\n                Id = dto.Id,\n                Journeys = jouneyMapping.GetCollection<JourneyDTO, Journey>(dto.Journeys).ToList(),\n                Modified = dto.Modified,\n                RecordLocator = dto.RecordLocator,\n                SalesAgent = dto.SalesAgent\n            } as TOutput;\n        }\n\n    }\n}",
+      "file_purpose": "Maps a BookingMgmt.Contracts.DTO.BookingDTO object into a BookingMgmt.Domain.Entities.Booking domain entity.",
+      "usings": [
+        "using System;",
+        "using System.Linq;",
+        "using BookingMgmt.Contracts.DTO;",
+        "using BookingMgmt.Domain.Entities;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "MappingBase",
+          "dependency_type": "class",
+          "description": "Base mapping abstraction inherited by FromBookingDTO. Provides the overridable Get<TInput, TOutput> method and appears to provide GetCollection<TInput, TOutput> used for collection mapping."
+        },
+        {
+          "name": "MappingToDomainFactory",
+          "dependency_type": "class",
+          "description": "Factory used to obtain the mapper responsible for converting JourneyDTO objects into Journey domain entities."
+        },
+        {
+          "name": "EnumDomain",
+          "dependency_type": "enum",
+          "description": "Used with MappingToDomainFactory.GetFor(EnumDomain.Journey) to identify the domain mapper needed for Journey conversion."
+        },
+        {
+          "name": "BookingDTO",
+          "dependency_type": "class",
+          "description": "Source DTO type from BookingMgmt.Contracts.DTO. Supplies booking data to be mapped into the domain entity."
+        },
+        {
+          "name": "JourneyDTO",
+          "dependency_type": "class",
+          "description": "Source DTO type for journey items inside BookingDTO.Journeys. Used as the input type for journey collection mapping."
+        },
+        {
+          "name": "Booking",
+          "dependency_type": "class",
+          "description": "Target domain entity created and populated from BookingDTO."
+        },
+        {
+          "name": "Journey",
+          "dependency_type": "class",
+          "description": "Target domain entity type for mapped journey collection items."
+        },
+        {
+          "name": "System",
+          "dependency_type": "framework",
+          "description": "Provides InvalidCastException and base .NET runtime types."
+        },
+        {
+          "name": "System.Linq",
+          "dependency_type": "framework",
+          "description": "Provides ToList(), used to materialize the mapped journey collection as a List<Journey>."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Type safety",
+          "observation": "The mapper uses generic TInput/TOutput parameters, runtime type checking, InvalidCastException, and an 'as TOutput' cast.",
+          "recommendation": "Consider whether strongly typed mapper interfaces could reduce runtime casting risks during modernization."
+        },
+        {
+          "area": "Null handling",
+          "observation": "A null source returns default(TOutput), but null behavior for dto.Journeys depends on MappingBase.GetCollection and is not visible here.",
+          "recommendation": "Review null-handling expectations across mapping infrastructure and document or standardize behavior."
+        },
+        {
+          "area": "Naming",
+          "observation": "The private field is named 'jouneyMapping', which appears to be a spelling mistake for 'journeyMapping'.",
+          "recommendation": "Consider correcting naming during refactoring for readability, if compatible with project conventions."
+        },
+        {
+          "area": "Exception diagnostics",
+          "observation": "InvalidCastException is thrown with typeof(TInput).Name, which reports the generic type parameter name/type rather than including the actual runtime source type and expected type details.",
+          "recommendation": "Consider improving exception messages during modernization to aid troubleshooting."
+        },
+        {
+          "area": "Mapping infrastructure",
+          "observation": "Mapping is implemented manually using custom MappingBase and MappingToDomainFactory infrastructure.",
+          "recommendation": "During modernization, evaluate whether the existing custom mapper remains appropriate or whether standardized mapping conventions/tools would improve maintainability. No replacement should be assumed without broader repository review."
+        },
+        {
+          "area": "Collection materialization",
+          "observation": "The journey mapping result is immediately materialized with ToList().",
+          "recommendation": "Confirm that Booking.Journeys requires a concrete list and that eager materialization is intended."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromJourneyDTO.cs": {
+    "file_hash": "5da6f8ebd40138e25eafa31690a8c1279dc32e3bba3dc97878dded45a364d38a",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromJourneyDTO.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal class FromJourneyDTO : MappingBase\n    {\n        internal override TOutput Get<TInput, TOutput>(TInput source)\n        {\n            if (source == null) { return default; }\n\n            if (!(source is JourneyDTO dto)) { throw new InvalidCastException(typeof(TInput).Name); }\n\n            return new Journey\n            {\n                Arrival = dto.Arrival,\n                ArrivalDate = dto.ArrivalDate,\n                BookingId = dto.BookingId,\n                Departure = dto.Departure,\n                DepartureDate = dto.DepartureDate,\n                Id = dto.Id,\n                Price = dto.Price\n            } as TOutput;\n        }\n\n    }\n}",
+      "file_purpose": "Maps a JourneyDTO contract/application DTO object into a Journey domain entity.",
+      "usings": [
+        "using System;",
+        "using BookingMgmt.Contracts.DTO;",
+        "using BookingMgmt.Domain.Entities;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System",
+          "dependency_type": "framework",
+          "description": "Provides InvalidCastException and core language/runtime types used by the mapper."
+        },
+        {
+          "name": "BookingMgmt.Contracts.DTO.JourneyDTO",
+          "dependency_type": "class",
+          "description": "Source DTO type consumed by the mapper. The mapper reads journey data from this DTO."
+        },
+        {
+          "name": "BookingMgmt.Domain.Entities.Journey",
+          "dependency_type": "class",
+          "description": "Target domain entity type created by the mapper from JourneyDTO data."
+        },
+        {
+          "name": "MappingBase",
+          "dependency_type": "class",
+          "description": "Base mapping abstraction that defines the generic Get<TInput, TOutput> method overridden by this mapper. Its implementation details are not supplied."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Type safety",
+          "observation": "The method uses generic TInput/TOutput parameters but only supports JourneyDTO as input and Journey as the practical output.",
+          "recommendation": "Consider whether a strongly typed mapper contract would make supported source and target types clearer during modernization."
+        },
+        {
+          "area": "Casting behavior",
+          "observation": "The method returns the created Journey using 'as TOutput', which can silently return null when TOutput is incompatible.",
+          "recommendation": "Consider making incompatible output types explicit in a future design, depending on desired behavior."
+        },
+        {
+          "area": "Exception clarity",
+          "observation": "InvalidCastException is thrown with typeof(TInput).Name as the message, which identifies the generic input type but not the expected type.",
+          "recommendation": "Consider more descriptive error reporting during modernization if this mapper remains manually implemented."
+        },
+        {
+          "area": "Manual mapping",
+          "observation": "The class manually copies each property from JourneyDTO to Journey.",
+          "recommendation": "For larger mapping surfaces, evaluate centralized mapping conventions or mapping tooling, while preserving existing behavior."
+        },
+        {
+          "area": "Null handling",
+          "observation": "A null source returns default(TOutput).",
+          "recommendation": "Ensure callers depend on this behavior before changing it in any modernization effort."
+        },
+        {
+          "area": "Layer boundaries",
+          "observation": "The application mapping layer depends on both the contracts DTO type and the domain entity type.",
+          "recommendation": "This is consistent with the current layered architecture; preserve clear direction of dependencies if modernizing."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\MappingToDomainFactory.cs": {
+    "file_hash": "6e076b0498f418299e3c06f6181383008244c353dd3a4f791c80eac51d8dc932",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\MappingToDomainFactory.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories.MapDTOToDomain\n{\n    internal static class MappingToDomainFactory\n    {\n        internal static MappingBase GetFor(EnumDomain model)\n        {\n            switch (model)\n            {\n                case EnumDomain.Booking:\n                    return new FromBookingDTO();\n                case EnumDomain.Journey:\n                    return new FromJourneyDTO();\n                default:\n                    throw new NotImplementedException($\"The mapping for type {model} is not implemented.\");\n            }\n        }\n    }\n}",
+      "file_purpose": "Provide a centralized factory method for obtaining the correct mapper that converts application DTO objects into domain model objects for a specific domain type.",
+      "usings": [
+        "using System;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System",
+          "dependency_type": "framework",
+          "description": "Provides NotImplementedException used when a requested mapping type is unsupported."
+        },
+        {
+          "name": "EnumDomain",
+          "dependency_type": "class",
+          "description": "Used as the selector input to determine which domain mapper should be created. The exact declaration is not supplied."
+        },
+        {
+          "name": "MappingBase",
+          "dependency_type": "class",
+          "description": "The common return type for all mapper implementations produced by the factory. Its members and behavior are not shown in the supplied code."
+        },
+        {
+          "name": "FromBookingDTO",
+          "dependency_type": "class",
+          "description": "Concrete mapper returned when the requested domain model is EnumDomain.Booking."
+        },
+        {
+          "name": "FromJourneyDTO",
+          "dependency_type": "class",
+          "description": "Concrete mapper returned when the requested domain model is EnumDomain.Journey."
+        },
+        {
+          "name": "NotImplementedException",
+          "dependency_type": "framework",
+          "description": "Thrown for unsupported EnumDomain values where no mapping implementation exists."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Factory extensibility",
+          "observation": "The factory uses a switch statement over EnumDomain and must be modified whenever a new domain mapper is added.",
+          "recommendation": "Consider whether a registration-based mapper lookup or dependency-injected mapper collection would better support extension in a modernized design."
+        },
+        {
+          "area": "Exception semantics",
+          "observation": "Unsupported mappings throw NotImplementedException.",
+          "recommendation": "Consider whether a more domain/application-specific exception or InvalidOperationException would better communicate an unsupported mapper request."
+        },
+        {
+          "area": "Dependency creation",
+          "observation": "Concrete mapper instances are directly instantiated inside the factory.",
+          "recommendation": "If mappers gain dependencies, consider using dependency injection instead of direct construction."
+        },
+        {
+          "area": "Accessibility and testability",
+          "observation": "The factory is internal and static, which limits substitution and direct external testing unless internals are exposed to test assemblies.",
+          "recommendation": "If this factory becomes more complex, consider an instance-based abstraction to improve testability and configurability."
+        },
+        {
+          "area": "Mapping approach",
+          "observation": "The repository contains explicit mapping factory classes rather than using an automated mapper. This code participates in that explicit mapping approach.",
+          "recommendation": "For modernization, evaluate whether explicit mapping should be retained for control and clarity or replaced with a mapping library, depending on project standards and complexity."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\MapFactories\\MappingBase.cs": {
+    "file_hash": "8a455f6382ab307f60d1af95db1fd123fbea789815ba9a62bc9c162c75137fec",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\MapFactories\\MappingBase.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.MapFactories\n{\n    internal abstract class MappingBase\n    {\n        internal IEnumerable<TOutput> GetCollection<TInput, TOutput>(IEnumerable<TInput> source)\n            where TInput : class\n            where TOutput : class\n        {\n            if (source == null) { yield break; }\n\n            foreach (var item in source)\n            {\n                yield return Get<TInput, TOutput>(item);\n            }\n        }\n\n        internal abstract TOutput Get<TInput, TOutput>(TInput source) \n            where TInput : class\n            where TOutput : class;\n    }\n}",
+      "file_purpose": "Provides a reusable base abstraction for mapping objects and collections of objects within the BookingMgmt.Application mapping factory area.",
+      "usings": [
+        "using System.Collections.Generic;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System.Collections.Generic",
+          "dependency_type": "framework",
+          "description": "Provides IEnumerable<T>, which is used as the input and output collection abstraction for GetCollection."
+        },
+        {
+          "name": "IEnumerable<TInput>",
+          "dependency_type": "interface",
+          "description": "Represents the source collection to be mapped."
+        },
+        {
+          "name": "IEnumerable<TOutput>",
+          "dependency_type": "interface",
+          "description": "Represents the lazily produced mapped output collection."
+        },
+        {
+          "name": "Derived MappingBase implementations",
+          "dependency_type": "class",
+          "description": "Concrete subclasses are required to implement the abstract Get<TInput, TOutput> method. The specific subclasses used by this file cannot be determined from this code unit alone."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Nullability",
+          "observation": "The code uses generic class constraints and manually handles a null source collection, but nullable reference type annotations are not available in this .NET Framework-style code.",
+          "recommendation": "If modernizing to a newer C# version, consider enabling nullable reference types and documenting whether null source items are valid inputs to Get."
+        },
+        {
+          "area": "Deferred execution",
+          "observation": "GetCollection uses yield return, so mapping is lazy and exceptions are deferred until enumeration.",
+          "recommendation": "Preserve or explicitly document this behavior during modernization, because changing it to eager materialization could alter runtime behavior and exception timing."
+        },
+        {
+          "area": "Type safety",
+          "observation": "The abstract Get<TInput, TOutput> method is fully generic, meaning the base class itself does not constrain which input/output type pairs are supported.",
+          "recommendation": "If modernizing, consider whether more explicit typed mapper abstractions would make supported mappings clearer. Existing behavior should be verified before changing this design."
+        },
+        {
+          "area": "Mapping infrastructure",
+          "observation": "The class provides custom mapping infrastructure instead of using a standard mapping library or source-generated mapper.",
+          "recommendation": "For modernization, evaluate whether the existing custom mapping behavior is simple enough to retain or whether a standardized mapping approach would reduce maintenance. Any replacement should be validated against current mapper behavior."
+        },
+        {
+          "area": "Assembly visibility",
+          "observation": "The class and methods are internal, restricting usage to the BookingMgmt.Application assembly.",
+          "recommendation": "Preserve the internal boundary unless there is a confirmed need for cross-assembly mapper reuse."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\Properties\\AssemblyInfo.cs": {
+    "file_hash": "71537a30c295af3c5743d14f3997fe5156e00f9bd681f363930c489185afd288",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\Properties\\AssemblyInfo.cs",
+      "project": null,
+      "namespace": null,
+      "file_purpose": "Unknown",
+      "usings": [
+        "using System.Reflection;",
+        "using System.Runtime.InteropServices;",
+        "using BookingMgmt.Application.Properties;"
+      ],
+      "classes": [],
+      "dependencies": [],
+      "database_related": false,
+      "wcf_related": false,
+      "external_integrations": [],
+      "modernization_observations": []
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application\\Properties\\NugetPackageGenerationAttribute.cs": {
+    "file_hash": "9054223aca4a239279b55648782a08d694bb4c35c56ad786c6be82c97f4cf5c2",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application\\Properties\\NugetPackageGenerationAttribute.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.Properties\n{\n    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]\n    [ComVisible(true)]\n    public sealed class NugetPackageGenerationAttribute : Attribute\n    {\n        public NugetPackageGenerationAttribute(bool Description)\n        {\n            this.Description = Description;\n        }\n\n        public bool Description { get; }\n    }\n}",
+      "file_purpose": "Unknown",
+      "usings": [
+        "using System;",
+        "using System.Runtime.InteropServices;"
+      ],
+      "classes": [
+        {
+          "name": "Unknown",
+          "class_type": "class",
+          "namespace": "namespace BookingMgmt.Application.Properties\n{\n    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]\n    [ComVisible(true)]\n    public sealed class NugetPackageGenerationAttribute : Attribute\n    {\n        public NugetPackageGenerationAttribute(bool Description)\n        {\n            this.Description = Description;\n        }\n\n        public bool Description { get; }\n    }\n}",
+          "base_classes": [],
+          "interfaces": [],
+          "responsibilities": [],
+          "dependencies": [],
+          "methods": [],
+          "design_patterns": [],
+          "wcf_related": false
+        }
+      ],
+      "dependencies": [],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": []
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application.UnitTest\\GivenBookingDto\\WhenCancelBooking.cs": {
+    "file_hash": "c2203619328e6ee7d42ef704957eb09ad6705c2b729e4dd60cf06c89c9a3f36c",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\GivenBookingDto\\WhenCancelBooking.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.UnitTest.GivenBookingDto\n{\n    [TestClass]\n    public class WhenCancelBooking\n    {\n        public static MockFactory _mockFactory;\n        private static Mock<IBookingCreatorDomainServices> _bookingCreatorDomainServices;\n        private static IBookingCreatorApplicationServices _sut;\n\n\n        [ClassInitialize]\n        public static void ClassInitialize(TestContext context)\n        {\n            _mockFactory = new MockFactory();\n            _bookingCreatorDomainServices = _mockFactory.CreateMock<IBookingCreatorDomainServices>();\n\n            _sut = new BookingCreatorApplicationServices(_bookingCreatorDomainServices.MockObject);\n        }\n\n        [TestMethod]\n        public void Then_GetTotalPriceIsCalled()\n        {\n            _mockFactory.ClearExpectations();\n            var expected = 225;\n            var booking = BookingDtoMockProvider.GetNewBooking();\n            var actual = _sut.GetTotalPrice(booking);\n\n            Assert.IsTrue(actual == expected);\n\n        }\n\n        [TestMethod]\n        public void Then_GetRouteIsCalled()\n        {\n            _mockFactory.ClearExpectations();\n            var expected = \"MADBIO\";\n            var booking = BookingDtoMockProvider.GetNewBooking();\n            var actual = _sut.GetRoute(booking);\n\n            Assert.IsTrue(actual == expected);\n\n        }\n\n    }\n}",
+      "file_purpose": "This class contains application-layer unit tests for BookingCreatorApplicationServices behavior when operating on a mocked Booking DTO. Despite the class name WhenCancelBooking, the supplied tests verify GetTotalPrice and GetRoute behavior, not booking cancellation.",
+      "usings": [
+        "using BookingMgmt.Application.Implementation;",
+        "using BookingMgmt.Application.UnitTest.Mocks;",
+        "using BookingMgmt.Contracts;",
+        "using BookingMgmt.Domain.DomainServiceContracts;",
+        "using Microsoft.VisualStudio.TestTools.UnitTesting;",
+        "using NMock;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "BookingCreatorApplicationServices",
+          "dependency_type": "class",
+          "description": "Application service implementation being tested. It is instantiated in ClassInitialize with a mocked IBookingCreatorDomainServices dependency."
+        },
+        {
+          "name": "IBookingCreatorApplicationServices",
+          "dependency_type": "interface",
+          "description": "Application service contract used as the type of the system under test field _sut."
+        },
+        {
+          "name": "IBookingCreatorDomainServices",
+          "dependency_type": "interface",
+          "description": "Domain service dependency required by BookingCreatorApplicationServices. In this test it is mocked using NMock."
+        },
+        {
+          "name": "BookingDtoMockProvider",
+          "dependency_type": "class",
+          "description": "Test helper used to create a booking DTO test instance via GetNewBooking()."
+        },
+        {
+          "name": "MockFactory",
+          "dependency_type": "class/library",
+          "description": "NMock factory used to create and manage mocks."
+        },
+        {
+          "name": "Mock<IBookingCreatorDomainServices>",
+          "dependency_type": "class/library",
+          "description": "NMock mock wrapper for the IBookingCreatorDomainServices dependency."
+        },
+        {
+          "name": "Microsoft.VisualStudio.TestTools.UnitTesting",
+          "dependency_type": "framework",
+          "description": "MSTest framework providing TestClass, ClassInitialize, TestMethod, TestContext, and Assert."
+        },
+        {
+          "name": "NMock",
+          "dependency_type": "library",
+          "description": "Mocking framework used to create the mocked domain service dependency."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Test naming",
+          "observation": "The class is named WhenCancelBooking, but the test methods verify GetTotalPrice and GetRoute behavior. No cancellation method is called in the supplied code.",
+          "recommendation": "Consider aligning test fixture names with the behavior under test to improve maintainability and reduce confusion."
+        },
+        {
+          "area": "Assertions",
+          "observation": "The tests use Assert.IsTrue(actual == expected).",
+          "recommendation": "Consider using Assert.AreEqual(expected, actual) in MSTest for clearer failure messages."
+        },
+        {
+          "area": "Mock usage",
+          "observation": "A mock IBookingCreatorDomainServices is created and expectations are cleared, but no expectations are configured or verified in the supplied tests.",
+          "recommendation": "Consider removing unused mocking if not needed, or adding explicit expectations/verifications if interaction with the domain service is intended."
+        },
+        {
+          "area": "Shared static test state",
+          "observation": "The mock factory, mock, and system under test are stored in static fields initialized once with [ClassInitialize].",
+          "recommendation": "Consider per-test initialization if tests require isolation or mutable dependencies."
+        },
+        {
+          "area": "Legacy test framework",
+          "observation": "The project uses MSTest with Microsoft.VisualStudio.QualityTools.UnitTestFramework and NMock, consistent with legacy .NET Framework test projects.",
+          "recommendation": "If modernizing, evaluate current MSTest packages or other supported testing/mocking libraries, while preserving existing behavior."
+        },
+        {
+          "area": "Test method names",
+          "observation": "Method names end with IsCalled, but the tests assert returned values rather than verifying that a dependency method was called.",
+          "recommendation": "Consider renaming tests to describe the expected result, or add mock interaction verification if call behavior is the intended concern."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs": {
+    "file_hash": "f4c40b76da15a28331f8867120c5e6b5f29f4f37107c64bc1d9c80ce28931ca8",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.UnitTest.Mocks\n{\n    internal static class BookingDtoMockProvider\n    {\n        internal static BookingDTO GetNewBooking()\n        {\n            return new BookingDTO\n            {\n                Journeys = new List<JourneyDTO>\n                {\n                    new JourneyDTO\n                    {\n                        Departure = \"MAD\",\n                        Arrival = \"BCN\",\n                        Price = 150\n                    },\n                    new JourneyDTO\n                    {\n                        Departure = \"BCN\",\n                        Arrival = \"BIO\",\n                        Price = 75\n                    }\n                }\n            };\n        }\n    }\n}",
+      "file_purpose": "Provides a reusable sample BookingDTO instance for unit tests in the application test project.",
+      "usings": [
+        "using System.Collections.Generic;",
+        "using BookingMgmt.Contracts.DTO;"
+      ],
+      "classes": [
+        {
+          "name": "Unknown",
+          "class_type": "class",
+          "namespace": "namespace BookingMgmt.Application.UnitTest.Mocks\n{\n    internal static class BookingDtoMockProvider\n    {\n        internal static BookingDTO GetNewBooking()\n        {\n            return new BookingDTO\n            {\n                Journeys = new List<JourneyDTO>\n                {\n                    new JourneyDTO\n                    {\n                        Departure = \"MAD\",\n                        Arrival = \"BCN\",\n                        Price = 150\n                    },\n                    new JourneyDTO\n                    {\n                        Departure = \"BCN\",\n                        Arrival = \"BIO\",\n                        Price = 75\n                    }\n                }\n            };\n        }\n    }\n}",
+          "base_classes": [],
+          "interfaces": [],
+          "responsibilities": [
+            "Create a new BookingDTO populated with predefined JourneyDTO test data.",
+            "Centralize common booking DTO test setup for application-layer unit tests.",
+            "Avoid repeating the same BookingDTO object initialization in individual tests."
+          ],
+          "dependencies": [
+            {
+              "name": "System.Collections.Generic",
+              "dependency_type": "framework/library",
+              "description": "Provides List<T>, used to initialize the BookingDTO.Journeys collection."
+            },
+            {
+              "name": "BookingMgmt.Contracts.DTO.BookingDTO",
+              "dependency_type": "class",
+              "description": "Application/contract DTO representing a booking. This helper creates and returns an instance of it for tests."
+            },
+            {
+              "name": "BookingMgmt.Contracts.DTO.JourneyDTO",
+              "dependency_type": "class",
+              "description": "Application/contract DTO representing a journey segment. This helper creates two predefined journey entries."
+            }
+          ],
+          "methods": [],
+          "design_patterns": [
+            {
+              "pattern": "Test Data Provider / Object Mother",
+              "evidence": "The class is named BookingDtoMockProvider, is located under a Mocks folder in a unit test project, and exposes GetNewBooking() returning a preconfigured BookingDTO.",
+              "description": "The class centralizes construction of a commonly used test object so tests can reuse consistent booking DTO data."
+            },
+            {
+              "pattern": "Static Factory Method",
+              "evidence": "internal static BookingDTO GetNewBooking() creates and returns a configured BookingDTO instance.",
+              "description": "The method acts as a simple factory for producing a predefined DTO instance used in tests."
+            }
+          ],
+          "wcf_related": true
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "System.Collections.Generic",
+          "dependency_type": "framework/library",
+          "description": "Provides List<T>, used to initialize the BookingDTO.Journeys collection."
+        },
+        {
+          "name": "BookingMgmt.Contracts.DTO.BookingDTO",
+          "dependency_type": "class",
+          "description": "Application/contract DTO representing a booking. This helper creates and returns an instance of it for tests."
+        },
+        {
+          "name": "BookingMgmt.Contracts.DTO.JourneyDTO",
+          "dependency_type": "class",
+          "description": "Application/contract DTO representing a journey segment. This helper creates two predefined journey entries."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Test data construction",
+          "observation": "The helper returns hard-coded booking and journey data using a static method.",
+          "recommendation": "Consider whether a more flexible test data builder would improve readability and allow tests to vary fields without duplicating setup, especially if many test scenarios require similar but slightly different DTOs."
+        },
+        {
+          "area": "Naming",
+          "observation": "The class is called BookingDtoMockProvider, but it does not create a mock object in the mocking-framework sense; it creates a real DTO instance.",
+          "recommendation": "Consider naming conventions that distinguish test data fixtures/providers from mocks, to avoid confusion in larger test suites."
+        },
+        {
+          "area": "Hard-coded literals",
+          "observation": "Airport codes and prices are embedded directly in the helper.",
+          "recommendation": "If these values have business significance across many tests, consider centralizing them as named test constants or using descriptive factory methods. If they are only arbitrary sample data, the current approach is simple and explicit."
+        },
+        {
+          "area": "Legacy test project style",
+          "observation": "The repository metadata indicates .NET Framework 4.7.2 MSTest-based unit tests with NMock3 available.",
+          "recommendation": "For modernization planning, evaluate whether the test suite should remain on MSTest/NMock or be migrated to newer test tooling as part of a broader .NET modernization effort. No migration code is implied by this observation."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Application.UnitTest\\Properties\\AssemblyInfo.cs": {
+    "file_hash": "30613e2d7df3de1a73702200cbce64dc7af08bf7548baa76430019640b7a25be",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Application.UnitTest\\Properties\\AssemblyInfo.cs",
+      "project": null,
+      "namespace": null,
+      "file_purpose": "Unknown",
+      "usings": [
+        "using System.Reflection;",
+        "using System.Runtime.InteropServices;"
+      ],
+      "classes": [],
+      "dependencies": [],
+      "database_related": false,
+      "wcf_related": false,
+      "external_integrations": [],
+      "modernization_observations": []
+    }
+  },
+  "D:\\migration\\repo\\before\\BookingMgmt.Contracts\\DTO\\BookingDTO.cs": {
+    "file_hash": "45c9e79a279c1fe4230ccdfc9bf531caa6fb5fef66ec6d564da42230b5163a1e",
+    "status": "success",
+    "result": {
+      "file_path": "repo\\before\\BookingMgmt.Contracts\\DTO\\BookingDTO.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Contracts.DTO\n{\n    public class BookingDTO\n    {\n        public int Id { get; set; }\n        public string SalesAgent { get; set; }\n        public System.DateTime Created { get; set; }\n        public System.DateTime Modified { get; set; }\n        public string RecordLocator { get; set; }\n        public decimal TotalPrice { get; set; }\n        public IEnumerable<JourneyDTO> Journeys { get; set; }\n    }\n}",
+      "file_purpose": "Provide a booking-shaped DTO for transferring booking data between layers or service boundaries. Based on repository context, it belongs to the BookingMgmt.Contracts project and is likely used by application services and/or WCF-facing mapping code, but this specific source file does not contain WCF attributes or service operations.",
+      "usings": [
+        "using System.Collections.Generic;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System.Collections.Generic",
+          "dependency_type": "framework namespace",
+          "description": "Provides IEnumerable<T>, used for the Journeys collection property."
+        },
+        {
+          "name": "IEnumerable<JourneyDTO>",
+          "dependency_type": "framework generic interface",
+          "description": "Represents a sequence of JourneyDTO objects associated with the booking."
+        },
+        {
+          "name": "JourneyDTO",
+          "dependency_type": "class",
+          "description": "Represents journey data related to the booking. The implementation is not included in the supplied code unit."
+        },
+        {
+          "name": "System.DateTime",
+          "dependency_type": "framework struct",
+          "description": "Used for Created and Modified timestamp properties."
+        },
+        {
+          "name": "System.Decimal",
+          "dependency_type": "framework struct",
+          "description": "Used for TotalPrice monetary/value data."
+        },
+        {
+          "name": "System.String",
+          "dependency_type": "framework class",
+          "description": "Used for SalesAgent and RecordLocator textual values."
+        },
+        {
+          "name": "System.Int32",
+          "dependency_type": "framework struct",
+          "description": "Used for the Id property."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "DTO mutability",
+          "observation": "All properties have public setters, making the DTO fully mutable.",
+          "recommendation": "If modernizing, consider whether immutability or init-only properties would be appropriate for contract stability. This depends on serializer and framework compatibility requirements."
+        },
+        {
+          "area": "Collection property",
+          "observation": "Journeys is typed as IEnumerable<JourneyDTO>, which allows deferred execution and does not communicate whether the collection is materialized, mutable, or nullable.",
+          "recommendation": "If modernizing, consider whether a concrete read-only collection contract or explicit null-handling policy would make API behavior clearer."
+        },
+        {
+          "area": "Nullability",
+          "observation": "Reference-type properties SalesAgent, RecordLocator, and Journeys do not express nullability expectations. This is typical for .NET Framework-era C# code.",
+          "recommendation": "If moving to a newer C# version, consider nullable reference type annotations to document whether these properties may be null."
+        },
+        {
+          "area": "Date/time representation",
+          "observation": "Created and Modified use DateTime without visible information about time zone, DateTimeKind, or UTC/local expectations.",
+          "recommendation": "If modernizing contracts, consider documenting or standardizing timestamp semantics, for example UTC expectations. Changing the type would require compatibility analysis."
+        },
+        {
+          "area": "Serialization contracts",
+          "observation": "No DataContract/DataMember or JSON serialization attributes are present in this DTO.",
+          "recommendation": "If this DTO is serialized across service boundaries, verify whether serialization currently relies on default public property serialization. Any modernization should preserve wire compatibility where required."
+        },
+        {
+          "area": "Layer separation",
+          "observation": "The DTO is in the Contracts project and references another DTO rather than domain entities.",
+          "recommendation": "This separation is consistent with the existing layered architecture. Preserve DTO/domain separation during modernization unless there is a deliberate contract redesign."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs": {
+    "status": "success",
+    "source_hash": "c62f0bedc191285b8a0b814de9d935da288ff2ca6d392383f86c3647d2f0dde4",
+    "pipeline_version": "all-agents-v1",
+    "prompt_version": "v1",
+    "result": {
+      "file_path": "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.Exceptions\n{\n    [Serializable]\n    public class ConfigurationInitializationException : Exception\n    {\n\n        public ConfigurationInitializationException()\n        {\n        \n        }\n        public ConfigurationInitializationException(string message) : base(message)\n        {\n\n        }\n        public ConfigurationInitializationException(string message, Exception innerException) : base(message, innerException)\n        {\n\n        }\n        protected ConfigurationInitializationException(SerializationInfo info,\n         StreamingContext context)\n            : base(info, context)\n        {\n\n        }\n\n    }\n}",
+      "file_purpose": "Provides a custom exception type for configuration initialization failures within the BookingMgmt.Application layer. The exact calling locations and scenarios are not present in the supplied code.",
+      "usings": [
+        "using System;",
+        "using System.Runtime.Serialization;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "System.Exception",
+          "dependency_type": "framework class",
+          "description": "Base class inherited by ConfigurationInitializationException to make it a .NET exception type."
+        },
+        {
+          "name": "System.SerializableAttribute",
+          "dependency_type": "framework attribute",
+          "description": "Marks the exception as serializable."
+        },
+        {
+          "name": "System.Runtime.Serialization.SerializationInfo",
+          "dependency_type": "framework class",
+          "description": "Used by the protected serialization constructor to deserialize exception state."
+        },
+        {
+          "name": "System.Runtime.Serialization.StreamingContext",
+          "dependency_type": "framework struct",
+          "description": "Used by the protected serialization constructor to provide serialization context."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Exception serialization",
+          "observation": "The class uses [Serializable] and a protected SerializationInfo/StreamingContext constructor, which is common in .NET Framework-era custom exceptions.",
+          "recommendation": "If modernizing to newer .NET versions, review whether formatter-based exception serialization is still required. In modern .NET, this pattern may be unnecessary unless binary serialization, remoting-style scenarios, or compatibility requirements exist."
+        },
+        {
+          "area": "Custom exception design",
+          "observation": "The exception has no additional properties or state beyond the standard Exception members.",
+          "recommendation": "Preserve the type if callers depend on catching this specific exception. If usage is minimal or nonexistent, assess whether a distinct exception type is still necessary during modernization."
+        },
+        {
+          "area": "Layering",
+          "observation": "The class is located under BookingMgmt.Application\\Exceptions, suggesting it belongs to the application layer.",
+          "recommendation": "When modernizing, keep exception ownership aligned with the layer that raises and handles the configuration initialization error. Do not move it without checking references."
+        },
+        {
+          "area": "WCF compatibility",
+          "observation": "This exception is serializable, but there is no evidence in this file that it is used as a WCF fault contract or transmitted across service boundaries.",
+          "recommendation": "If this exception crosses WCF boundaries elsewhere, review service fault handling and consider explicit fault contracts where appropriate. This cannot be confirmed from the supplied file alone."
+        }
+      ]
+    }
+  },
+  "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs": {
+    "status": "success",
+    "source_hash": "9a95bc7dea5524efb34fb8541b7029d8f28e014b710f090d70ff79bddb28318b",
+    "pipeline_version": "all-agents-v1",
+    "prompt_version": "v1",
+    "result": {
+      "file_path": "D:\\migration\\repo\\sam\\BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs",
+      "project": null,
+      "namespace": "namespace BookingMgmt.Application.Implementation\n{\n    public class BookingCreatorApplicationServices : IBookingCreatorApplicationServices\n    {\n        private readonly IBookingCreatorDomainServices _bookingCreatorDomainServices;\n\n        public BookingCreatorApplicationServices(\n            IBookingCreatorDomainServices bookingCreatorDomainServices)\n        {\n            _bookingCreatorDomainServices = bookingCreatorDomainServices;\n        }\n\n        public void CancelBooking(int bookingId)\n        {\n            _bookingCreatorDomainServices.CancelBooking(bookingId);\n        }\n\n        public int CreateBooking(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n            return _bookingCreatorDomainServices.CreateBooking(booking);\n        }\n\n        public List<BookingDTO> GetCanceledByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetCanceled()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n\n        public List<BookingDTO> GetActivesByPages(int page, int pageSize)\n        {\n            var bookings = _bookingCreatorDomainServices.GetActives()\n                .OrderBy(x => x.Id)\n                .Skip(page - 1)\n                .Take(page * pageSize)\n                .ToList();\n\n            return GetBookingToBookingDto(bookings);\n        }\n\n        public decimal GetTotalPrice(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetTotalPrice();\n        }\n\n        public string GetRoute(BookingDTO bookingDto)\n        {\n            var booking = GetBookingDtoToBooking(bookingDto);\n\n            return booking.GetRoute();\n        }\n\n        private Booking GetBookingDtoToBooking(BookingDTO bookingDto)\n        {\n            var bookingMapper = MappingToDomainFactory.GetFor(EnumDomain.Booking);\n            return bookingMapper.Get<BookingDTO,Booking>(bookingDto);\n        }\n\n        private List<BookingDTO> GetBookingToBookingDto(List<Booking> entities)\n        {\n            var mapping = MappingFromDomainFactory.GetFor(DomainToDtoEnum.Booking);\n            return mapping.GetCollection<Booking, BookingDTO>(entities).ToList();\n        }\n    }\n}",
+      "file_purpose": "Provides application-level booking operations for creating, canceling, querying, and calculating booking-related information. It acts as a boundary between contract/DTO-based callers and the domain layer by mapping BookingDTO objects to Booking domain entities and delegating business operations to domain services or domain entities.",
+      "usings": [
+        "using System.Collections.Generic;",
+        "using System.Linq;",
+        "using BookingMgmt.Application.MapFactories.MapDomainToDTO;",
+        "using BookingMgmt.Application.MapFactories.MapDTOToDomain;",
+        "using BookingMgmt.Contracts;",
+        "using BookingMgmt.Contracts.DTO;",
+        "using BookingMgmt.Domain.DomainServiceContracts;",
+        "using BookingMgmt.Domain.Entities;"
+      ],
+      "classes": [],
+      "dependencies": [
+        {
+          "name": "IBookingCreatorApplicationServices",
+          "dependency_type": "interface",
+          "description": "Application service contract implemented by BookingCreatorApplicationServices. It defines the operations exposed by this class. The interface is imported from BookingMgmt.Contracts."
+        },
+        {
+          "name": "IBookingCreatorDomainServices",
+          "dependency_type": "interface",
+          "description": "Domain service dependency injected through the constructor. Used to cancel bookings, create bookings, and retrieve active or canceled bookings."
+        },
+        {
+          "name": "BookingDTO",
+          "dependency_type": "class",
+          "description": "Data transfer object used by the application contract boundary. Input and output type for booking data exposed by this service."
+        },
+        {
+          "name": "Booking",
+          "dependency_type": "class",
+          "description": "Domain entity representing a booking. Used internally after mapping from BookingDTO. Provides domain behavior such as GetTotalPrice() and GetRoute()."
+        },
+        {
+          "name": "MappingToDomainFactory",
+          "dependency_type": "class",
+          "description": "Factory used to obtain a mapper for converting DTO objects into domain entities."
+        },
+        {
+          "name": "MappingFromDomainFactory",
+          "dependency_type": "class",
+          "description": "Factory used to obtain a mapper for converting domain entities into DTO objects."
+        },
+        {
+          "name": "EnumDomain",
+          "dependency_type": "enum",
+          "description": "Used with MappingToDomainFactory.GetFor(EnumDomain.Booking) to select the mapper for Booking domain conversion."
+        },
+        {
+          "name": "DomainToDtoEnum",
+          "dependency_type": "enum",
+          "description": "Used with MappingFromDomainFactory.GetFor(DomainToDtoEnum.Booking) to select the mapper for Booking-to-DTO conversion."
+        },
+        {
+          "name": "System.Collections.Generic",
+          "dependency_type": "framework",
+          "description": "Provides List<T>, used for collections of BookingDTO and Booking."
+        },
+        {
+          "name": "System.Linq",
+          "dependency_type": "framework",
+          "description": "Provides LINQ extension methods such as OrderBy, Skip, Take, and ToList used for paging and collection transformation."
+        }
+      ],
+      "database_related": true,
+      "wcf_related": true,
+      "external_integrations": [],
+      "modernization_observations": [
+        {
+          "area": "Paging logic",
+          "observation": "GetCanceledByPages and GetActivesByPages use Skip(page - 1) and Take(page * pageSize). This is not the usual paging formula and may return unexpected item counts depending on intended behavior.",
+          "recommendation": "Review the intended paging semantics. If conventional paging is desired, validate the formula during modernization, but do not change behavior without confirming requirements."
+        },
+        {
+          "area": "Input validation",
+          "observation": "Methods do not validate bookingDto, page, pageSize, or bookingId.",
+          "recommendation": "Consider adding validation at the service boundary in a future modernization effort, after confirming existing caller expectations and compatibility requirements."
+        },
+        {
+          "area": "Exception handling",
+          "observation": "No explicit exception handling or fault translation is present.",
+          "recommendation": "If this service is exposed through WCF or another remote boundary, consider whether domain exceptions should be translated into contract-safe faults or standardized error responses."
+        },
+        {
+          "area": "Mapping factory usage",
+          "observation": "Mapping factories are accessed statically inside private methods, which couples the service to concrete factory classes.",
+          "recommendation": "For improved testability and dependency management, consider injectable mapping abstractions in future modernization. Preserve current behavior unless requirements allow refactoring."
+        },
+        {
+          "area": "Synchronous API",
+          "observation": "All operations are synchronous.",
+          "recommendation": "If domain service calls involve I/O such as database access, future modernization could evaluate asynchronous APIs. The current source does not show whether I/O occurs."
+        },
+        {
+          "area": "Collection materialization",
+          "observation": "The service retrieves collections from the domain service, applies LINQ ordering and paging, and then materializes with ToList(). It is unknown whether the underlying collection is IQueryable, IEnumerable, or already materialized.",
+          "recommendation": "During modernization, verify where filtering and paging execute. If data comes from a database, pushing ordering and paging into the data query may improve performance."
+        },
+        {
+          "area": "WCF contract visibility",
+          "observation": "The implementation may be associated with WCF through its contract interface, but the supplied class does not show WCF attributes or configuration.",
+          "recommendation": "Inspect IBookingCreatorApplicationServices and configuration/host files before making WCF modernization decisions."
+        },
+        {
+          "area": "Constructor null handling",
+          "observation": "The constructor assigns the injected IBookingCreatorDomainServices without checking for null.",
+          "recommendation": "Consider enforcing non-null dependencies in future modernization to fail fast and clarify invariants."
+        }
+      ]
+    }
+  }
+}

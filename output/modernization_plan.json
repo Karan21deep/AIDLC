@@ -1,0 +1,842 @@
+{
+  "repository_name": "sam",
+  "current_architecture": "FACT: The supplied analysis shows a partial BookingMgmt codebase with Application, Contracts DTO, and Application.UnitTest folders/files. FACT: No .sln, .csproj, package files, host files, app.config/web.config, or runtime entry point files were supplied. FACT: BookingCreatorApplicationServices implements IBookingCreatorApplicationServices, delegates to IBookingCreatorDomainServices, maps BookingDTO to Booking domain entities, maps Booking domain entities back to BookingDTO, and exposes booking-related operations. INFERENCE: The visible code suggests a layered architecture with Contracts DTOs, an Application service layer, Domain entities/services referenced but not supplied, and unit tests. RECOMMENDATION: Treat the current architecture as an incomplete layered .NET application with a possible WCF-facing application service until missing project, contract, host, and configuration files are recovered.",
+  "target_architecture": "RECOMMENDATION: Use a modern layered architecture on Modern .NET: shared contracts/models, application services, domain layer, infrastructure/data access layer if present, and a separately hosted service boundary only if remote access is required. For the possible WCF service boundary, select ASP.NET Core Web API for simple request/response HTTP APIs if consumers can migrate; select CoreWCF if SOAP/WSDL or WCF protocol compatibility is required; keep as an in-process application service if no remote boundary is actually needed. Exact target service technology cannot be finalized from the supplied evidence.",
+  "current_framework": "Unknown. FACT: No project files were supplied, so the current target framework cannot be confirmed. INFERENCE: The source style, AssemblyInfo files, [Serializable] exception pattern, MSTest attributes, and NMock usage suggest legacy .NET Framework-era code, but the exact framework version is not reliably determined from the supplied repository evidence.",
+  "target_framework": "Modern .NET. The exact target version should be confirmed by the modernization team after recovering project files, deployment constraints, hosting requirements, package compatibility, and organizational support policy.",
+  "migration_strategy": "Use an assessment-first, incremental migration. First recover the missing build, project, contract, host, configuration, client, and dependency artifacts. Then migrate contracts and application logic into Modern .NET class libraries while preserving current behavior through characterization tests. Decide the service boundary per confirmed WCF usage: ASP.NET Core Web API for simple request/response APIs where clients can change; CoreWCF for SOAP/WCF compatibility; no network service if the class is only in-process. Avoid changing DTO shapes, paging behavior, exception behavior, or mapping semantics until tests document current behavior.",
+  "projects": [
+    {
+      "project_name": "BookingMgmt.Application",
+      "current_framework": "Unknown",
+      "target_framework": "Modern .NET class library",
+      "strategy": "Recreate or recover the project structure, then migrate the application service and mapping infrastructure as an application-layer library behind the selected hosting boundary.",
+      "changes": [
+        "FACT: Contains BookingCreatorApplicationServices, custom mapping factories, MappingBase, and ConfigurationInitializationException.",
+        "FACT: BookingCreatorApplicationServices depends on IBookingCreatorDomainServices, BookingDTO, Booking, MappingToDomainFactory, MappingFromDomainFactory, EnumDomain, DomainToDtoEnum, and LINQ.",
+        "RECOMMENDATION: Preserve application/domain separation and keep DTO/domain mapping internal to the application layer.",
+        "RECOMMENDATION: Consider replacing static mapper factories with injectable mapper abstractions only after behavior is characterized.",
+        "RECOMMENDATION: Review paging, null handling, invalid cast behavior, and exception behavior before refactoring."
+      ],
+      "dependencies": [
+        "IBookingCreatorDomainServices",
+        "IBookingCreatorApplicationServices",
+        "BookingMgmt.Contracts.DTO",
+        "BookingMgmt.Domain.Entities",
+        "System",
+        "System.Collections.Generic",
+        "System.Linq",
+        "System.Runtime.Serialization"
+      ],
+      "risks": [
+        "No .csproj is available, so assembly references and framework compatibility are unknown.",
+        "Domain service and domain entity source is incomplete or missing from the supplied analysis.",
+        "Static factories and runtime generic casts may hide behavior that tests do not currently cover.",
+        "Paging behavior appears unusual and may be either a defect or required legacy behavior."
+      ]
+    },
+    {
+      "project_name": "BookingMgmt.Contracts",
+      "current_framework": "Unknown",
+      "target_framework": "Modern .NET shared contracts library, or API-specific request/response models if contract redesign is approved",
+      "strategy": "Preserve DTO compatibility initially, especially if DTOs are serialized across WCF or external service boundaries.",
+      "changes": [
+        "FACT: BookingDTO has public mutable properties and an IEnumerable<JourneyDTO> Journeys property.",
+        "FACT: BookingDTO has no visible DataContract/DataMember attributes in the supplied code.",
+        "RECOMMENDATION: Do not rename properties, change collection types, change DateTime semantics, or add/remove serialization attributes until client compatibility is reviewed.",
+        "RECOMMENDATION: Review nullable reference expectations and DateTime UTC/local semantics during modernization, but avoid breaking serialized contracts."
+      ],
+      "dependencies": [
+        "JourneyDTO",
+        "System.DateTime",
+        "System.Collections.Generic"
+      ],
+      "risks": [
+        "JourneyDTO source is not supplied.",
+        "Serialization behavior is unknown.",
+        "Existing clients may depend on current DTO XML/JSON/SOAP shape.",
+        "Date/time and nullability semantics are undocumented."
+      ]
+    },
+    {
+      "project_name": "BookingMgmt.Application.UnitTest",
+      "current_framework": "Unknown; legacy MSTest/NMock usage is indicated",
+      "target_framework": "Modern .NET test project using supported MSTest packages or an approved alternative test framework",
+      "strategy": "Modernize tests early to establish behavioral safety before refactoring or changing service boundaries.",
+      "changes": [
+        "FACT: Tests use MSTest attributes and NMock.",
+        "FACT: Existing tests cover GetTotalPrice returning 225 and GetRoute returning MADBIO for a sample BookingDTO.",
+        "RECOMMENDATION: Convert existing tests into characterization tests first.",
+        "RECOMMENDATION: Add tests for CreateBooking, CancelBooking, active/canceled paging behavior, mapper null handling, invalid cast behavior, and exception behavior.",
+        "RECOMMENDATION: Rename misleading test fixtures/methods after behavior is preserved."
+      ],
+      "dependencies": [
+        "Microsoft.VisualStudio.TestTools.UnitTesting",
+        "NMock",
+        "BookingMgmt.Application",
+        "BookingMgmt.Contracts",
+        "BookingMgmt.Domain"
+      ],
+      "risks": [
+        "Existing test coverage is very small.",
+        "Test names do not consistently describe behavior under test.",
+        "Mocks are created but not clearly verified in the supplied tests.",
+        "Static test state may reduce isolation."
+      ]
+    },
+    {
+      "project_name": "WCF host project",
+      "current_framework": "Unknown",
+      "target_framework": "Unknown until hosting model and compatibility requirements are discovered",
+      "strategy": "Locate or reconstruct the missing service host before choosing a target host.",
+      "changes": [
+        "FACT: No WCF service host files, .svc files, app.config, web.config, endpoints, or bindings were supplied.",
+        "RECOMMENDATION: Identify whether the service is IIS/WAS-hosted, Windows Service-hosted, console self-hosted, or not remotely hosted.",
+        "RECOMMENDATION: Select ASP.NET Core, CoreWCF, worker service hosting, or no host based on confirmed service exposure and consumers."
+      ],
+      "dependencies": [
+        "Unknown"
+      ],
+      "risks": [
+        "Hosting lifecycle, DI setup, configuration loading, security, and deployment model are unknown.",
+        "A wrong target host could break activation, identity, or client access behavior."
+      ]
+    }
+  ],
+  "component_mappings": [
+    {
+      "component": "BookingCreatorApplicationServices",
+      "component_type": "Application service / possible WCF-adjacent service implementation",
+      "legacy_technology": "Legacy C# application service; possible WCF contract indicator reported, but no WCF attributes visible on supplied implementation",
+      "target_technology": "Modern .NET application service behind ASP.NET Core Web API, CoreWCF, gRPC, or in-process boundary depending on confirmed consumers and WCF configuration",
+      "rationale": "FACT: The class implements IBookingCreatorApplicationServices and exposes booking operations. FACT: It maps DTOs to domain entities and delegates persistence-like operations to IBookingCreatorDomainServices. INFERENCE: It is the application boundary for booking creation/cancellation/query/calculation use cases. RECOMMENDATION: Keep application orchestration separate from transport-specific hosting.",
+      "affected_files": [
+        "BookingMgmt.Application\\Implementation\\BookingCreatorApplicationServices.cs"
+      ],
+      "affected_dependencies": [
+        "IBookingCreatorApplicationServices",
+        "IBookingCreatorDomainServices",
+        "BookingDTO",
+        "Booking",
+        "MappingToDomainFactory",
+        "MappingFromDomainFactory",
+        "EnumDomain",
+        "DomainToDtoEnum",
+        "System.Linq"
+      ],
+      "considerations": [
+        "Confirm actual IBookingCreatorApplicationServices interface source and attributes.",
+        "Review whether all public methods are intended service operations.",
+        "Add input validation only after confirming compatibility expectations.",
+        "Review whether operations should remain synchronous or become async based on real data access behavior.",
+        "Review paging formula Skip(page - 1) and Take(page * pageSize) before changing."
+      ],
+      "risks": [
+        "Current operation exposure through WCF is unconfirmed.",
+        "Underlying domain service implementation is missing.",
+        "Database query execution location is unknown.",
+        "Error/fault behavior is unknown."
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "component": "Mapping infrastructure",
+      "component_type": "Application-layer DTO/domain mapping",
+      "legacy_technology": "Internal custom MappingBase plus static switch factories",
+      "target_technology": "Retain initially in Modern .NET; optionally refactor to typed/injectable mapping after characterization tests",
+      "rationale": "FACT: MappingBase supports generic object and collection mapping with deferred execution. FACT: Factories directly instantiate mappers based on enum values. RECOMMENDATION: Preserve behavior first; improve type safety and dependency injection later if justified.",
+      "affected_files": [
+        "BookingMgmt.Application\\MapFactories\\MappingBase.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\MappingToDomainFactory.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromBookingDTO.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\FromJourneyDTO.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\MappingFromDomainFactory.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromBookingEntity.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\FromJourneyEntity.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDTOToDomain\\EnumDomain.cs",
+        "BookingMgmt.Application\\MapFactories\\MapDomainToDTO\\DomainToDtoEnum.cs"
+      ],
+      "affected_dependencies": [
+        "BookingDTO",
+        "JourneyDTO",
+        "Booking",
+        "Journey",
+        "System.Linq",
+        "System.InvalidCastException",
+        "System.NotImplementedException"
+      ],
+      "considerations": [
+        "Preserve null source behavior where null maps to default.",
+        "Preserve lazy collection mapping behavior unless intentionally changed.",
+        "Review invalid cast messages and unsupported mapper exceptions.",
+        "Correct misspellings such as jouneyMapping only as safe cleanup.",
+        "Do not replace with a mapping library without evidence that the custom mapper is problematic."
+      ],
+      "risks": [
+        "Runtime generic casts may return null for incompatible output types.",
+        "Changing lazy/eager behavior can alter exception timing.",
+        "DTO shape changes can affect external service contracts."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "BookingDTO",
+      "component_type": "Contract DTO",
+      "legacy_technology": "Plain mutable DTO with public properties",
+      "target_technology": "Modern .NET shared DTO or API contract model, preserving compatibility initially",
+      "rationale": "FACT: BookingDTO is used by the application service and mapping layer. FACT: It has no visible serialization attributes. RECOMMENDATION: Treat it as externally sensitive until client and WCF contract usage are confirmed.",
+      "affected_files": [
+        "BookingMgmt.Contracts\\DTO\\BookingDTO.cs"
+      ],
+      "affected_dependencies": [
+        "JourneyDTO",
+        "System.DateTime",
+        "IEnumerable<JourneyDTO>"
+      ],
+      "considerations": [
+        "Confirm whether DTOs are part of a WSDL/SOAP contract.",
+        "Review JourneyDTO definition.",
+        "Clarify nullability of SalesAgent, RecordLocator, and Journeys.",
+        "Clarify DateTime kind/time zone expectations.",
+        "Avoid changing collection type until serialization compatibility is known."
+      ],
+      "risks": [
+        "Changing DTO structure may break clients.",
+        "Unspecified nullability can cause different behavior under modern serializers.",
+        "DateTime behavior may change across serializers or hosts."
+      ],
+      "complexity": "Low to Medium"
+    },
+    {
+      "component": "ConfigurationInitializationException",
+      "component_type": "Custom exception",
+      "legacy_technology": ".NET Framework-style serializable custom exception",
+      "target_technology": "Modern .NET custom exception retained only if used by application or boundary error handling",
+      "rationale": "FACT: The exception derives from Exception, is marked [Serializable], and includes a serialization constructor. RECOMMENDATION: Preserve the type if referenced; review whether binary exception serialization is still required.",
+      "affected_files": [
+        "BookingMgmt.Application\\Exceptions\\ConfigurationInitializationException.cs"
+      ],
+      "affected_dependencies": [
+        "System.Exception",
+        "System.SerializableAttribute",
+        "System.Runtime.Serialization.SerializationInfo",
+        "System.Runtime.Serialization.StreamingContext"
+      ],
+      "considerations": [
+        "Determine whether this exception is thrown anywhere in missing code.",
+        "Determine whether it crosses a WCF boundary or is translated to faults.",
+        "Modern error handling should avoid leaking internal exceptions over APIs."
+      ],
+      "risks": [
+        "Removing or changing the exception could break catch blocks.",
+        "Legacy binary serialization behavior may not be needed or may not behave the same in Modern .NET.",
+        "Fault translation behavior is unknown."
+      ],
+      "complexity": "Low"
+    },
+    {
+      "component": "Unit tests and test data provider",
+      "component_type": "Test modernization",
+      "legacy_technology": "MSTest with NMock-style mocking",
+      "target_technology": "Modern .NET test project using supported MSTest/NMock replacement or retained NMock if compatible",
+      "rationale": "FACT: Existing tests cover only limited calculation behavior. RECOMMENDATION: Use tests to freeze legacy behavior before modifying architecture.",
+      "affected_files": [
+        "BookingMgmt.Application.UnitTest\\GivenBookingDto\\WhenCancelBooking.cs",
+        "BookingMgmt.Application.UnitTest\\Mocks\\BookingDtoMockProvider.cs"
+      ],
+      "affected_dependencies": [
+        "Microsoft.VisualStudio.TestTools.UnitTesting",
+        "NMock",
+        "BookingDTO",
+        "JourneyDTO",
+        "IBookingCreatorDomainServices"
+      ],
+      "considerations": [
+        "Convert test data providers into clearer builders if test coverage expands.",
+        "Use clearer assertions and names.",
+        "Add interaction tests for domain service delegation.",
+        "Add contract/API tests after the service boundary is selected."
+      ],
+      "risks": [
+        "Insufficient regression coverage.",
+        "Existing tests may not reflect actual WCF/API behavior.",
+        "Static setup can hide test coupling."
+      ],
+      "complexity": "Low"
+    }
+  ],
+  "wcf_modernization": [
+    {
+      "component": "IBookingCreatorApplicationServices / BookingCreatorApplicationServices",
+      "component_type": "Possible WCF service contract and implementation",
+      "legacy_technology": "WCF-related contract indicator reported; actual ServiceContract/OperationContract attributes not confirmed",
+      "target_technology": "Conditional: ASP.NET Core Web API for simple request/response HTTP migration; CoreWCF for SOAP/WSDL or WCF binding compatibility; in-process Modern .NET application service if not remotely hosted; gRPC only if confirmed internal RPC requirements justify it",
+      "rationale": "FACT: Repository analysis reports WCF detected and lists BookingCreatorApplicationServices.cs as a WCF-related contract indicator. FACT: The supplied class contains no visible ServiceContract, OperationContract, ServiceBehavior, endpoint, or binding configuration. FACT: Operations are synchronous and request/response shaped. INFERENCE: The class may be a WCF-adjacent application service or the implementation of a WCF contract. RECOMMENDATION: Do not select a single WCF replacement until contracts, bindings, endpoints, host, and consumers are confirmed.",
+      "operations": [
+        "CancelBooking(int bookingId): delegates to IBookingCreatorDomainServices.CancelBooking; likely persistence-related.",
+        "CreateBooking(BookingDTO bookingDto): maps DTO to Booking and delegates to IBookingCreatorDomainServices.CreateBooking.",
+        "GetCanceledByPages(int page, int pageSize): retrieves canceled bookings, orders by Id, applies Skip(page - 1) and Take(page * pageSize), maps to DTOs.",
+        "GetActivesByPages(int page, int pageSize): retrieves active bookings, orders by Id, applies Skip(page - 1) and Take(page * pageSize), maps to DTOs.",
+        "GetTotalPrice(BookingDTO bookingDto): maps DTO to Booking and calls Booking.GetTotalPrice.",
+        "GetRoute(BookingDTO bookingDto): maps DTO to Booking and calls Booking.GetRoute."
+      ],
+      "security_considerations": [
+        "Unknown authentication and authorization model.",
+        "Unknown transport security and message security requirements.",
+        "Unknown certificate, Windows authentication, impersonation, or credential requirements.",
+        "Do not design final security until binding and hosting configuration are recovered."
+      ],
+      "configuration_considerations": [
+        "No app.config, web.config, .svc, ServiceHost code, endpoint, binding, or behavior configuration was supplied.",
+        "Locate system.serviceModel configuration or programmatic host setup.",
+        "Determine binding type, endpoint addresses, metadata publishing, quotas, timeouts, throttling, diagnostics, and error behavior.",
+        "Determine DI/composition root for IBookingCreatorDomainServices."
+      ],
+      "compatibility_considerations": [
+        "Existing clients are unknown.",
+        "If clients use generated WCF proxies, WSDL, SOAP XML namespaces, or WS-* features, CoreWCF or a compatibility facade may be required.",
+        "If clients can migrate to HTTP/JSON, ASP.NET Core Web API is a likely long-term target.",
+        "Preserve DTO serialization shape until external contract usage is confirmed.",
+        "Current fault/exception behavior is unknown and must be characterized."
+      ],
+      "risks": [
+        "WCF detection may be incomplete or a false positive.",
+        "Missing contract interface prevents confirmation of ServiceContract and OperationContract attributes.",
+        "Missing endpoint and binding configuration prevents protocol/security assessment.",
+        "Changing from SOAP/WCF to REST/JSON could break existing consumers.",
+        "WCF-specific features such as sessions, transactions, callbacks, custom behaviors, inspectors, or reliable messaging may exist in missing files."
+      ],
+      "complexity": "Unknown"
+    },
+    {
+      "component": "WCF hosting/configuration",
+      "component_type": "Service host and endpoint configuration",
+      "legacy_technology": "Unknown WCF hosting model",
+      "target_technology": "Unknown until hosting and consumer requirements are discovered",
+      "rationale": "FACT: No service host files, .svc files, app.config, web.config, endpoints, bindings, behaviors, or startup files are present in the supplied metadata. RECOMMENDATION: Treat host migration as blocked pending discovery.",
+      "operations": [
+        "Unknown"
+      ],
+      "security_considerations": [
+        "Unknown"
+      ],
+      "configuration_considerations": [
+        "Recover host project and configuration.",
+        "Identify endpoint addresses and bindings.",
+        "Identify service behaviors and diagnostics.",
+        "Identify deployment environment and configuration sources."
+      ],
+      "compatibility_considerations": [
+        "Host replacement differs significantly between IIS/WAS-hosted WCF, Windows Service self-hosting, console hosting, and library-only usage."
+      ],
+      "risks": [
+        "Incorrect host assumptions can break activation, base addresses, identity, configuration loading, dependency lifetimes, and client connectivity."
+      ],
+      "complexity": "Unknown"
+    }
+  ],
+  "dependency_modernization": [
+    {
+      "dependency": "Microsoft.VisualStudio.TestTools.UnitTesting",
+      "dependency_type": "Test framework",
+      "current_usage": "FACT: Used by supplied unit tests through MSTest attributes and assertions.",
+      "target_dependency": "Supported MSTest packages for Modern .NET, or approved alternative test framework after team decision",
+      "action": "Review and likely update",
+      "rationale": "Legacy MSTest assemblies may not be appropriate for Modern .NET test projects, but test framework selection should align with team standards.",
+      "risks": [
+        "Test behavior and lifecycle attributes may differ between old and modern MSTest packages.",
+        "Changing frameworks before characterization may slow migration."
+      ]
+    },
+    {
+      "dependency": "NMock",
+      "dependency_type": "Mocking framework",
+      "current_usage": "FACT: Unit tests create MockFactory and Mock<IBookingCreatorDomainServices>.",
+      "target_dependency": "Retain if compatible, or replace with a supported mocking framework after test strategy review",
+      "action": "Review",
+      "rationale": "The supplied tests do not configure or verify meaningful expectations, so the need for NMock specifically is unclear. Do not replace solely without compatibility and maintenance review.",
+      "risks": [
+        "NMock compatibility with Modern .NET may be limited.",
+        "Replacing mocking frameworks may alter test style and require test rewrites."
+      ]
+    },
+    {
+      "dependency": "System.ServiceModel / WCF assemblies",
+      "dependency_type": "WCF framework dependency",
+      "current_usage": "Unknown. WCF was detected by metadata, but no actual WCF attributes or project references were supplied.",
+      "target_dependency": "CoreWCF only if WCF/SOAP compatibility is required; otherwise ASP.NET Core hosting packages or no service dependency",
+      "action": "Review",
+      "rationale": "WCF usage cannot be confirmed beyond a contract indicator. Target dependency depends on actual service exposure and clients.",
+      "risks": [
+        "Choosing ASP.NET Core Web API prematurely may break SOAP/WCF clients.",
+        "Choosing CoreWCF unnecessarily may preserve accidental complexity."
+      ]
+    },
+    {
+      "dependency": "Custom MappingBase and mapping factories",
+      "dependency_type": "Internal application dependency",
+      "current_usage": "FACT: Used for BookingDTO/Booking and JourneyDTO/Journey conversions.",
+      "target_dependency": null,
+      "action": "Retain initially; refactor only after tests",
+      "rationale": "The custom mapping layer is simple and explicit. There is no evidence requiring replacement with an external mapper.",
+      "risks": [
+        "Runtime casting behavior may hide errors.",
+        "Changing mapper behavior may affect API outputs and tests."
+      ]
+    },
+    {
+      "dependency": "BookingMgmt.Domain.Entities and IBookingCreatorDomainServices",
+      "dependency_type": "Internal domain dependency",
+      "current_usage": "FACT: Referenced by application service and mappers. Source is not supplied.",
+      "target_dependency": "Modern .NET domain/application abstractions",
+      "action": "Review and migrate after contracts are stabilized",
+      "rationale": "Domain layer is required for application service behavior but is incomplete in the supplied analysis.",
+      "risks": [
+        "Persistence and transaction behavior may be hidden behind domain services.",
+        "Async feasibility and data access modernization cannot be assessed."
+      ]
+    },
+    {
+      "dependency": "System.Runtime.Serialization",
+      "dependency_type": "Serialization support",
+      "current_usage": "FACT: Used by ConfigurationInitializationException serialization constructor.",
+      "target_dependency": "Retain only if required for compatibility",
+      "action": "Review",
+      "rationale": "Formatter-style exception serialization is less commonly needed in Modern .NET unless binary serialization/remoting-style compatibility is required.",
+      "risks": [
+        "Removing serialization support could break legacy serialization scenarios.",
+        "Keeping unused serialization patterns may add unnecessary legacy compatibility surface."
+      ]
+    },
+    {
+      "dependency": "System.Linq",
+      "dependency_type": "Framework library",
+      "current_usage": "FACT: Used for ordering, paging, and materialization.",
+      "target_dependency": "System.Linq in Modern .NET",
+      "action": "Retain",
+      "rationale": "LINQ is standard and no replacement is indicated.",
+      "risks": [
+        "If domain service methods return IQueryable, query execution behavior must be verified.",
+        "If methods return materialized collections, paging may occur in memory."
+      ]
+    }
+  ],
+  "migration_phases": [
+    {
+      "phase": 1,
+      "name": "Repository recovery and baseline assessment",
+      "objective": "Recover the missing build, project, dependency, host, configuration, and client artifacts before making irreversible modernization decisions.",
+      "components": [
+        "Solution files",
+        "Project files",
+        "Package references",
+        "WCF host/configuration",
+        "Contracts",
+        "Domain and infrastructure projects",
+        "Client applications"
+      ],
+      "prerequisites": [
+        "Access to full source repository or original build artifacts",
+        "Access to deployment configuration and runtime environment information"
+      ],
+      "deliverables": [
+        "Confirmed project inventory",
+        "Confirmed current framework versions",
+        "Confirmed package/reference inventory",
+        "Confirmed WCF endpoint/binding/host inventory",
+        "Confirmed dependency graph",
+        "Confirmed consumer inventory"
+      ],
+      "risks": [
+        "Repository snapshot may be incomplete.",
+        "Modernization plan accuracy remains limited until missing files are found."
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Behavior characterization",
+      "objective": "Document and test current behavior before refactoring or changing service boundaries.",
+      "components": [
+        "BookingCreatorApplicationServices",
+        "Mapping layer",
+        "BookingDTO/JourneyDTO",
+        "Existing unit tests"
+      ],
+      "prerequisites": [
+        "Code can be compiled or minimally reconstructed",
+        "Domain entities/services available or test doubles defined"
+      ],
+      "deliverables": [
+        "Characterization tests for GetTotalPrice and GetRoute",
+        "Tests for CreateBooking and CancelBooking delegation",
+        "Tests for active/canceled paging semantics",
+        "Mapper null-handling and invalid-cast tests",
+        "Exception behavior baseline"
+      ],
+      "risks": [
+        "Missing domain layer may block full behavior characterization.",
+        "Existing paging formula may be a legacy defect that tests must intentionally document."
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Target architecture and service boundary decision",
+      "objective": "Choose target hosting/service technology based on actual WCF contracts, bindings, clients, and operation semantics.",
+      "components": [
+        "IBookingCreatorApplicationServices",
+        "BookingCreatorApplicationServices",
+        "WCF configuration",
+        "DTO contracts",
+        "Client applications"
+      ],
+      "prerequisites": [
+        "Recovered WCF contract/interface source",
+        "Recovered endpoint/binding configuration",
+        "Consumer compatibility analysis"
+      ],
+      "deliverables": [
+        "Decision record: ASP.NET Core Web API vs CoreWCF vs gRPC vs in-process service",
+        "Contract compatibility strategy",
+        "Security migration strategy",
+        "Error/fault translation strategy"
+      ],
+      "risks": [
+        "Unknown external clients may constrain design.",
+        "SOAP/WSDL compatibility may require CoreWCF or a staged facade."
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Modern .NET project foundation",
+      "objective": "Create Modern .NET project structure without changing business behavior.",
+      "components": [
+        "Contracts library",
+        "Application library",
+        "Test project",
+        "Potential host project"
+      ],
+      "prerequisites": [
+        "Target framework version confirmed",
+        "Project boundaries agreed"
+      ],
+      "deliverables": [
+        "Modern .NET solution structure",
+        "Restored references/packages",
+        "CI build pipeline baseline",
+        "Static analysis and nullable/reference-type plan if adopted"
+      ],
+      "risks": [
+        "Dependency incompatibilities may appear only after project files are recovered.",
+        "Target version selection may be constrained by hosting or package requirements."
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Contracts and DTO migration",
+      "objective": "Migrate shared DTOs and interfaces while preserving serialized shape where required.",
+      "components": [
+        "BookingDTO",
+        "JourneyDTO",
+        "IBookingCreatorApplicationServices"
+      ],
+      "prerequisites": [
+        "Serialization and client compatibility requirements known"
+      ],
+      "deliverables": [
+        "Modern contracts library",
+        "Serialization compatibility tests",
+        "DTO nullability/date-time guidance",
+        "Contract versioning plan if external clients exist"
+      ],
+      "risks": [
+        "DTO shape changes can break clients.",
+        "Unknown DataContract/serializer settings may exist in missing files."
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "Application and mapping layer migration",
+      "objective": "Move BookingCreatorApplicationServices and mapping infrastructure to Modern .NET with behavior preserved.",
+      "components": [
+        "BookingCreatorApplicationServices",
+        "MappingBase",
+        "MappingToDomainFactory",
+        "MappingFromDomainFactory",
+        "Concrete mappers",
+        "ConfigurationInitializationException"
+      ],
+      "prerequisites": [
+        "Contracts migrated",
+        "Domain dependencies available or abstracted",
+        "Characterization tests in place"
+      ],
+      "deliverables": [
+        "Modern application layer",
+        "Passing application-layer tests",
+        "Documented mapping behavior",
+        "Review notes for optional refactoring"
+      ],
+      "risks": [
+        "Static factories may complicate testing.",
+        "Mapping null/cast behavior may be accidentally changed.",
+        "Domain service behavior is not visible in supplied analysis."
+      ]
+    },
+    {
+      "phase": 7,
+      "name": "Domain/data/infrastructure migration",
+      "objective": "Migrate domain services and persistence only after they are recovered and analyzed.",
+      "components": [
+        "IBookingCreatorDomainServices",
+        "Booking",
+        "Journey",
+        "Persistence layer",
+        "Repositories or ORM if present"
+      ],
+      "prerequisites": [
+        "Domain and infrastructure source recovered",
+        "Database access patterns identified"
+      ],
+      "deliverables": [
+        "Domain/infrastructure modernization plan",
+        "Database behavior tests",
+        "Transaction strategy",
+        "Async feasibility assessment"
+      ],
+      "risks": [
+        "Database technology is unknown.",
+        "Transactions and query execution behavior are unknown.",
+        "Paging may currently execute in memory."
+      ]
+    },
+    {
+      "phase": 8,
+      "name": "Service host migration",
+      "objective": "Implement the selected modern service boundary and host only after compatibility requirements are known.",
+      "components": [
+        "ASP.NET Core Web API or CoreWCF host",
+        "Authentication/authorization",
+        "Configuration",
+        "Error handling",
+        "Observability"
+      ],
+      "prerequisites": [
+        "Service boundary decision complete",
+        "Security requirements known",
+        "Contracts migrated"
+      ],
+      "deliverables": [
+        "Modern host",
+        "Endpoint/API contract tests",
+        "Security configuration mapping",
+        "Logging/diagnostics plan",
+        "Deployment configuration"
+      ],
+      "risks": [
+        "Unknown clients may require legacy endpoint compatibility.",
+        "Authentication/security migration may be more complex than visible code suggests."
+      ]
+    },
+    {
+      "phase": 9,
+      "name": "Integration, parallel validation, and regression testing",
+      "objective": "Validate the migrated system against legacy behavior and consumers.",
+      "components": [
+        "Application service",
+        "Service host",
+        "DTO serialization",
+        "Domain/data layer",
+        "Clients"
+      ],
+      "prerequisites": [
+        "Migrated host and libraries available",
+        "Legacy baseline available for comparison"
+      ],
+      "deliverables": [
+        "Unit test results",
+        "Integration test results",
+        "Contract compatibility results",
+        "Database behavior validation",
+        "Client smoke test results",
+        "Performance baseline comparison"
+      ],
+      "risks": [
+        "No existing comprehensive test suite was supplied.",
+        "Legacy environment may not be reproducible."
+      ]
+    },
+    {
+      "phase": 10,
+      "name": "Cutover and legacy decommissioning",
+      "objective": "Transition consumers safely and retire legacy WCF components only after validation.",
+      "components": [
+        "Legacy WCF endpoint",
+        "Modern service endpoint",
+        "Client applications",
+        "Deployment pipeline"
+      ],
+      "prerequisites": [
+        "Consumer migration plan approved",
+        "Rollback plan approved",
+        "Production readiness validation complete"
+      ],
+      "deliverables": [
+        "Cutover plan",
+        "Rollback plan",
+        "Consumer communication",
+        "Legacy endpoint decommission checklist",
+        "Post-cutover monitoring"
+      ],
+      "risks": [
+        "Unknown consumers may still call legacy endpoints.",
+        "Retiring WCF prematurely can cause outages."
+      ]
+    }
+  ],
+  "validation_strategy": [
+    {
+      "validation_type": "Unit tests",
+      "scope": "Application service and mapping layer",
+      "steps": [
+        "Preserve existing GetTotalPrice and GetRoute tests as baseline characterization.",
+        "Add tests for CancelBooking delegation to IBookingCreatorDomainServices.",
+        "Add tests for CreateBooking mapping and delegation.",
+        "Add tests for GetCanceledByPages and GetActivesByPages exact Skip/Take behavior.",
+        "Add mapper tests for BookingDTO-to-Booking, Booking-to-BookingDTO, JourneyDTO-to-Journey, and Journey-to-JourneyDTO.",
+        "Add tests for null source mapping and invalid source type behavior."
+      ],
+      "expected_behavior": [
+        "GetTotalPrice returns 225 for the existing sample booking.",
+        "GetRoute returns MADBIO for the existing sample booking.",
+        "Current paging formula is either preserved or changed only after approved requirement review.",
+        "Null mapping behavior remains documented and intentional.",
+        "Domain service delegation occurs as expected."
+      ]
+    },
+    {
+      "validation_type": "Contract tests",
+      "scope": "IBookingCreatorApplicationServices and DTOs",
+      "steps": [
+        "Recover interface and WCF attributes.",
+        "Inventory exposed operations and serialized DTO shapes.",
+        "Create tests that verify operation names, parameters, return shapes, and error behavior for the chosen target boundary.",
+        "If SOAP compatibility is required, compare WSDL/schema and sample SOAP messages where possible.",
+        "If Web API is selected, verify HTTP routes, status codes, request/response payloads, and error payloads."
+      ],
+      "expected_behavior": [
+        "Clients receive equivalent business results.",
+        "DTO property names, required/optional behavior, and collection behavior remain compatible unless versioned.",
+        "Fault/error behavior is documented and intentionally mapped."
+      ]
+    },
+    {
+      "validation_type": "Integration tests",
+      "scope": "Application service with domain service and persistence once recovered",
+      "steps": [
+        "Run CreateBooking and CancelBooking through the real or test persistence path.",
+        "Run active/canceled booking retrieval against representative data.",
+        "Verify ordering and paging against known datasets.",
+        "Validate transaction behavior and rollback behavior if applicable.",
+        "Validate configuration initialization and error paths."
+      ],
+      "expected_behavior": [
+        "Created booking identifiers/results match legacy semantics.",
+        "Canceled/active status changes match legacy behavior.",
+        "Paging results match documented baseline.",
+        "Persistence and transaction behavior do not regress."
+      ]
+    },
+    {
+      "validation_type": "WCF/API compatibility validation",
+      "scope": "Service boundary migration",
+      "steps": [
+        "Identify existing clients and run smoke tests against legacy and migrated endpoints.",
+        "Validate authentication, authorization, transport security, and error handling.",
+        "Validate endpoint addresses or migration redirects/proxies if endpoint URLs change.",
+        "Validate message size, timeout, and quota behavior if large payloads exist.",
+        "If using CoreWCF, verify generated client proxies and service metadata."
+      ],
+      "expected_behavior": [
+        "Existing approved clients can call the migrated service or have a documented migration path.",
+        "Security behavior is equivalent or intentionally improved with approval.",
+        "No undocumented loss of SOAP/WCF compatibility occurs."
+      ]
+    },
+    {
+      "validation_type": "Database behavior validation",
+      "scope": "Persistence behind IBookingCreatorDomainServices",
+      "steps": [
+        "Recover persistence implementation and database configuration.",
+        "Identify whether GetCanceled/GetActives return IQueryable, IEnumerable, or materialized collections.",
+        "Compare generated SQL/query behavior if an ORM is used.",
+        "Validate data consistency for create/cancel operations.",
+        "Validate performance of paging for large datasets."
+      ],
+      "expected_behavior": [
+        "Database state changes match legacy system behavior.",
+        "Ordering and paging remain correct and performant.",
+        "No accidental in-memory full-table operations are introduced."
+      ]
+    },
+    {
+      "validation_type": "Regression and performance testing",
+      "scope": "End-to-end booking workflows",
+      "steps": [
+        "Run legacy and modern implementations side by side where feasible.",
+        "Compare representative booking creation, cancellation, route calculation, price calculation, and list retrieval workflows.",
+        "Measure latency and throughput for the selected service boundary.",
+        "Monitor exception rates and logs during pilot rollout."
+      ],
+      "expected_behavior": [
+        "Functional outputs match baseline.",
+        "Performance is acceptable for expected load.",
+        "Operational telemetry supports troubleshooting."
+      ]
+    }
+  ],
+  "risks": [
+    "No solution or project files were supplied, so build structure, current framework, package references, and assembly references are unknown.",
+    "Repository analysis appears inconsistent: discovery initially reports only 2 source files, while code understanding includes 19 files; treat the supplied repository as incomplete.",
+    "WCF detection is unverified beyond a contract indicator; no visible ServiceContract or OperationContract attributes were supplied.",
+    "No WCF endpoints, bindings, host files, app.config, web.config, service behaviors, or security configuration were supplied.",
+    "Current hosting model is unknown.",
+    "Existing clients and compatibility requirements are unknown.",
+    "Changing to ASP.NET Core Web API could break SOAP/WCF clients if they exist.",
+    "Choosing CoreWCF without evidence could retain unnecessary legacy complexity.",
+    "Domain service, domain entity, data access, transaction, and database behavior are incomplete or missing.",
+    "Paging logic appears unusual and may be a legacy defect or required behavior.",
+    "DTO serialization, nullability, DateTime semantics, and JourneyDTO definition are incomplete.",
+    "Exception/fault translation behavior is unknown.",
+    "Unit test coverage is minimal.",
+    "Static mapping factories and runtime casts may cause hidden runtime failures.",
+    "Synchronous operations may be scalability risks if underlying work is I/O-bound, but async suitability cannot be confirmed."
+  ],
+  "assumptions": [
+    "The supplied analysis represents a partial repository snapshot and not the complete application.",
+    "BookingMgmt.Application, BookingMgmt.Contracts, and BookingMgmt.Application.UnitTest are logical projects or project-like folders, but project files are missing.",
+    "BookingCreatorApplicationServices is an application-layer service and may be related to a WCF boundary through IBookingCreatorApplicationServices.",
+    "IBookingCreatorDomainServices and domain entities exist outside the supplied source and are required for full behavior.",
+    "Database involvement is inferred through domain service operations, not directly proven by supplied data access code.",
+    "Target framework is Modern .NET because no desired target version was provided.",
+    "Final WCF target technology will be selected only after reviewing actual contracts, bindings, endpoints, security, hosting, and consumers."
+  ],
+  "human_review_items": [
+    "Recover .sln and .csproj files.",
+    "Confirm current .NET Framework version and package references.",
+    "Recover IBookingCreatorApplicationServices source and confirm whether it has ServiceContract and OperationContract attributes.",
+    "Recover all DTO definitions, especially JourneyDTO, and check DataContract/DataMember/KnownType/XML serialization attributes.",
+    "Locate app.config, web.config, .svc files, ServiceHost code, IIS/WAS configuration, Windows Service host, or console host startup.",
+    "Identify WCF endpoints, bindings, addresses, quotas, timeouts, message sizes, metadata publishing, and behavior settings.",
+    "Identify authentication, authorization, transport security, message security, certificates, credentials, impersonation, and identity propagation.",
+    "Identify all existing clients and whether they require SOAP/WSDL/WCF proxy compatibility.",
+    "Determine whether WCF-specific features are used: sessions, callbacks, transactions, reliable messaging, streaming, custom bindings, inspectors, throttling, and custom error handlers.",
+    "Review current paging formula in GetCanceledByPages and GetActivesByPages for intended behavior.",
+    "Review input validation expectations for bookingDto, bookingId, page, and pageSize.",
+    "Review exception handling and whether ConfigurationInitializationException or other exceptions cross service boundaries.",
+    "Recover and analyze IBookingCreatorDomainServices implementation, Booking and Journey entities, repositories, ORM usage, connection strings, and transaction behavior.",
+    "Decide whether mapping factories should be retained, refactored, or replaced after test coverage is added.",
+    "Select exact Modern .NET target version based on runtime support, hosting, dependencies, and organizational policy.",
+    "Approve final service target: ASP.NET Core Web API, CoreWCF, gRPC, or in-process application service.",
+    "Define rollback and client migration plan before decommissioning any legacy WCF endpoint."
+  ]
+}
